@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin.contract", "plugin.contract.vcxproj.vcxproj", "{6A708F37-BD90-482C-92CD-0CCCA385112A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin.core", "plugin.core.vcxproj", "{D921C210-BE9B-4D93-B98C-084BA6F355AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A708F37-BD90-482C-92CD-0CCCA385112A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6A708F37-BD90-482C-92CD-0CCCA385112A}.Debug|Win32.Build.0 = Debug|Win32
+		{6A708F37-BD90-482C-92CD-0CCCA385112A}.Release|Win32.ActiveCfg = Release|Win32
+		{6A708F37-BD90-482C-92CD-0CCCA385112A}.Release|Win32.Build.0 = Release|Win32
+		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Debug|Win32.Build.0 = Debug|Win32
+		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Release|Win32.ActiveCfg = Release|Win32
+		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
