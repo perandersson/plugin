@@ -1,13 +1,9 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+**/*.sdf
+**/*.opensdf
+**/*.suo
+**/*.obj
+**/*.pdb
+**/*.vsp
+**/Debug/*
+**/Release/*
+projects/vs2013/ipch/*
