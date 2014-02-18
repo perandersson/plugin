@@ -7,7 +7,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="plugin2_activator.cpp">
+    <ClInclude Include="IGame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="contract.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="contract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

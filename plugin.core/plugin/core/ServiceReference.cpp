@@ -25,7 +25,7 @@ ServiceReference::~ServiceReference()
 
 bool ServiceReference::IsValid() const
 {
-	return this == &INVALID_SERVICE_REFERENCE;
+	return this != &INVALID_SERVICE_REFERENCE;
 }
 
 IService* ServiceReference::GetService()

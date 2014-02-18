@@ -7,8 +7,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="plugin1_activator.cpp">
+    <ClCompile Include="DemoActivator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DemoGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DemoGame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

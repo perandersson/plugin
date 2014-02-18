@@ -26,7 +26,7 @@ Plugin::~Plugin()
 
 bool Plugin::IsValid() const
 {
-	return this == &INVALID_PLUGIN;
+	return this != &INVALID_PLUGIN;
 }
 
 void Plugin::Start(PluginContext* context)
