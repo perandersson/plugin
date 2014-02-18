@@ -88,6 +88,8 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 			Helper::GetFunctionPtr<GetPluginEngineMinorVersionFunc>(library, "GetPluginEngineMinorVersion");
 		GetPluginActivatorFunc getPluginActivator = 
 			Helper::GetFunctionPtr<GetPluginActivatorFunc>(library, "GetPluginActivator");
+		GetPluginVersionFunc getPluginVersion =
+			Helper::GetFunctionPtr<GetPluginVersionFunc>(library, "GetPluginVersion");
 
 		if (getPluginEngineMajorVersion == nullptr ||
 			getPluginEngineMajorVersion == nullptr ||
@@ -108,7 +110,14 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 			return true;
 		}
 
-		mPluginContext.StartPlugin(activator);
+		const char* pluginVersion = (*getPluginVersion)();
+		int majorVersion = 0;
+		int minorVersion = 0;
+		int patchVersion = 0;
+		if (pluginVersion != nullptr)
+			sscanf(pluginVersion, "%d.%d.%d", &majorVersion, &minorVersion, &patchVersion);
+		
+		mPluginContext.StartPlugin(activator, majorVersion, minorVersion, patchVersion);
 	}
 
 	return true;

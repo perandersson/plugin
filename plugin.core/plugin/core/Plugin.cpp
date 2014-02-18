@@ -1,6 +1,7 @@
 #include "Plugin.h"
 #include "ServiceReference.h"
 #include "PluginContext.h"
+#include "Version.h"
 
 using namespace plugin;
 using namespace plugin::core;
@@ -8,12 +9,12 @@ using namespace plugin::core;
 Plugin Plugin::INVALID_PLUGIN;
 
 Plugin::Plugin()
+: mVersion(std::auto_ptr<Version>(new Version(0, 0, 0)))
 {
-
 }
 
-Plugin::Plugin(std::auto_ptr<IPluginActivator> activator)
-: mActivator(activator)
+Plugin::Plugin(std::auto_ptr<IPluginActivator> activator, std::auto_ptr<Version> version)
+: mActivator(activator), mVersion(version)
 {
 
 }
@@ -67,4 +68,9 @@ void Plugin::NotifyServiceListeners(const type_info& type, PluginContext* contex
 void Plugin::AddServiceListener(IServiceListener* listener)
 {
 	mListeners.push_back(listener);
+}
+
+const IVersion* Plugin::GetVersion() const
+{
+	return mVersion.get();
 }

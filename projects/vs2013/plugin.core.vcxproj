@@ -53,7 +53,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../3rdparty/tinyxml2/include;../../plugin.contract</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -72,7 +72,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../3rdparty/tinyxml2/include;../../plugin.contract</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -93,12 +93,14 @@
     <ClCompile Include="..\..\plugin.core\plugin\core\Plugin.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\PluginContext.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\ServiceReference.cpp" />
+    <ClCompile Include="..\..\plugin.core\plugin\core\Version.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\XMLPluginContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\plugin.core\plugin\core\Plugin.h" />
     <ClInclude Include="..\..\plugin.core\plugin\core\PluginContext.h" />
     <ClInclude Include="..\..\plugin.core\plugin\core\ServiceReference.h" />
+    <ClInclude Include="..\..\plugin.core\plugin\core\Version.h" />
     <ClInclude Include="..\..\plugin.core\plugin\core\XMLPluginContext.h" />
   </ItemGroup>
   <ItemGroup>

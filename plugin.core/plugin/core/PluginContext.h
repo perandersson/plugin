@@ -24,7 +24,8 @@ namespace plugin
 			// Start a new plugin
 			//
 			// @param activator
-			void StartPlugin(IPluginActivator* activator);
+			// @param version string
+			void StartPlugin(IPluginActivator* activator, int majorVersion, int minorVersion, int patchVersion);
 
 		// IPluginContext
 		public:

@@ -19,6 +19,7 @@ namespace plugin
 	{
 		class ServiceReference;
 		class PluginContext;
+		class Version;
 
 		class Plugin : public IPlugin
 		{
@@ -27,7 +28,7 @@ namespace plugin
 
 		public:
 			Plugin();
-			Plugin(std::auto_ptr<IPluginActivator> activator);
+			Plugin(std::auto_ptr<IPluginActivator> activator, std::auto_ptr<Version> version);
 			~Plugin();
 
 			//
@@ -69,13 +70,19 @@ namespace plugin
 			// @param listener
 			void AddServiceListener(IServiceListener* listener);
 
+		// IPlugin
+		public:
+			virtual const IVersion* GetVersion() const;
+
 		public:
 			static Plugin INVALID_PLUGIN;
 			
 		private:
 			std::auto_ptr<IPluginActivator> mActivator;
+			std::auto_ptr<Version> mVersion;
 			ServiceReferences mReferences;
 			ServiceListeners mListeners;
+			
 		};
 	}
 }

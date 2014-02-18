@@ -44,10 +44,14 @@ namespace plugin
 	//
 	// Function signature for retrieving the expected engine minor version
 	typedef int(*GetPluginEngineMinorVersionFunc)(void);
+
+	//
+	// Function signature for retriving the plugin version
+	typedef const char* (*GetPluginVersionFunc)(void);
 }
 
 #ifndef DEFINE_PLUGIN
-#define DEFINE_PLUGIN(Type) \
+#define DEFINE_PLUGIN(Type, Version) \
 	extern "C" { \
 	PLUGIN_API plugin::IPluginActivator* GetPluginActivator() { \
 		return new Type(); \
@@ -58,6 +62,9 @@ namespace plugin
 	} \
 	PLUGIN_API int GetPluginEngineMinorVersion() { \
 		return PLUGIN_ENGINE_MINOR_VERSION; \
+	} \
+	PLUGIN_API const char* GetPluginVersion() { \
+		return Version; \
 	} \
 }
 #endif

@@ -19,6 +19,9 @@
     <ClCompile Include="..\..\plugin.core\plugin\core\XMLPluginContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\plugin.core\plugin\core\Version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\plugin.core\plugin\core\Plugin.h">
@@ -31,6 +34,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.core\plugin\core\XMLPluginContext.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.core\plugin\core\Version.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -41,4 +41,4 @@ private:
 	Plugin1Service mService;
 };
 
-DEFINE_PLUGIN(Plugin1Activator);
+DEFINE_PLUGIN(Plugin1Activator, "1.0.0");

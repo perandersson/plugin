@@ -8,5 +8,6 @@
 #include "IService.h"
 #include "IServiceReference.h"
 #include "IPlugin.h"
+#include "IVersion.h"
 
 #endif

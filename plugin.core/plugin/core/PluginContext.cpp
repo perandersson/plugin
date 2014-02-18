@@ -1,6 +1,7 @@
 #include "PluginContext.h"
 #include "ServiceReference.h"
 #include "Plugin.h"
+#include "Version.h"
 #include <algorithm>
 
 #ifdef _DEBUG
@@ -26,9 +27,11 @@ PluginContext::~PluginContext()
 
 }
 
-void PluginContext::StartPlugin(IPluginActivator* activator)
+void PluginContext::StartPlugin(IPluginActivator* activator, int majorVersion, int minorVersion, int patchVersion)
 {
-	std::shared_ptr<Plugin> plugin(new Plugin(std::auto_ptr<IPluginActivator>(activator)));
+	std::auto_ptr<IPluginActivator> activatorPtr(activator);
+	std::auto_ptr<Version> version(new Version(majorVersion, minorVersion, patchVersion));
+	std::shared_ptr<Plugin> plugin(new Plugin(activatorPtr, version));
 	mCurrentPlugin = plugin;
 	mPlugins.push_back(plugin);
 	plugin->Start(this);

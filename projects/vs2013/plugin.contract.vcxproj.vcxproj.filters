@@ -35,5 +35,8 @@
     <ClInclude Include="..\..\plugin.contract\plugin\IServiceReference.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\plugin.contract\plugin\IVersion.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

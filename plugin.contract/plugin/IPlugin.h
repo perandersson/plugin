@@ -6,10 +6,17 @@
 
 namespace plugin
 {
+	class PLUGIN_API IVersion;
+
 	class PLUGIN_API IPlugin
 	{
 	public:
 		virtual ~IPlugin() {}
+
+	public:
+		//
+		// @return The version of this plugin
+		virtual const IVersion* GetVersion() const = 0;
 	};
 }
 
