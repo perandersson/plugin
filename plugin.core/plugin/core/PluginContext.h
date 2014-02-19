@@ -17,7 +17,7 @@ namespace plugin
 		class ServiceReference;
 
 		//
-		// 
+		// Base class for the plugin manager.
 		class PluginContext : public IPluginContext
 		{
 			typedef std::list<std::shared_ptr<Plugin>> Plugins;

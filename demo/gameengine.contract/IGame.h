@@ -3,8 +3,7 @@
 #define _GAMEENGINE_IGAME_H_
 
 #include <plugin/contract.h>
-
-using namespace plugin::contract;
+using plugin::contract::IService;
 
 namespace gameengine
 {
