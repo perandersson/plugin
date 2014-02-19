@@ -26,6 +26,12 @@ public:
 	}
 
 	virtual void OnServiceChanged(IServiceReference* reference, Status status) {
+		if (status == STATUS_REGISTERED) {
+			const type_info& type = reference->GetType();
+			if (type == typeid(gameengine::IGame)) {
+				std::cout << "IGame instance registered!!" << std::endl;
+			}
+		}
 		std::cout << "DemoActivator -> Service status changed for type: " << reference->GetType().name() << std::endl;
 	}
 	
