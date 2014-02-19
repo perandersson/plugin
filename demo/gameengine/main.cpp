@@ -4,7 +4,7 @@
 
 static const char PLUGINS_XML[] = {
 	"<plugins> \
-		<plugin path=\"demo.dll\" /> \
+		<plugin path=\"demo2.dll\" /> \
 	</plugins>" };
 
 int main()

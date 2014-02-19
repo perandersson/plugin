@@ -59,12 +59,18 @@ void PluginContext::GetServiceReferences(const type_info& type, IServiceReferenc
 
 IService* PluginContext::GetService(IServiceReference* reference)
 {
+	if (reference == nullptr)
+		return nullptr;
+
 	ServiceReference* s = dynamic_cast<ServiceReference*>(reference);
 	return s->GetService();
 }
 
 void PluginContext::UngetService(IServiceReference* reference)
 {
+	if (reference == nullptr)
+		return;
+
 	ServiceReference* s = dynamic_cast<ServiceReference*>(reference);
 	s->UngetService();
 }
