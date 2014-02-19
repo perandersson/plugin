@@ -5,13 +5,16 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Contract">
+      <UniqueIdentifier>{e6b290d4-8b80-4bf3-92a8-24f5d4b298f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IGame.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="contract.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IGame.h">
+      <Filter>Contract</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
