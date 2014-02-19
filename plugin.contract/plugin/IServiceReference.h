@@ -23,6 +23,10 @@ namespace plugin
 		//
 		// @return The plugin this service reference is connected to
 		virtual const IPlugin* GetPlugin() const = 0;
+
+		//
+		// @return The type that the service reference is implementing
+		virtual const type_info& GetType() const = 0;
 	};
 }
 

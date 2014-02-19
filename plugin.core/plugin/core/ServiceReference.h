@@ -13,8 +13,7 @@ namespace plugin
 		class ServiceReference : public IServiceReference
 		{
 		public:
-			ServiceReference();
-			ServiceReference(Plugin* plugin, IService* service);
+			ServiceReference(Plugin* plugin, IService* service, const type_info& type);
 			virtual ~ServiceReference();
 
 			//
@@ -35,15 +34,25 @@ namespace plugin
 		public:
 			virtual IPlugin* GetPlugin();
 			virtual const IPlugin* GetPlugin() const;
-
-		public:
-			// Instance that symbolizes that a service reference doesn't exist
-			static ServiceReference INVALID_SERVICE_REFERENCE;
+			virtual const type_info& GetType() const;
 
 		private:
 			Plugin* mPlugin;
 			IService* mService;
 			int mNumReferences;
+			const type_info& mType;
+		};
+
+		//
+		// Type indicating that the service reference is invalid/doesn't exist.
+		class InvalidServiceReference : public ServiceReference
+		{
+		public:
+			InvalidServiceReference();
+			virtual ~InvalidServiceReference();
+
+		public:
+			static InvalidServiceReference INSTANCE;
 		};
 	}
 }

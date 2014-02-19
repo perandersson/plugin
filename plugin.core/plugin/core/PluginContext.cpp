@@ -59,7 +59,7 @@ IServiceReference* PluginContext::GetServiceReference(const type_info& type)
 		}
 	}
 
-	return &ServiceReference::INVALID_SERVICE_REFERENCE;
+	return &InvalidServiceReference::INSTANCE;
 }
 
 IService* PluginContext::GetService(IServiceReference* reference)

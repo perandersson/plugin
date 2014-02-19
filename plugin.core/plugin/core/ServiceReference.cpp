@@ -4,16 +4,8 @@
 using namespace plugin;
 using namespace plugin::core;
 
-ServiceReference ServiceReference::INVALID_SERVICE_REFERENCE;
-
-ServiceReference::ServiceReference()
-: mPlugin(nullptr), mService(nullptr), mNumReferences(0)
-{
-
-}
-
-ServiceReference::ServiceReference(Plugin* plugin, IService* service)
-: mPlugin(plugin), mService(service), mNumReferences(0)
+ServiceReference::ServiceReference(Plugin* plugin, IService* service, const type_info& type)
+: mPlugin(plugin), mService(service), mNumReferences(0), mType(type)
 {
 
 }
@@ -25,7 +17,7 @@ ServiceReference::~ServiceReference()
 
 bool ServiceReference::IsValid() const
 {
-	return this != &INVALID_SERVICE_REFERENCE;
+	return this != &InvalidServiceReference::INSTANCE;
 }
 
 IService* ServiceReference::GetService()
@@ -53,4 +45,24 @@ IPlugin* ServiceReference::GetPlugin()
 const IPlugin* ServiceReference::GetPlugin() const
 {
 	return mPlugin;
+}
+
+const type_info& ServiceReference::GetType() const
+{
+	return mType;
+}
+
+/////////////////////////////
+
+InvalidServiceReference InvalidServiceReference::INSTANCE;
+
+InvalidServiceReference::InvalidServiceReference()
+: ServiceReference(nullptr, nullptr, typeid(InvalidServiceReference))
+{
+
+}
+
+InvalidServiceReference::~InvalidServiceReference()
+{
+
 }

@@ -43,7 +43,7 @@ ServiceReference* Plugin::FindServiceReference(const type_info& type)
 {
 	ServiceReferences::iterator it = mReferences.find(std::string(type.name()));
 	if (it == mReferences.end()) {
-		return &ServiceReference::INVALID_SERVICE_REFERENCE;
+		return &InvalidServiceReference::INSTANCE;
 	}
 
 	return it->second.get();
@@ -51,7 +51,7 @@ ServiceReference* Plugin::FindServiceReference(const type_info& type)
 
 ServiceReference* Plugin::RegisterService(const type_info& type, IService* service)
 {
-	std::shared_ptr<ServiceReference> reference(new ServiceReference(this, service));
+	std::shared_ptr<ServiceReference> reference(new ServiceReference(this, service, type));
 	mReferences.insert(std::make_pair(std::string(type.name()), reference));
 	return reference.get();
 }
