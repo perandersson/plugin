@@ -18,7 +18,7 @@ namespace plugin
 		class PLUGIN_API IPlugin
 		{
 		public:
-			enum Status {
+			enum PLUGIN_API Status {
 				//
 				// Symbolizes that the plugin is starting up.
 				STATUS_STARTING,
@@ -44,13 +44,31 @@ namespace plugin
 		public:
 			//
 			// Register a new plugin service. It is s the plugin that owns the memory of the service. This means 
-			// that the plugin is responsible to clean the memory up during the STATUS_STOPPING phase.
+			// that the plugin is responsible to clean the memory up during the STATUS_STOPPING phase. All services are automatically
+			// unregistered during the plugins STATUS_STOPPING phase.
 			//
 			// @param type
 			//			The type of the supplied service
 			// @param service
-			//			The service we want to register.
-			virtual void RegisterService(const type_info& type, IService* service) = 0;
+			//			The service we want to register
+			// @return A service reference placeholder object for the actual service
+			virtual IServiceReference* RegisterService(const type_info& type, IService* service) = 0;
+
+			//
+			// Unregister all services of a specific type. All services are automatically
+			// unregistered during the plugins STATUS_STOPPING phase.
+			//
+			// @param type
+			//			The service type
+			virtual void UnregisterServices(const type_info& type) = 0;
+
+			//
+			// Unregister a specific service. All services are automatically
+			// unregistered during the plugins STATUS_STOPPING phase.
+			//
+			// @param reference
+			//			The service reference we want to unregister
+			virtual void UnregisterService(IServiceReference* reference) = 0;
 
 			//
 			// Add a service listener. This listener will receive events when services are registered and unregistered.
@@ -73,6 +91,10 @@ namespace plugin
 			//
 			// @return The version of this plugin.
 			virtual const IVersion& GetVersion() const = 0;
+
+			//
+			// @return The context where this located in
+			virtual IPluginContext& GetContext() = 0;
 		};
 	}
 }

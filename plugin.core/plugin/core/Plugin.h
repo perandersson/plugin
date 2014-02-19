@@ -56,21 +56,24 @@ namespace plugin
 			//
 			// Notifies all the listeners connected via this plugin
 			//
-			// @param context
-			//			The responsible plugin context running all the plugins
 			// @param type
 			//			The service type
 			// @param service
 			//			The actual service
-			void NotifyServiceListeners(PluginContext& context, const type_info& type, ServiceReference& reference);
+			// @param status
+			//			The status of the service
+			void NotifyServiceChanged(const type_info& type, ServiceReference& reference, IServiceListener::Status status);
 
 		// IPlugin
 		public:
-			virtual void RegisterService(const type_info& type, IService* service);
+			virtual IServiceReference* RegisterService(const type_info& type, IService* service);
+			virtual void UnregisterServices(const type_info& type);
+			virtual void UnregisterService(IServiceReference* reference);
 			virtual void AddServiceListener(IServiceListener* listener);
 			virtual void RemoveServiceListener(IServiceListener* listener);
 			virtual Status GetStatus() const;
 			virtual const IVersion& GetVersion() const;
+			virtual IPluginContext& GetContext();
 
 		private:
 			PluginContext& mPluginContext;

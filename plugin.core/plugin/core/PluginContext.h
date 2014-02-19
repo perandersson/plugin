@@ -38,8 +38,15 @@ namespace plugin
 			void StartPlugin(IPluginActivator* activator, const Version& version);
 
 			//
-			// Notify all the service listeners that a service is registered
-			void NotifyServiceListeners(const type_info& type, ServiceReference& reference);
+			// Notifies all the listeners
+			//
+			// @param type
+			//			The service type
+			// @param service
+			//			The actual service
+			// @param status
+			//			The status of the service
+			void NotifyServiceChanged(const type_info& type, ServiceReference& reference, IServiceListener::Status status);
 
 		// IPluginContext
 		public:

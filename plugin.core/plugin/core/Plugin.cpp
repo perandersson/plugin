@@ -42,7 +42,7 @@ ServiceReference* Plugin::FindServiceReference(const type_info& type)
 	return it->second.get();
 }
 
-void Plugin::RegisterService(const type_info& type, IService* service)
+IServiceReference* Plugin::RegisterService(const type_info& type, IService* service)
 {
 	std::string typeName(type.name());
 	if (mReferences.find(typeName) != mReferences.end()) {
@@ -54,7 +54,31 @@ void Plugin::RegisterService(const type_info& type, IService* service)
 	mReferences.insert(std::make_pair(typeName, reference));
 
 	// Notify all the registered service listeners about the new service
-	mPluginContext.NotifyServiceListeners(type, *serviceReference);
+	mPluginContext.NotifyServiceChanged(type, *serviceReference, IServiceListener::STATUS_REGISTERED);
+	return serviceReference;
+}
+
+void Plugin::UnregisterServices(const type_info& type)
+{
+	std::string typeName(type.name());
+	ServiceReferences::iterator it = mReferences.find(typeName);
+	if (it == mReferences.end())
+		return;
+
+	//
+	mReferences.erase(it);
+}
+
+void Plugin::UnregisterService(IServiceReference* reference)
+{
+	ServiceReferences::iterator it = mReferences.begin();
+	ServiceReferences::const_iterator end = mReferences.end();
+	for (; it != end; ++it) {
+		if (it->second.get() == reference) {
+			mReferences.erase(it);
+			break;
+		}
+	}
 }
 
 void Plugin::AddServiceListener(IServiceListener* listener)
@@ -69,12 +93,12 @@ void Plugin::RemoveServiceListener(IServiceListener* listener)
 		mListeners.erase(it);
 }
 
-void Plugin::NotifyServiceListeners(PluginContext& context, const type_info& type, ServiceReference& reference)
+void Plugin::NotifyServiceChanged(const type_info& type, ServiceReference& reference, IServiceListener::Status status)
 {
 	ServiceListeners::iterator it = mListeners.begin();
 	ServiceListeners::const_iterator end = mListeners.end();
 	for (; it != end; ++it) {
-		(*it)->ServiceRegistered(context, type, reference);
+		(*it)->OnServiceChanged(type, reference, status);
 	}
 }
 
@@ -86,4 +110,9 @@ IPlugin::Status Plugin::GetStatus() const
 const IVersion& Plugin::GetVersion() const
 {
 	return mVersion;
+}
+
+IPluginContext& Plugin::GetContext()
+{
+	return mPluginContext;
 }

@@ -17,26 +17,27 @@ namespace plugin
 		class PLUGIN_API IServiceListener
 		{
 		public:
+			enum PLUGIN_API Status {
+				//
+				// Status if a service is registered
+				STATUS_REGISTERED,
+
+				//
+				// Status if a service is unregistered
+				STATUS_UNREGISTERED
+			};
+
+		public:
 			virtual ~IServiceListener() {}
 
 		public:
 			//
-			// Notifies that a service has been registered
+			// Notifies that the status a service has been changed
 			//
-			// @param context
 			// @param type
 			// @param reference
-			virtual void ServiceRegistered(IPluginContext& context, const type_info& type, IServiceReference& reference) = 0;
-
-			//
-			// Notifies that a service has been unregistered
-			//
-			// @remark This method is invoked right before the service's internal memory is released
-			//
-			// @param context
-			// @param type
-			// @param reference
-			virtual void ServiceUnregisted(IPluginContext& context,  const type_info& type, const IServiceReference& reference) = 0;
+			// @param status
+			virtual void OnServiceChanged(const type_info& type, IServiceReference& reference, Status status) = 0;
 		};
 	}
 }

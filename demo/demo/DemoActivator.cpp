@@ -17,6 +17,7 @@ public:
 	}
 
 	virtual void Start(IPluginContext& context, IPlugin& plugin) {
+		plugin.AddServiceListener(this);
 		plugin.RegisterService(typeid(gameengine::IGame), &mService);
 	}
 
@@ -24,14 +25,10 @@ public:
 		std::cout << "DemoActivator is deactivated" << std::endl;
 	}
 
-	virtual void ServiceRegistered(IPluginContext& context, const type_info& type, IServiceReference& reference) {
-		std::cout << "DemoActivator -> Service is registered of type: " << type.name() << std::endl;
+	virtual void OnServiceChanged(const type_info& type, IServiceReference& reference, Status status) {
+		std::cout << "DemoActivator -> Service status changed for type: " << type.name() << std::endl;
 	}
-
-	virtual void ServiceUnregisted(IPluginContext& context, const type_info& type, const IServiceReference& service) {
-
-	}
-
+	
 private:
 	DemoGame mService;
 };
