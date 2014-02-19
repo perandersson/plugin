@@ -79,8 +79,17 @@ namespace plugin
 			// @param listener
 			void AddServiceListener(IServiceListener* listener);
 
+			//
+			// Activates this plugin
+			void Activate();
+
+			//
+			// Deactivates this plugin
+			void Deactivate();
+
 		// IPlugin
 		public:
+			virtual Status GetStatus() const;
 			virtual const IVersion& GetVersion() const;
 
 		public:
@@ -91,7 +100,7 @@ namespace plugin
 			Version mVersion;
 			ServiceReferences mReferences;
 			ServiceListeners mListeners;
-			
+			Status mStatus;
 		};
 	}
 }

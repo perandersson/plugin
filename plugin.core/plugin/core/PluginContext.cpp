@@ -24,6 +24,7 @@ void PluginContext::StartPlugin(IPluginActivator* activator, const Version& vers
 	mCurrentPlugin = plugin;
 	mPlugins.push_back(plugin);
 	plugin->Start(*this);
+	plugin->Activate();
 }
 
 void PluginContext::RegisterService(const type_info& type, IService* service)

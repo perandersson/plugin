@@ -10,12 +10,12 @@ using namespace plugin::core;
 Plugin Plugin::INVALID_PLUGIN;
 
 Plugin::Plugin()
-: mVersion(0, 0, 0)
+: mVersion(0, 0, 0), mStatus(STATUS_INACTIVE)
 {
 }
 
 Plugin::Plugin(std::auto_ptr<IPluginActivator> activator, const Version& version)
-: mActivator(activator), mVersion(version)
+: mActivator(activator), mVersion(version), mStatus(STATUS_STARTING)
 {
 
 }
@@ -38,6 +38,7 @@ void Plugin::Start(PluginContext& context)
 void Plugin::Stop()
 {
 	mActivator->Stop(*this);
+	Deactivate();
 }
 
 ServiceReference* Plugin::FindServiceReference(const type_info& type)
@@ -69,6 +70,21 @@ void Plugin::NotifyServiceListeners(PluginContext& context, const type_info& typ
 void Plugin::AddServiceListener(IServiceListener* listener)
 {
 	mListeners.push_back(listener);
+}
+
+void Plugin::Activate()
+{
+	mStatus = STATUS_ACTIVE;
+}
+
+void Plugin::Deactivate()
+{
+	mStatus = STATUS_INACTIVE;
+}
+
+IPlugin::Status Plugin::GetStatus() const
+{
+	return mStatus;
 }
 
 const IVersion& Plugin::GetVersion() const
