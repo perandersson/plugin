@@ -9,6 +9,9 @@ namespace plugin
 	namespace contract
 	{
 		class PLUGIN_API IVersion;
+		class PLUGIN_API IService;
+		class PLUGIN_API IServiceReference;
+		class PLUGIN_API IServiceListener;
 
 		//
 		// Interface representing the actual plugin. 
@@ -26,15 +29,43 @@ namespace plugin
 				STATUS_ACTIVE,
 
 				//
+				// The plugin is stopping and is currently removing it's internal resources
+				STATUS_STOPPING,
+
+				//
 				// An inactive status means that the plugin engine is aware of the plugin but none of
 				// the services are registrered.
-				STATUS_INACTIVE
+				STATUS_STOPPED,
 			};
 
 		public:
 			virtual ~IPlugin() {}
 
 		public:
+			//
+			// Register a new plugin service. It is s the plugin that owns the memory of the service. This means 
+			// that the plugin is responsible to clean the memory up during the STATUS_STOPPING phase.
+			//
+			// @param type
+			//			The type of the supplied service
+			// @param service
+			//			The service we want to register.
+			virtual void RegisterService(const type_info& type, IService* service) = 0;
+
+			//
+			// Add a service listener. This listener will receive events when services are registered and unregistered.
+			// Listener bound to a plugin is automatically unregistered during the plugin's STATUS_STOPPING phase 
+			//
+			// @param listener
+			//			The listener instance
+			virtual void AddServiceListener(IServiceListener* listener) = 0;
+
+			//
+			// Remove a service listener. Listeners are automatically unregistrered during the plugins STATUS_STOPPING phase.
+			//
+			// @param listener
+			virtual void RemoveServiceListener(IServiceListener* listener) = 0;
+
 			//
 			// @return The status for this plugin
 			virtual Status GetStatus() const = 0;

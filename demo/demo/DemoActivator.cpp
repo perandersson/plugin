@@ -17,7 +17,7 @@ public:
 	}
 
 	virtual void Start(IPluginContext& context, IPlugin& plugin) {
-		context.RegisterService(typeid(gameengine::IGame), &mService);
+		plugin.RegisterService(typeid(gameengine::IGame), &mService);
 	}
 
 	virtual void Stop(IPlugin& plugin) {

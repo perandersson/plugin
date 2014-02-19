@@ -19,22 +19,17 @@ PluginContext::~PluginContext()
 
 void PluginContext::StartPlugin(IPluginActivator* activator, const Version& version)
 {
-	std::auto_ptr<IPluginActivator> activatorPtr(activator);
-	std::shared_ptr<Plugin> plugin(new Plugin(activatorPtr, version));
-	mCurrentPlugin = plugin;
+	std::shared_ptr<Plugin> plugin(new Plugin(*this, activator, version));
 	mPlugins.push_back(plugin);
 	plugin->Start(*this);
-	plugin->Activate();
 }
 
-void PluginContext::RegisterService(const type_info& type, IService* service)
+void PluginContext::NotifyServiceListeners(const type_info& type, ServiceReference& reference)
 {
-	auto reference = mCurrentPlugin->RegisterService(type, service);
-
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
 	for (; it != end; ++it) {
-		(*it)->NotifyServiceListeners(*this, type, *reference);
+		(*it)->NotifyServiceListeners(*this, type, reference);
 	}
 }
 
@@ -62,14 +57,4 @@ void PluginContext::UngetService(IServiceReference* reference)
 {
 	ServiceReference* s = dynamic_cast<ServiceReference*>(reference);
 	s->UngetService();
-}
-
-void PluginContext::AddServiceListener(IServiceListener* listener)
-{
-	mCurrentPlugin->AddServiceListener(listener);
-}
-
-void PluginContext::RemoveServiceListener(IServiceListener* listener)
-{
-	// TODO IMPLEMENT THIS!!!
 }

@@ -7,15 +7,8 @@ using namespace plugin;
 using namespace plugin::contract;
 using namespace plugin::core;
 
-Plugin Plugin::INVALID_PLUGIN;
-
-Plugin::Plugin()
-: mVersion(0, 0, 0), mStatus(STATUS_INACTIVE)
-{
-}
-
-Plugin::Plugin(std::auto_ptr<IPluginActivator> activator, const Version& version)
-: mActivator(activator), mVersion(version), mStatus(STATUS_STARTING)
+Plugin::Plugin(PluginContext& context, IPluginActivator* activator, const Version& version)
+: mPluginContext(context), mActivator(activator), mVersion(version), mStatus(STATUS_STOPPED)
 {
 
 }
@@ -25,20 +18,18 @@ Plugin::~Plugin()
 
 }
 
-bool Plugin::IsValid() const
-{
-	return this != &INVALID_PLUGIN;
-}
-
 void Plugin::Start(PluginContext& context)
 {
+	mStatus = STATUS_STARTING;
 	mActivator->Start(context, *this);
+	mStatus = STATUS_ACTIVE;
 }
 
 void Plugin::Stop()
 {
+	mStatus = STATUS_STOPPING;
 	mActivator->Stop(*this);
-	Deactivate();
+	mStatus = STATUS_STOPPED;	
 }
 
 ServiceReference* Plugin::FindServiceReference(const type_info& type)
@@ -51,11 +42,31 @@ ServiceReference* Plugin::FindServiceReference(const type_info& type)
 	return it->second.get();
 }
 
-ServiceReference* Plugin::RegisterService(const type_info& type, IService* service)
+void Plugin::RegisterService(const type_info& type, IService* service)
 {
-	std::shared_ptr<ServiceReference> reference(new ServiceReference(this, service, type));
-	mReferences.insert(std::make_pair(std::string(type.name()), reference));
-	return reference.get();
+	std::string typeName(type.name());
+	if (mReferences.find(typeName) != mReferences.end()) {
+		// WHAT TO DO???
+	}
+
+	auto serviceReference = new ServiceReference(this, service, type);
+	std::shared_ptr<ServiceReference> reference(serviceReference);
+	mReferences.insert(std::make_pair(typeName, reference));
+
+	// Notify all the registered service listeners about the new service
+	mPluginContext.NotifyServiceListeners(type, *serviceReference);
+}
+
+void Plugin::AddServiceListener(IServiceListener* listener)
+{
+	mListeners.push_back(listener);
+}
+
+void Plugin::RemoveServiceListener(IServiceListener* listener)
+{
+	ServiceListeners::iterator it = std::find(mListeners.begin(), mListeners.end(), listener);
+	if (it != mListeners.end())
+		mListeners.erase(it);
 }
 
 void Plugin::NotifyServiceListeners(PluginContext& context, const type_info& type, ServiceReference& reference)
@@ -65,21 +76,6 @@ void Plugin::NotifyServiceListeners(PluginContext& context, const type_info& typ
 	for (; it != end; ++it) {
 		(*it)->ServiceRegistered(context, type, reference);
 	}
-}
-
-void Plugin::AddServiceListener(IServiceListener* listener)
-{
-	mListeners.push_back(listener);
-}
-
-void Plugin::Activate()
-{
-	mStatus = STATUS_ACTIVE;
-}
-
-void Plugin::Deactivate()
-{
-	mStatus = STATUS_INACTIVE;
 }
 
 IPlugin::Status Plugin::GetStatus() const

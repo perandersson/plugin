@@ -31,13 +31,8 @@ namespace plugin
 			typedef std::list<IServiceListener*> ServiceListeners;
 
 		public:
-			Plugin();
-			Plugin(std::auto_ptr<IPluginActivator> activator, const Version& version);
+			Plugin(PluginContext& context, IPluginActivator* activator, const Version& version);
 			~Plugin();
-
-			//
-			// @return TRUE if this plugin is valid; FALSE otherwise
-			bool IsValid() const;
 
 			//
 			// Starts this plugin in the supplied context
@@ -59,12 +54,6 @@ namespace plugin
 			ServiceReference* FindServiceReference(const type_info& type);
 
 			//
-			// @param type
-			// @param service
-			// @return
-			ServiceReference* RegisterService(const type_info& type, IService* service);
-
-			//
 			// Notifies all the listeners connected via this plugin
 			//
 			// @param context
@@ -75,27 +64,16 @@ namespace plugin
 			//			The actual service
 			void NotifyServiceListeners(PluginContext& context, const type_info& type, ServiceReference& reference);
 
-			//
-			// @param listener
-			void AddServiceListener(IServiceListener* listener);
-
-			//
-			// Activates this plugin
-			void Activate();
-
-			//
-			// Deactivates this plugin
-			void Deactivate();
-
 		// IPlugin
 		public:
+			virtual void RegisterService(const type_info& type, IService* service);
+			virtual void AddServiceListener(IServiceListener* listener);
+			virtual void RemoveServiceListener(IServiceListener* listener);
 			virtual Status GetStatus() const;
 			virtual const IVersion& GetVersion() const;
 
-		public:
-			static Plugin INVALID_PLUGIN;
-			
 		private:
+			PluginContext& mPluginContext;
 			std::auto_ptr<IPluginActivator> mActivator;
 			Version mVersion;
 			ServiceReferences mReferences;

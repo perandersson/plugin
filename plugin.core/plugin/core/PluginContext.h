@@ -14,6 +14,7 @@ namespace plugin
 	{
 		class Plugin;
 		class Version;
+		class ServiceReference;
 
 		//
 		// 
@@ -36,18 +37,18 @@ namespace plugin
 			//			The plugin version
 			void StartPlugin(IPluginActivator* activator, const Version& version);
 
+			//
+			// Notify all the service listeners that a service is registered
+			void NotifyServiceListeners(const type_info& type, ServiceReference& reference);
+
 		// IPluginContext
 		public:
-			virtual void RegisterService(const type_info& type, IService* service);
 			virtual IServiceReference* GetServiceReference(const type_info& type);
 			virtual IService* GetService(IServiceReference* reference);
 			virtual void UngetService(IServiceReference* reference);
-			virtual void AddServiceListener(IServiceListener* listener);
-			virtual void RemoveServiceListener(IServiceListener* listener);
 
 		private:
 			Plugins mPlugins;
-			std::shared_ptr<Plugin> mCurrentPlugin;
 		};
 	}
 }
