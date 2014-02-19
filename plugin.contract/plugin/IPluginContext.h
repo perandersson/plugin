@@ -36,8 +36,9 @@ namespace plugin
 			//
 			// @param type
 			//			The service type
-			// @return A set of references.
-			virtual IServiceReferences* GetServiceReferences(const type_info& type) = 0;
+			// @param callback
+			//			A callack instance
+			virtual void GetServiceReferences(const type_info& type, IServiceReferences* callback) = 0;
 
 			//
 			// Resolves a service based on it's service reference. This ensures that the actual pointer

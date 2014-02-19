@@ -7,6 +7,7 @@
 #include "IPluginContext.h"
 #include "IService.h"
 #include "IServiceReference.h"
+#include "IServiceReferences.h"
 #include "IPlugin.h"
 #include "IVersion.h"
 

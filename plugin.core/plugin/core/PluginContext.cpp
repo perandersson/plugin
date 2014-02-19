@@ -47,9 +47,14 @@ IServiceReference* PluginContext::GetServiceReference(const type_info& type)
 	return nullptr;
 }
 
-IServiceReferences* GetServiceReferences(const type_info& type)
+void PluginContext::GetServiceReferences(const type_info& type, IServiceReferences* callback)
 {
-	return nullptr;
+	Plugins::iterator it = mPlugins.begin();
+	Plugins::const_iterator end = mPlugins.end();
+	for (; it != end; ++it) {
+		auto reference = (*it)->FindServiceReference(type);
+		callback->OnServiceReference(reference);
+	}
 }
 
 IService* PluginContext::GetService(IServiceReference* reference)

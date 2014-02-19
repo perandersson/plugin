@@ -21,4 +21,12 @@
 #define PLUGIN_ENGINE_MAJOR_VERSION 0
 #define PLUGIN_ENGINE_MINOR_VERSION 1
 
+#ifndef THREAD_LOCAL
+#ifdef WIN32
+#define THREAD_LOCAL __declspec(thread)
+#else
+#define THREAD_LOCAL __thread
+#endif
+#endif
+
 #endif

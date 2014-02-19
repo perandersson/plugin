@@ -15,6 +15,9 @@ namespace plugin
 		class PLUGIN_API IServiceReferences
 		{
 		public:
+			//
+			//
+			virtual void OnServiceReference(IServiceReference* reference) = 0;
 		};
 	}
 }
