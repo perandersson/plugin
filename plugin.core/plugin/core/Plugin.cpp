@@ -54,7 +54,7 @@ IServiceReference* Plugin::RegisterService(const type_info& type, IService* serv
 	mReferences.insert(std::make_pair(typeName, reference));
 
 	// Notify all the registered service listeners about the new service
-	mPluginContext.NotifyServiceChanged(type, *serviceReference, IServiceListener::STATUS_REGISTERED);
+	mPluginContext.NotifyServiceChanged(*serviceReference, IServiceListener::STATUS_REGISTERED);
 	return serviceReference;
 }
 
@@ -68,7 +68,7 @@ void Plugin::UnregisterServices(const type_info& type)
 	//
 	auto reference = it->second;
 	mReferences.erase(it);
-	mPluginContext.NotifyServiceChanged(reference->GetType(), *reference.get(), IServiceListener::STATUS_UNREGISTERED);
+	mPluginContext.NotifyServiceChanged(*reference.get(), IServiceListener::STATUS_UNREGISTERED);
 }
 
 void Plugin::UnregisterService(IServiceReference* reference)
@@ -79,7 +79,7 @@ void Plugin::UnregisterService(IServiceReference* reference)
 		if (it->second.get() == reference) {
 			auto reference = it->second;
 			mReferences.erase(it);
-			mPluginContext.NotifyServiceChanged(reference->GetType(), *reference.get(), IServiceListener::STATUS_UNREGISTERED);
+			mPluginContext.NotifyServiceChanged(*reference.get(), IServiceListener::STATUS_UNREGISTERED);
 			break;
 		}
 	}
@@ -97,12 +97,12 @@ void Plugin::RemoveServiceListener(IServiceListener* listener)
 		mListeners.erase(it);
 }
 
-void Plugin::NotifyServiceChanged(const type_info& type, ServiceReference& reference, IServiceListener::Status status)
+void Plugin::NotifyServiceChanged(ServiceReference& reference, IServiceListener::Status status)
 {
 	ServiceListeners::iterator it = mListeners.begin();
 	ServiceListeners::const_iterator end = mListeners.end();
 	for (; it != end; ++it) {
-		(*it)->OnServiceChanged(type, reference, status);
+		(*it)->OnServiceChanged(reference, status);
 	}
 }
 

@@ -24,12 +24,12 @@ void PluginContext::StartPlugin(IPluginActivator* activator, const Version& vers
 	plugin->Start(*this);
 }
 
-void PluginContext::NotifyServiceChanged(const type_info& type, ServiceReference& reference, IServiceListener::Status status)
+void PluginContext::NotifyServiceChanged(ServiceReference& reference, IServiceListener::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
 	for (; it != end; ++it) {
-		(*it)->NotifyServiceChanged(type, reference, status);
+		(*it)->NotifyServiceChanged(reference, status);
 	}
 }
 

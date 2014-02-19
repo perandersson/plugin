@@ -25,8 +25,8 @@ public:
 		std::cout << "DemoActivator is deactivated" << std::endl;
 	}
 
-	virtual void OnServiceChanged(const type_info& type, IServiceReference& reference, Status status) {
-		std::cout << "DemoActivator -> Service status changed for type: " << type.name() << std::endl;
+	virtual void OnServiceChanged(IServiceReference& reference, Status status) {
+		std::cout << "DemoActivator -> Service status changed for type: " << reference.GetType().name() << std::endl;
 	}
 	
 private:

@@ -34,10 +34,9 @@ namespace plugin
 			//
 			// Notifies that the status a service has been changed
 			//
-			// @param type
 			// @param reference
 			// @param status
-			virtual void OnServiceChanged(const type_info& type, IServiceReference& reference, Status status) = 0;
+			virtual void OnServiceChanged(IServiceReference& reference, Status status) = 0;
 		};
 	}
 }

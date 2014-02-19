@@ -56,13 +56,11 @@ namespace plugin
 			//
 			// Notifies all the listeners connected via this plugin
 			//
-			// @param type
-			//			The service type
 			// @param service
 			//			The actual service
 			// @param status
 			//			The status of the service
-			void NotifyServiceChanged(const type_info& type, ServiceReference& reference, IServiceListener::Status status);
+			void NotifyServiceChanged(ServiceReference& reference, IServiceListener::Status status);
 
 		// IPlugin
 		public:
