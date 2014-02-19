@@ -66,7 +66,9 @@ void Plugin::UnregisterServices(const type_info& type)
 		return;
 
 	//
+	auto reference = it->second;
 	mReferences.erase(it);
+	mPluginContext.NotifyServiceChanged(reference->GetType(), *reference.get(), IServiceListener::STATUS_UNREGISTERED);
 }
 
 void Plugin::UnregisterService(IServiceReference* reference)
@@ -75,7 +77,9 @@ void Plugin::UnregisterService(IServiceReference* reference)
 	ServiceReferences::const_iterator end = mReferences.end();
 	for (; it != end; ++it) {
 		if (it->second.get() == reference) {
+			auto reference = it->second;
 			mReferences.erase(it);
+			mPluginContext.NotifyServiceChanged(reference->GetType(), *reference.get(), IServiceListener::STATUS_UNREGISTERED);
 			break;
 		}
 	}
