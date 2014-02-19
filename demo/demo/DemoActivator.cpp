@@ -1,9 +1,13 @@
-#include <plugin/contract.h>
 #include "../gameengine.contract/contract.h"
 #include "DemoGame.h"
 #include <iostream>
 
-using namespace plugin::contract;
+#include <plugin/contract.h>
+using plugin::contract::IPluginActivator;
+using plugin::contract::IServiceListener;
+using plugin::contract::IServiceReference;
+using plugin::contract::IPluginContext;
+using plugin::contract::IPlugin;
 
 class DemoActivator : public IPluginActivator, public IServiceListener
 {
