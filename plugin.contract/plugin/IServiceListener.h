@@ -36,7 +36,7 @@ namespace plugin
 			//
 			// @param reference
 			// @param status
-			virtual void OnServiceChanged(IServiceReference& reference, Status status) = 0;
+			virtual void OnServiceChanged(IServiceReference* reference, Status status) = 0;
 		};
 	}
 }

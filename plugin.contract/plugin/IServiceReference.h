@@ -20,11 +20,11 @@ namespace plugin
 		public:
 			//
 			// @return The plugin this service reference is connected to
-			virtual IPlugin& GetPlugin() = 0;
+			virtual IPlugin* GetPlugin() = 0;
 
 			//
 			// @return The plugin this service reference is connected to
-			virtual const IPlugin& GetPlugin() const = 0;
+			virtual const IPlugin* GetPlugin() const = 0;
 
 			//
 			// @return The type that the service reference is implementing

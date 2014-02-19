@@ -19,12 +19,12 @@ PluginContext::~PluginContext()
 
 void PluginContext::StartPlugin(IPluginActivator* activator, const Version& version)
 {
-	std::shared_ptr<Plugin> plugin(new Plugin(*this, activator, version));
+	std::shared_ptr<Plugin> plugin(new Plugin(activator, version));
 	mPlugins.push_back(plugin);
-	plugin->Start(*this);
+	plugin->Start(this);
 }
 
-void PluginContext::NotifyServiceChanged(ServiceReference& reference, IServiceListener::Status status)
+void PluginContext::NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();

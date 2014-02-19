@@ -16,17 +16,17 @@ public:
 
 	}
 
-	virtual void Start(IPluginContext& context, IPlugin& plugin) {
-		plugin.AddServiceListener(this);
-		plugin.RegisterService(typeid(gameengine::IGame), &mService);
+	virtual void Start(IPluginContext* context, IPlugin* plugin) {
+		plugin->AddServiceListener(this);
+		plugin->RegisterService(typeid(gameengine::IGame), &mService);
 	}
 
-	virtual void Stop(IPlugin& plugin) {
+	virtual void Stop(IPlugin* plugin) {
 		std::cout << "DemoActivator is deactivated" << std::endl;
 	}
 
-	virtual void OnServiceChanged(IServiceReference& reference, Status status) {
-		std::cout << "DemoActivator -> Service status changed for type: " << reference.GetType().name() << std::endl;
+	virtual void OnServiceChanged(IServiceReference* reference, Status status) {
+		std::cout << "DemoActivator -> Service status changed for type: " << reference->GetType().name() << std::endl;
 	}
 	
 private:

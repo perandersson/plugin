@@ -31,7 +31,7 @@ namespace plugin
 			typedef std::list<IServiceListener*> ServiceListeners;
 
 		public:
-			Plugin(PluginContext& context, IPluginActivator* activator, const Version& version);
+			Plugin(IPluginActivator* activator, const Version& version);
 			~Plugin();
 
 			//
@@ -39,7 +39,7 @@ namespace plugin
 			//
 			// @param context
 			//			The context where all the plugins resides
-			void Start(PluginContext& context);
+			void Start(PluginContext* context);
 
 			//
 			// Stops this plugin from running.
@@ -60,7 +60,7 @@ namespace plugin
 			//			The actual service
 			// @param status
 			//			The status of the service
-			void NotifyServiceChanged(ServiceReference& reference, IServiceListener::Status status);
+			void NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status);
 
 		// IPlugin
 		public:
@@ -70,11 +70,11 @@ namespace plugin
 			virtual void AddServiceListener(IServiceListener* listener);
 			virtual void RemoveServiceListener(IServiceListener* listener);
 			virtual Status GetStatus() const;
-			virtual const IVersion& GetVersion() const;
-			virtual IPluginContext& GetContext();
+			virtual const IVersion* GetVersion() const;
+			virtual IPluginContext* GetContext();
 
 		private:
-			PluginContext& mPluginContext;
+			PluginContext* mPluginContext;
 			std::auto_ptr<IPluginActivator> mActivator;
 			Version mVersion;
 			ServiceReferences mReferences;

@@ -90,11 +90,11 @@ namespace plugin
 
 			//
 			// @return The version of this plugin.
-			virtual const IVersion& GetVersion() const = 0;
+			virtual const IVersion* GetVersion() const = 0;
 
 			//
 			// @return The context where this located in
-			virtual IPluginContext& GetContext() = 0;
+			virtual IPluginContext* GetContext() = 0;
 		};
 	}
 }
