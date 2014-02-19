@@ -37,7 +37,7 @@ ServiceReference* Plugin::FindServiceReference(const type_info& type)
 {
 	ServiceReferences::iterator it = mReferences.find(std::string(type.name()));
 	if (it == mReferences.end()) {
-		return &InvalidServiceReference::INSTANCE;
+		return nullptr;
 	}
 
 	return it->second.get();

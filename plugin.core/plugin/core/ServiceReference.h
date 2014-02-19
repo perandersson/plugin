@@ -19,10 +19,6 @@ namespace plugin
 			virtual ~ServiceReference();
 
 			//
-			// @return TRUE if this service reference is valid; FALSE otherwise
-			bool IsValid() const;
-
-			//
 			// Retrieves the service for this reference and increase it's reference counter
 			//
 			// @return The pointer to the service
@@ -43,18 +39,6 @@ namespace plugin
 			IService* mService;
 			int mNumReferences;
 			const type_info& mType;
-		};
-
-		//
-		// Type indicating that the service reference is invalid/doesn't exist.
-		class InvalidServiceReference : public ServiceReference
-		{
-		public:
-			InvalidServiceReference();
-			virtual ~InvalidServiceReference();
-
-		public:
-			static InvalidServiceReference INSTANCE;
 		};
 	}
 }

@@ -51,6 +51,7 @@ namespace plugin
 		// IPluginContext
 		public:
 			virtual IServiceReference* GetServiceReference(const type_info& type);
+			virtual IServiceReferences* GetServiceReferences(const type_info& type);
 			virtual IService* GetService(IServiceReference* reference);
 			virtual void UngetService(IServiceReference* reference);
 

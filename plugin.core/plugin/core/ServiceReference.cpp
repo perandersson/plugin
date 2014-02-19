@@ -15,25 +15,14 @@ ServiceReference::~ServiceReference()
 
 }
 
-bool ServiceReference::IsValid() const
-{
-	return this != &InvalidServiceReference::INSTANCE;
-}
-
 IService* ServiceReference::GetService()
 {
-	if (!IsValid())
-		return nullptr;
-
 	mNumReferences++;
 	return mService;
 }
 
 void ServiceReference::UngetService()
 {
-	if (!IsValid())
-		return;
-
 	mNumReferences--;
 }
 
@@ -50,19 +39,4 @@ const IPlugin* ServiceReference::GetPlugin() const
 const type_info& ServiceReference::GetType() const
 {
 	return mType;
-}
-
-/////////////////////////////
-
-InvalidServiceReference InvalidServiceReference::INSTANCE;
-
-InvalidServiceReference::InvalidServiceReference()
-: ServiceReference(nullptr, nullptr, typeid(InvalidServiceReference))
-{
-
-}
-
-InvalidServiceReference::~InvalidServiceReference()
-{
-
 }

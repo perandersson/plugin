@@ -38,13 +38,18 @@ IServiceReference* PluginContext::GetServiceReference(const type_info& type)
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
 	for (; it != end; ++it) {
-		ServiceReference* reference = (*it)->FindServiceReference(type);
-		if (reference->IsValid()) {
+		auto reference = (*it)->FindServiceReference(type);
+		if (reference != nullptr) {
 			return reference;
 		}
 	}
 
-	return &InvalidServiceReference::INSTANCE;
+	return nullptr;
+}
+
+IServiceReferences* GetServiceReferences(const type_info& type)
+{
+	return nullptr;
 }
 
 IService* PluginContext::GetService(IServiceReference* reference)

@@ -11,6 +11,7 @@ namespace plugin
 	{
 		class PLUGIN_API IService;
 		class PLUGIN_API IServiceReference;
+		class PLUGIN_API IServiceReferences;
 		class PLUGIN_API IServiceListener;
 
 		//
@@ -22,12 +23,21 @@ namespace plugin
 
 		public:
 			//
-			// Retrieves a specific service reference based on it's type
+			// Retrieves a specific service reference based on it's type. If multiple services has registered the same type
+			// then return the first one that's registered.
 			//
 			// @param type
 			//			The service type
 			// @return A reference created by the plugin engine if found; NULL otherwise
 			virtual IServiceReference* GetServiceReference(const type_info& type) = 0;
+
+			//
+			// Retrieves a all service reference implementing the supplied type. 
+			//
+			// @param type
+			//			The service type
+			// @return A set of references.
+			virtual IServiceReferences* GetServiceReferences(const type_info& type) = 0;
 
 			//
 			// Resolves a service based on it's service reference. This ensures that the actual pointer
