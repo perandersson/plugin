@@ -16,9 +16,6 @@
     <ClCompile Include="..\..\plugin.core\plugin\core\ServiceReference.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\plugin.core\plugin\core\XMLPluginContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\plugin.core\plugin\core\Version.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -31,9 +28,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.core\plugin\core\ServiceReference.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.core\plugin\core\XMLPluginContext.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.core\plugin\core\Version.h">

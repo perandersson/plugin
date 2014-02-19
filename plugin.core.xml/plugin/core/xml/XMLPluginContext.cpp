@@ -1,5 +1,4 @@
 #include "XMLPluginContext.h"
-#include "Version.h"
 #include <tinyxml2.h>
 
 #ifdef WIN32
@@ -9,6 +8,7 @@
 
 using namespace plugin;
 using namespace plugin::core;
+using namespace plugin::core::xml;
 
 ////////////////////////////////////////////////////////////////
 

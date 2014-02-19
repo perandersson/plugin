@@ -7,6 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin.contract", "plugin.c
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin.core", "plugin.core.vcxproj", "{D921C210-BE9B-4D93-B98C-084BA6F355AF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugin.core.xml", "plugin.core.xml.vcxproj", "{8753D6C5-C85A-4594-A792-2D913375E933}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D921C210-BE9B-4D93-B98C-084BA6F355AF} = {D921C210-BE9B-4D93-B98C-084BA6F355AF}
+		{6A708F37-BD90-482C-92CD-0CCCA385112A} = {6A708F37-BD90-482C-92CD-0CCCA385112A}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +27,10 @@ Global
 		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Debug|Win32.Build.0 = Debug|Win32
 		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Release|Win32.ActiveCfg = Release|Win32
 		{D921C210-BE9B-4D93-B98C-084BA6F355AF}.Release|Win32.Build.0 = Release|Win32
+		{8753D6C5-C85A-4594-A792-2D913375E933}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8753D6C5-C85A-4594-A792-2D913375E933}.Debug|Win32.Build.0 = Debug|Win32
+		{8753D6C5-C85A-4594-A792-2D913375E933}.Release|Win32.ActiveCfg = Release|Win32
+		{8753D6C5-C85A-4594-A792-2D913375E933}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

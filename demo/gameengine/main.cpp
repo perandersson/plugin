@@ -1,6 +1,8 @@
 #include <iostream>
-#include <plugin/core/XMLPluginContext.h>
 #include "../gameengine.contract/contract.h"
+
+#include <plugin/core/xml/XMLPluginContext.h>
+using namespace plugin::core::xml;
 
 static const char PLUGINS_XML[] = {
 	"<plugins> \
@@ -11,7 +13,7 @@ int main()
 {
 	//
 	// Start the plugin context
-	plugin::core::XMLPluginContext pluginContext;
+	XMLPluginContext pluginContext;
 	pluginContext.Load(PLUGINS_XML);
 
 	//
