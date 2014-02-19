@@ -12,6 +12,7 @@ namespace plugin
 		class PLUGIN_API IService;
 		class PLUGIN_API IServiceReference;
 		class PLUGIN_API IServiceListener;
+		class PLUGIN_API IPluginListener;
 
 		//
 		// Interface representing the actual plugin. 
@@ -72,7 +73,7 @@ namespace plugin
 
 			//
 			// Add a service listener. This listener will receive events when services are registered and unregistered.
-			// Listener bound to a plugin is automatically unregistered during the plugin's STATUS_STOPPING phase 
+			// Listener bound to a plugin is automatically removed during the plugin's STATUS_STOPPING phase 
 			//
 			// @param listener
 			//			The listener instance
@@ -85,6 +86,20 @@ namespace plugin
 			virtual void RemoveServiceListener(IServiceListener* listener) = 0;
 
 			//
+			// Add a plugin listener. This listener will receive events when plugins are activated and deactivated.
+			// Listener bound to a plugin is automatically removed during the plugin's STATUS_STOPPING phase 
+			//
+			// @param listener
+			//			The listener instance
+			virtual void AddPluginListener(IPluginListener* listener) = 0;
+
+			//
+			// Remove a plugin listener. Listeners are automatically unregistrered during the plugins STATUS_STOPPING phase.
+			//
+			// @param listener
+			virtual void RemovePluginListener(IPluginListener* listener) = 0;
+
+			//
 			// @return The status for this plugin
 			virtual Status GetStatus() const = 0;
 
@@ -95,6 +110,10 @@ namespace plugin
 			//
 			// @return The context where this located in
 			virtual IPluginContext* GetPluginContext() = 0;
+
+			//
+			// @return A null-terminated name of the plugin.
+			virtual const char* GetName() = 0;
 		};
 	}
 }

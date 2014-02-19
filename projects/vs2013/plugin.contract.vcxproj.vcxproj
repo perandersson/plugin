@@ -19,6 +19,7 @@
     <ClInclude Include="..\..\plugin.contract\plugin\IPlugin.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IPluginActivator.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IPluginContext.h" />
+    <ClInclude Include="..\..\plugin.contract\plugin\IPluginListener.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IServiceReferences.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IVersion.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IService.h" />

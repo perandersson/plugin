@@ -7,8 +7,8 @@ using namespace plugin;
 using namespace plugin::contract;
 using namespace plugin::core;
 
-Plugin::Plugin(IPluginActivator* activator, const Version& version)
-: mPluginContext(nullptr), mActivator(activator), mVersion(version), mStatus(STATUS_STOPPED)
+Plugin::Plugin(IPluginActivator* activator, const std::string& name, const Version& version)
+: mPluginContext(nullptr), mActivator(activator), mVersion(version), mStatus(STATUS_STOPPED), mName(name)
 {
 
 }
@@ -24,13 +24,15 @@ void Plugin::Start(PluginContext* context)
 	mStatus = STATUS_STARTING;
 	mActivator->Start(context, this);
 	mStatus = STATUS_ACTIVE;
+	mPluginContext->NotifyPluginChanged(this, IPluginListener::STATUS_ACTIVE);
 }
 
 void Plugin::Stop()
 {
 	mStatus = STATUS_STOPPING;
 	mActivator->Stop(this);
-	mStatus = STATUS_STOPPED;	
+	mStatus = STATUS_STOPPED;
+	mPluginContext->NotifyPluginChanged(this, IPluginListener::STATUS_INACTIVE);
 }
 
 ServiceReference* Plugin::FindServiceReference(const type_info& type)
@@ -88,22 +90,43 @@ void Plugin::UnregisterService(IServiceReference* reference)
 
 void Plugin::AddServiceListener(IServiceListener* listener)
 {
-	mListeners.push_back(listener);
+	mServiceListeners.push_back(listener);
 }
 
 void Plugin::RemoveServiceListener(IServiceListener* listener)
 {
-	ServiceListeners::iterator it = std::find(mListeners.begin(), mListeners.end(), listener);
-	if (it != mListeners.end())
-		mListeners.erase(it);
+	ServiceListeners::iterator it = std::find(mServiceListeners.begin(), mServiceListeners.end(), listener);
+	if (it != mServiceListeners.end())
+		mServiceListeners.erase(it);
+}
+
+void Plugin::AddPluginListener(IPluginListener* listener)
+{
+	mPluginListeners.push_back(listener);
+}
+
+void Plugin::RemovePluginListener(IPluginListener* listener)
+{
+	PluginListeners::iterator it = std::find(mPluginListeners.begin(), mPluginListeners.end(), listener);
+	if (it != mPluginListeners.end())
+		mPluginListeners.erase(it);
 }
 
 void Plugin::NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status)
 {
-	ServiceListeners::iterator it = mListeners.begin();
-	ServiceListeners::const_iterator end = mListeners.end();
+	ServiceListeners::iterator it = mServiceListeners.begin();
+	ServiceListeners::const_iterator end = mServiceListeners.end();
 	for (; it != end; ++it) {
 		(*it)->OnServiceChanged(reference, status);
+	}
+}
+
+void Plugin::NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status)
+{
+	PluginListeners::iterator it = mPluginListeners.begin();
+	PluginListeners::const_iterator end = mPluginListeners.end();
+	for (; it != end; ++it) {
+		(*it)->OnPluginChanged(plugin, status);
 	}
 }
 
@@ -120,4 +143,9 @@ const IVersion* Plugin::GetVersion() const
 IPluginContext* Plugin::GetPluginContext()
 {
 	return mPluginContext;
+}
+
+const char* Plugin::GetName()
+{
+	return mName.c_str();
 }

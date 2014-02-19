@@ -12,7 +12,6 @@ namespace plugin
 		class PLUGIN_API IService;
 		class PLUGIN_API IServiceReference;
 		class PLUGIN_API IServiceReferences;
-		class PLUGIN_API IServiceListener;
 
 		//
 		//

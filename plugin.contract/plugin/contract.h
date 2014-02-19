@@ -9,6 +9,7 @@
 #include "IServiceReference.h"
 #include "IServiceReferences.h"
 #include "IPlugin.h"
+#include "IPluginListener.h"
 #include "IVersion.h"
 
 #endif

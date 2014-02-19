@@ -33,9 +33,11 @@ namespace plugin
 			//
 			// @param activator
 			//			The plugin activator class responsible for starting- and stopping the plugin
+			// @param name
+			//			The name of the plugin
 			// @param version
 			//			The plugin version
-			void StartPlugin(IPluginActivator* activator, const Version& version);
+			void StartPlugin(IPluginActivator* activator, const std::string& name, const Version& version);
 
 			//
 			// Notifies all the listeners
@@ -47,6 +49,15 @@ namespace plugin
 			// @param status
 			//			The status of the service
 			void NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status);
+
+			//
+			// Notifies all the listeners
+			//
+			// @param plugin
+			//			The plugin that's being changed
+			// @param status
+			//			The status of the plugin
+			void NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status);
 
 		// IPluginContext
 		public:

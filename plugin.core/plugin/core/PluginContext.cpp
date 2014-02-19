@@ -17,9 +17,9 @@ PluginContext::~PluginContext()
 
 }
 
-void PluginContext::StartPlugin(IPluginActivator* activator, const Version& version)
+void PluginContext::StartPlugin(IPluginActivator* activator, const std::string& name, const Version& version)
 {
-	std::shared_ptr<Plugin> plugin(new Plugin(activator, version));
+	std::shared_ptr<Plugin> plugin(new Plugin(activator, name, version));
 	mPlugins.push_back(plugin);
 	plugin->Start(this);
 }
@@ -30,6 +30,15 @@ void PluginContext::NotifyServiceChanged(ServiceReference* reference, IServiceLi
 	Plugins::const_iterator end = mPlugins.end();
 	for (; it != end; ++it) {
 		(*it)->NotifyServiceChanged(reference, status);
+	}
+}
+
+void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status)
+{
+	Plugins::iterator it = mPlugins.begin();
+	Plugins::const_iterator end = mPlugins.end();
+	for (; it != end; ++it) {
+		(*it)->NotifyPluginChanged(plugin, status);
 	}
 }
 

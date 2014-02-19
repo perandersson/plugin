@@ -48,7 +48,10 @@ public:
 	XmlPluginRegistryVisitor(XMLPluginContext& context);
 	~XmlPluginRegistryVisitor();
 
-	// tinyxml2::XMLVisitor
+	std::string GetNameFromPath(const char* path);
+
+
+// tinyxml2::XMLVisitor
 public:
 	virtual bool VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* firstAttribute);
 
@@ -67,6 +70,26 @@ XmlPluginRegistryVisitor::~XmlPluginRegistryVisitor()
 
 }
 
+std::string XmlPluginRegistryVisitor::GetNameFromPath(const char* path)
+{
+	std::string pathAsString(path);
+	std::string::size_type pos = pathAsString.find_last_of("\\");
+	if (pos == std::string::npos) {
+		pos = pathAsString.find_last_of("//");
+	}
+	if (pos != std::string::npos) {
+		pathAsString = pathAsString.substr(pos);
+	}
+
+	pos = pathAsString.find_last_of('.');
+	if (pos != std::string::npos) {
+		pathAsString = pathAsString.substr(0, pos);
+	}
+
+
+	return pathAsString;
+}
+
 bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* firstAttribute)
 {
 	static const std::string TAG_PLUGIN("plugin");
@@ -77,6 +100,9 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 		if (path == NULL) {
 			return true;
 		}
+
+		std::string name = element.Attribute("name") == nullptr ? 
+			GetNameFromPath(path) : std::string(element.Attribute("name"));
 
 		auto library = Helper::GetLibrary(path);
 		if (library == nullptr) {
@@ -118,7 +144,7 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 		if (pluginVersion != nullptr)
 			sscanf(pluginVersion, "%d.%d.%d", &majorVersion, &minorVersion, &patchVersion);
 		
-		mPluginContext.StartPlugin(activator, Version(majorVersion, minorVersion, patchVersion));
+		mPluginContext.StartPlugin(activator, std::string(name), Version(majorVersion, minorVersion, patchVersion));
 	}
 
 	return true;

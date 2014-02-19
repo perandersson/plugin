@@ -29,9 +29,10 @@ namespace plugin
 		{
 			typedef std::hash_map<std::string, std::shared_ptr<ServiceReference>> ServiceReferences;
 			typedef std::list<IServiceListener*> ServiceListeners;
+			typedef std::list<IPluginListener*> PluginListeners;
 
 		public:
-			Plugin(IPluginActivator* activator, const Version& version);
+			Plugin(IPluginActivator* activator, const std::string& name, const Version& version);
 			~Plugin();
 
 			//
@@ -62,6 +63,15 @@ namespace plugin
 			//			The status of the service
 			void NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status);
 
+			//
+			// Notifies all the listeners connected via this plugin
+			//
+			// @param plugin
+			//			The plugin that's being changed
+			// @param status
+			//			The status of the plugin
+			void NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status);
+
 		// IPlugin
 		public:
 			virtual IServiceReference* RegisterService(const type_info& type, IService* service);
@@ -69,17 +79,22 @@ namespace plugin
 			virtual void UnregisterService(IServiceReference* reference);
 			virtual void AddServiceListener(IServiceListener* listener);
 			virtual void RemoveServiceListener(IServiceListener* listener);
+			virtual void AddPluginListener(IPluginListener* listener);
+			virtual void RemovePluginListener(IPluginListener* listener);
 			virtual Status GetStatus() const;
 			virtual const IVersion* GetVersion() const;
 			virtual IPluginContext* GetPluginContext();
+			virtual const char* GetName();
 
 		private:
 			PluginContext* mPluginContext;
 			std::auto_ptr<IPluginActivator> mActivator;
 			Version mVersion;
 			ServiceReferences mReferences;
-			ServiceListeners mListeners;
+			ServiceListeners mServiceListeners;
+			PluginListeners mPluginListeners;
 			Status mStatus;
+			std::string mName;
 		};
 	}
 }
