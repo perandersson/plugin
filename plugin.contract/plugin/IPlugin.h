@@ -94,7 +94,7 @@ namespace plugin
 
 			//
 			// @return The context where this located in
-			virtual IPluginContext* GetContext() = 0;
+			virtual IPluginContext* GetPluginContext() = 0;
 		};
 	}
 }

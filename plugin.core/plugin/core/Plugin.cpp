@@ -117,7 +117,7 @@ const IVersion* Plugin::GetVersion() const
 	return &mVersion;
 }
 
-IPluginContext* Plugin::GetContext()
+IPluginContext* Plugin::GetPluginContext()
 {
 	return mPluginContext;
 }

@@ -71,7 +71,7 @@ namespace plugin
 			virtual void RemoveServiceListener(IServiceListener* listener);
 			virtual Status GetStatus() const;
 			virtual const IVersion* GetVersion() const;
-			virtual IPluginContext* GetContext();
+			virtual IPluginContext* GetPluginContext();
 
 		private:
 			PluginContext* mPluginContext;
