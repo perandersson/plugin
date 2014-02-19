@@ -6,28 +6,31 @@
 
 namespace plugin
 {
-	class PLUGIN_API IPlugin;
-
-	//
-	// Interface that symbolizes a placeholder for a registered service.
-	class PLUGIN_API IServiceReference
+	namespace contract
 	{
-	public:
-		virtual ~IServiceReference() {}
-
-	public:
-		//
-		// @return The plugin this service reference is connected to
-		virtual IPlugin* GetPlugin() = 0;
+		class PLUGIN_API IPlugin;
 
 		//
-		// @return The plugin this service reference is connected to
-		virtual const IPlugin* GetPlugin() const = 0;
+		// Interface that symbolizes a placeholder for a registered service.
+		class PLUGIN_API IServiceReference
+		{
+		public:
+			virtual ~IServiceReference() {}
 
-		//
-		// @return The type that the service reference is implementing
-		virtual const type_info& GetType() const = 0;
-	};
+		public:
+			//
+			// @return The plugin this service reference is connected to
+			virtual IPlugin& GetPlugin() = 0;
+
+			//
+			// @return The plugin this service reference is connected to
+			virtual const IPlugin& GetPlugin() const = 0;
+
+			//
+			// @return The type that the service reference is implementing
+			virtual const type_info& GetType() const = 0;
+		};
+	}
 }
 
 #endif

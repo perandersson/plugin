@@ -4,11 +4,13 @@
 
 #include <plugin/contract.h>
 
+using namespace plugin::contract;
+
 namespace gameengine
 {
 	//
 	// The actual game instance
-	class IGame : public plugin::IService
+	class IGame : public IService
 	{
 	public:
 		virtual void StartGame() = 0;

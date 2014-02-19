@@ -3,7 +3,7 @@
 #include "DemoGame.h"
 #include <iostream>
 
-using namespace plugin;
+using namespace plugin::contract;
 
 class DemoActivator : public IPluginActivator, public IServiceListener
 {
@@ -24,11 +24,11 @@ public:
 		std::cout << "DemoActivator is deactivated" << std::endl;
 	}
 
-	virtual void ServiceRegistered(const type_info& type, IPluginContext* context, IServiceReference* reference) {
+	virtual void ServiceRegistered(IPluginContext& context, const type_info& type, IServiceReference& reference) {
 		std::cout << "DemoActivator -> Service is registered of type: " << type.name() << std::endl;
 	}
 
-	virtual void ServiceUnregisted(const type_info& type, IPluginContext* context, const IServiceReference* service) {
+	virtual void ServiceUnregisted(IPluginContext& context, const type_info& type, const IServiceReference& service) {
 
 	}
 

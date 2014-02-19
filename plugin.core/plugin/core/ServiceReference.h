@@ -6,6 +6,8 @@
 
 namespace plugin
 {
+	using namespace contract;
+
 	namespace core
 	{
 		class Plugin;
@@ -32,8 +34,8 @@ namespace plugin
 
 		// IServiceReference
 		public:
-			virtual IPlugin* GetPlugin();
-			virtual const IPlugin* GetPlugin() const;
+			virtual IPlugin& GetPlugin();
+			virtual const IPlugin& GetPlugin() const;
 			virtual const type_info& GetType() const;
 
 		private:

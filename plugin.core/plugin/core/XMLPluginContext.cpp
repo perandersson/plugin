@@ -1,4 +1,5 @@
 #include "XMLPluginContext.h"
+#include "Version.h"
 #include <tinyxml2.h>
 
 #ifdef WIN32
@@ -117,7 +118,7 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 		if (pluginVersion != nullptr)
 			sscanf(pluginVersion, "%d.%d.%d", &majorVersion, &minorVersion, &patchVersion);
 		
-		mPluginContext.StartPlugin(activator, majorVersion, minorVersion, patchVersion);
+		mPluginContext.StartPlugin(activator, Version(majorVersion, minorVersion, patchVersion));
 	}
 
 	return true;

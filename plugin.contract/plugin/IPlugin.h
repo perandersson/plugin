@@ -6,18 +6,21 @@
 
 namespace plugin
 {
-	class PLUGIN_API IVersion;
-
-	class PLUGIN_API IPlugin
+	namespace contract
 	{
-	public:
-		virtual ~IPlugin() {}
+		class PLUGIN_API IVersion;
 
-	public:
-		//
-		// @return The version of this plugin
-		virtual const IVersion* GetVersion() const = 0;
-	};
+		class PLUGIN_API IPlugin
+		{
+		public:
+			virtual ~IPlugin() {}
+
+		public:
+			//
+			// @return The version of this plugin.
+			virtual const IVersion& GetVersion() const = 0;
+		};
+	}
 }
 
 #endif

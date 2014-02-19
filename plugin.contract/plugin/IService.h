@@ -7,13 +7,16 @@
 
 namespace plugin
 {
-	//
-	//
-	class PLUGIN_API IService
+	namespace contract
 	{
-	public:
-		virtual ~IService() {}
-	};
+		//
+		//
+		class PLUGIN_API IService
+		{
+		public:
+			virtual ~IService() {}
+		};
+	}
 }
 
 #endif

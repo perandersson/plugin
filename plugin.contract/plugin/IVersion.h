@@ -6,26 +6,29 @@
 
 namespace plugin
 {
-	//
-	//
-	class PLUGIN_API IVersion
+	namespace contract
 	{
-	public:
-		virtual ~IVersion() {}
-
-	public:
 		//
-		// @return The major component of this version instance
-		virtual int GetMajor() const = 0;
-
 		//
-		// @return The minor component of this version instance
-		virtual int GetMinor() const = 0;
+		class PLUGIN_API IVersion
+		{
+		public:
+			virtual ~IVersion() {}
 
-		//
-		// @return The patch component of this version instance
-		virtual int GetPatch() const = 0;
-	};
+		public:
+			//
+			// @return The major component of this version instance
+			virtual int GetMajor() const = 0;
+
+			//
+			// @return The minor component of this version instance
+			virtual int GetMinor() const = 0;
+
+			//
+			// @return The patch component of this version instance
+			virtual int GetPatch() const = 0;
+		};
+	}
 }
 
 #endif

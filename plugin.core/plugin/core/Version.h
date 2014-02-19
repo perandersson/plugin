@@ -6,13 +6,18 @@
 
 namespace plugin
 {
+	using namespace contract;
+
 	namespace core
 	{
 		class Version : public IVersion
 		{
 		public:
+			Version(const Version& version);
 			Version(int major, int minor, int patch);
 			~Version();
+
+			Version& operator = (const Version& lhs);
 
 		// IVersion
 		public:

@@ -8,24 +8,33 @@
 
 namespace plugin
 {
+	using namespace contract;
+
 	namespace core
 	{
 		class Plugin;
+		class Version;
 
+		//
+		// 
 		class PluginContext : public IPluginContext
 		{
 			typedef std::list<std::shared_ptr<Plugin>> Plugins;
 
-		public:
+		protected:
 			PluginContext();
+
+		public:
 			virtual ~PluginContext();
 
 			//
-			// Start a new plugin
+			// Start a new plugin using the supplied activator
 			//
 			// @param activator
-			// @param version string
-			void StartPlugin(IPluginActivator* activator, int majorVersion, int minorVersion, int patchVersion);
+			//			The plugin activator class responsible for starting- and stopping the plugin
+			// @param version
+			//			The plugin version
+			void StartPlugin(IPluginActivator* activator, const Version& version);
 
 		// IPluginContext
 		public:

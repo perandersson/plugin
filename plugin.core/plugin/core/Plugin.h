@@ -5,6 +5,7 @@
 #include <plugin/contract.h>
 #include <list>
 #include <memory>
+#include "Version.h"
 
 #ifdef __GNUC__
 #include <ext/hash_map>
@@ -15,12 +16,15 @@ namespace std { using namespace __gnu_cxx; }
 
 namespace plugin
 {
+	using namespace contract;
+
 	namespace core
 	{
 		class ServiceReference;
 		class PluginContext;
-		class Version;
 
+		//
+		// Implementation of the IPlugin contract
 		class Plugin : public IPlugin
 		{
 			typedef std::hash_map<std::string, std::shared_ptr<ServiceReference>> ServiceReferences;
@@ -28,7 +32,7 @@ namespace plugin
 
 		public:
 			Plugin();
-			Plugin(std::auto_ptr<IPluginActivator> activator, std::auto_ptr<Version> version);
+			Plugin(std::auto_ptr<IPluginActivator> activator, const Version& version);
 			~Plugin();
 
 			//
@@ -61,10 +65,15 @@ namespace plugin
 			ServiceReference* RegisterService(const type_info& type, IService* service);
 
 			//
+			// Notifies all the listeners connected via this plugin
+			//
+			// @param context
+			//			The responsible plugin context running all the plugins
 			// @param type
-			// @param plugin
+			//			The service type
 			// @param service
-			void NotifyServiceListeners(const type_info& type, PluginContext* context, ServiceReference* reference);
+			//			The actual service
+			void NotifyServiceListeners(PluginContext& context, const type_info& type, ServiceReference& reference);
 
 			//
 			// @param listener
@@ -72,14 +81,14 @@ namespace plugin
 
 		// IPlugin
 		public:
-			virtual const IVersion* GetVersion() const;
+			virtual const IVersion& GetVersion() const;
 
 		public:
 			static Plugin INVALID_PLUGIN;
 			
 		private:
 			std::auto_ptr<IPluginActivator> mActivator;
-			std::auto_ptr<Version> mVersion;
+			Version mVersion;
 			ServiceReferences mReferences;
 			ServiceListeners mListeners;
 			

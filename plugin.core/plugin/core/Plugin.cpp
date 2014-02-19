@@ -4,16 +4,17 @@
 #include "Version.h"
 
 using namespace plugin;
+using namespace plugin::contract;
 using namespace plugin::core;
 
 Plugin Plugin::INVALID_PLUGIN;
 
 Plugin::Plugin()
-: mVersion(std::auto_ptr<Version>(new Version(0, 0, 0)))
+: mVersion(0, 0, 0)
 {
 }
 
-Plugin::Plugin(std::auto_ptr<IPluginActivator> activator, std::auto_ptr<Version> version)
+Plugin::Plugin(std::auto_ptr<IPluginActivator> activator, const Version& version)
 : mActivator(activator), mVersion(version)
 {
 
@@ -56,12 +57,12 @@ ServiceReference* Plugin::RegisterService(const type_info& type, IService* servi
 	return reference.get();
 }
 
-void Plugin::NotifyServiceListeners(const type_info& type, PluginContext* context, ServiceReference* reference)
+void Plugin::NotifyServiceListeners(PluginContext& context, const type_info& type, ServiceReference& reference)
 {
 	ServiceListeners::iterator it = mListeners.begin();
 	ServiceListeners::const_iterator end = mListeners.end();
 	for (; it != end; ++it) {
-		(*it)->ServiceRegistered(type, context, reference);
+		(*it)->ServiceRegistered(context, type, reference);
 	}
 }
 
@@ -70,7 +71,7 @@ void Plugin::AddServiceListener(IServiceListener* listener)
 	mListeners.push_back(listener);
 }
 
-const IVersion* Plugin::GetVersion() const
+const IVersion& Plugin::GetVersion() const
 {
-	return mVersion.get();
+	return mVersion;
 }

@@ -37,14 +37,14 @@ void ServiceReference::UngetService()
 	mNumReferences--;
 }
 
-IPlugin* ServiceReference::GetPlugin()
+IPlugin& ServiceReference::GetPlugin()
 {
-	return mPlugin;
+	return *mPlugin;
 }
 
-const IPlugin* ServiceReference::GetPlugin() const
+const IPlugin& ServiceReference::GetPlugin() const
 {
-	return mPlugin;
+	return *mPlugin;
 }
 
 const type_info& ServiceReference::GetType() const

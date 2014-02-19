@@ -4,16 +4,6 @@
 #include "Version.h"
 #include <algorithm>
 
-#ifdef _DEBUG
-#include <iostream>
-void Log(const char* msg) {
-	std::cout << msg << std::endl;
-}
-#else
-void Log(const char* msg) {
-}
-#endif
-
 using namespace plugin;
 using namespace plugin::core;
 
@@ -27,10 +17,9 @@ PluginContext::~PluginContext()
 
 }
 
-void PluginContext::StartPlugin(IPluginActivator* activator, int majorVersion, int minorVersion, int patchVersion)
+void PluginContext::StartPlugin(IPluginActivator* activator, const Version& version)
 {
 	std::auto_ptr<IPluginActivator> activatorPtr(activator);
-	std::auto_ptr<Version> version(new Version(majorVersion, minorVersion, patchVersion));
 	std::shared_ptr<Plugin> plugin(new Plugin(activatorPtr, version));
 	mCurrentPlugin = plugin;
 	mPlugins.push_back(plugin);
@@ -44,7 +33,7 @@ void PluginContext::RegisterService(const type_info& type, IService* service)
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
 	for (; it != end; ++it) {
-		(*it)->NotifyServiceListeners(type, this, reference);
+		(*it)->NotifyServiceListeners(*this, type, *reference);
 	}
 }
 

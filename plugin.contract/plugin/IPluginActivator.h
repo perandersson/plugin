@@ -7,53 +7,56 @@
 
 namespace plugin
 {
-	class PLUGIN_API IPluginContext;
-	class PLUGIN_API IPlugin;
-
-	//
-	class PLUGIN_API IPluginActivator
+	namespace contract
 	{
-	public:
-		virtual ~IPluginActivator() {}
+		class PLUGIN_API IPluginContext;
+		class PLUGIN_API IPlugin;
 
 		//
-		// Starts this plugin instance and registers it's internal resources
-		//
-		// @param context
-		//			The plugin context. It manages all the active plugin- and plugin features.
-		// @param plugin
-		//			The plugin representation inside the engine
-		virtual void Start(IPluginContext* context, IPlugin* plugin) = 0;
+		class PLUGIN_API IPluginActivator
+		{
+		public:
+			virtual ~IPluginActivator() {}
+
+			//
+			// Starts this plugin instance and registers it's internal resources
+			//
+			// @param context
+			//			The plugin context. It manages all the active plugin- and plugin features.
+			// @param plugin
+			//			The plugin representation inside the engine
+			virtual void Start(IPluginContext* context, IPlugin* plugin) = 0;
+
+			//
+			// Stop this plugin instance and release it's internal resources.
+			//
+			// @param plugin
+			//			The plugin representation inside the engine
+			virtual void Stop(IPlugin* plugin) = 0;
+		};
+
+		// 
+		// Function signature for the function used to return the actual plugin activator
+		typedef IPluginActivator*(*GetPluginActivatorFunc)(IPluginContext*);
 
 		//
-		// Stop this plugin instance and release it's internal resources.
+		// Function signature for retrieving the expected engine major version
+		typedef int(*GetPluginEngineMajorVersionFunc)(void);
+
 		//
-		// @param plugin
-		//			The plugin representation inside the engine
-		virtual void Stop(IPlugin* plugin) = 0;
-	};
-	
-	// 
-	// Function signature for the function used to return the actual plugin activator
-	typedef IPluginActivator*(*GetPluginActivatorFunc)(IPluginContext*);
+		// Function signature for retrieving the expected engine minor version
+		typedef int(*GetPluginEngineMinorVersionFunc)(void);
 
-	//
-	// Function signature for retrieving the expected engine major version
-	typedef int(*GetPluginEngineMajorVersionFunc)(void);
-
-	//
-	// Function signature for retrieving the expected engine minor version
-	typedef int(*GetPluginEngineMinorVersionFunc)(void);
-
-	//
-	// Function signature for retriving the plugin version
-	typedef const char* (*GetPluginVersionFunc)(void);
+		//
+		// Function signature for retriving the plugin version
+		typedef const char* (*GetPluginVersionFunc)(void);
+	}
 }
 
 #ifndef DEFINE_PLUGIN
 #define DEFINE_PLUGIN(Type, Version) \
 	extern "C" { \
-	PLUGIN_API plugin::IPluginActivator* GetPluginActivator() { \
+	PLUGIN_API plugin::contract::IPluginActivator* GetPluginActivator() { \
 		return new Type(); \
 	} \
 	\
