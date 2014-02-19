@@ -25,14 +25,14 @@ namespace plugin
 			//			The plugin context. It manages all the active plugin- and plugin features.
 			// @param plugin
 			//			The plugin representation inside the engine
-			virtual void Start(IPluginContext* context, IPlugin* plugin) = 0;
+			virtual void Start(IPluginContext& context, IPlugin& plugin) = 0;
 
 			//
 			// Stop this plugin instance and release it's internal resources.
 			//
 			// @param plugin
 			//			The plugin representation inside the engine
-			virtual void Stop(IPlugin* plugin) = 0;
+			virtual void Stop(IPlugin& plugin) = 0;
 		};
 
 		// 

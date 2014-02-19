@@ -30,14 +30,14 @@ bool Plugin::IsValid() const
 	return this != &INVALID_PLUGIN;
 }
 
-void Plugin::Start(PluginContext* context)
+void Plugin::Start(PluginContext& context)
 {
-	mActivator->Start(context, this);
+	mActivator->Start(context, *this);
 }
 
 void Plugin::Stop()
 {
-	mActivator->Stop(this);
+	mActivator->Stop(*this);
 }
 
 ServiceReference* Plugin::FindServiceReference(const type_info& type)

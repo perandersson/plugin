@@ -23,7 +23,7 @@ void PluginContext::StartPlugin(IPluginActivator* activator, const Version& vers
 	std::shared_ptr<Plugin> plugin(new Plugin(activatorPtr, version));
 	mCurrentPlugin = plugin;
 	mPlugins.push_back(plugin);
-	plugin->Start(this);
+	plugin->Start(*this);
 }
 
 void PluginContext::RegisterService(const type_info& type, IService* service)

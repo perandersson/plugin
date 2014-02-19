@@ -2,7 +2,6 @@
 #include <plugin/core/XMLPluginContext.h>
 #include "../gameengine.contract/contract.h"
 
-using namespace plugin;
 using namespace plugin::core;
 
 static const char PLUGINS_XML[] = {

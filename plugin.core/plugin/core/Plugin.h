@@ -44,7 +44,7 @@ namespace plugin
 			//
 			// @param context
 			//			The context where all the plugins resides
-			void Start(PluginContext* context);
+			void Start(PluginContext& context);
 
 			//
 			// Stops this plugin from running.
