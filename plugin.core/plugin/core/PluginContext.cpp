@@ -36,7 +36,8 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	}
 
 	Version expectedVersion((*getPluginEngineMajorVersion)());
-	if (expectedVersion.GetMajor() != PLUGIN_ENGINE_CONTRACT_MAJOR_VERSION) {
+	if (expectedVersion.GetMajor() != PLUGIN_ENGINE_CONTRACT_MAJOR_VERSION ||
+		expectedVersion.GetMinor() != PLUGIN_ENGINE_CONTRACT_MINOR_VERSION) {
 		ModuleLoader::UnloadLibrary(library);
 		return;
 	}
