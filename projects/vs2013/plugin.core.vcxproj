@@ -90,12 +90,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\plugin.core\plugin\core\ModuleLoader.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\Plugin.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\PluginContext.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\ServiceReference.cpp" />
     <ClCompile Include="..\..\plugin.core\plugin\core\Version.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\plugin.core\plugin\core\ModuleLoader.h" />
     <ClInclude Include="..\..\plugin.core\plugin\core\Plugin.h" />
     <ClInclude Include="..\..\plugin.core\plugin\core\PluginContext.h" />
     <ClInclude Include="..\..\plugin.core\plugin\core\ServiceReference.h" />

@@ -2,6 +2,7 @@
 #include "ServiceReference.h"
 #include "Plugin.h"
 #include "Version.h"
+#include "ModuleLoader.h"
 #include <algorithm>
 
 using namespace plugin;
@@ -15,6 +16,50 @@ PluginContext::PluginContext()
 PluginContext::~PluginContext()
 {
 
+}
+
+void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
+{
+	auto library = ModuleLoader::GetLibraryHandle(fileName);
+	if (library == nullptr)
+		return;
+
+	GetPluginEngineMajorVersionFunc getPluginEngineMajorVersion =
+		ModuleLoader::GetFunction<GetPluginEngineMajorVersionFunc>(library, "GetPluginEngineMajorVersion");
+	GetPluginEngineMinorVersionFunc getPluginEngineMinorVersion =
+		ModuleLoader::GetFunction<GetPluginEngineMinorVersionFunc>(library, "GetPluginEngineMinorVersion");
+	GetPluginActivatorFunc getPluginActivator =
+		ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator");
+	GetPluginVersionFunc getPluginVersion =
+		ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
+
+	if (getPluginEngineMajorVersion == nullptr ||
+		getPluginEngineMajorVersion == nullptr ||
+		getPluginActivator == nullptr) {
+		ModuleLoader::UnloadLibrary(library);
+		return;
+	}
+
+	int expectedMajorVersion = (*getPluginEngineMajorVersion)();
+	if (expectedMajorVersion != PLUGIN_ENGINE_MAJOR_VERSION) {
+		ModuleLoader::UnloadLibrary(library);
+		return;
+	}
+
+	IPluginActivator* activator = (*getPluginActivator)();
+	if (activator == nullptr) {
+		ModuleLoader::UnloadLibrary(library);
+		return;
+	}
+
+	const char* pluginVersion = (*getPluginVersion)();
+	int majorVersion = 0;
+	int minorVersion = 0;
+	int patchVersion = 0;
+	if (pluginVersion != nullptr)
+		sscanf(pluginVersion, "%d.%d.%d", &majorVersion, &minorVersion, &patchVersion);
+
+	StartPlugin(activator, std::string(name), Version(majorVersion, minorVersion, patchVersion));
 }
 
 void PluginContext::StartPlugin(IPluginActivator* activator, const std::string& name, const Version& version)

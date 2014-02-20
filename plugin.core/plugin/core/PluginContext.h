@@ -29,6 +29,13 @@ namespace plugin
 			virtual ~PluginContext();
 
 			//
+			// Load the supplied plugin file
+			//
+			// @param fileName
+			// @param name
+			void LoadPlugin(const char* fileName, const std::string& name);
+
+			//
 			// Start a new plugin using the supplied activator
 			//
 			// @param activator

@@ -1,46 +1,9 @@
 #include "XMLPluginContext.h"
 #include <tinyxml2.h>
 
-#ifdef WIN32
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#endif
-
 using namespace plugin;
 using namespace plugin::core;
 using namespace plugin::core::xml;
-
-////////////////////////////////////////////////////////////////
-
-namespace plugin
-{
-	namespace core
-	{
-		struct Helper
-		{
-#ifdef WIN32
-			template<typename T>
-			static T GetFunctionPtr(HMODULE library, const char* name) {
-				FARPROC addr = GetProcAddress(library, name);
-				if (addr == nullptr) {
-					return nullptr;
-				}
-				return reinterpret_cast<T>(addr);
-			}
-
-			static HMODULE GetLibrary(const char* fileName) {
-				return LoadLibraryA(fileName);
-			}
-
-			static void UnloadLibrary(HMODULE module) {
-				FreeLibrary(module);
-			}
-#endif
-		};
-	}
-}
-
-////////////////////////////////////////////////////////////////
 
 class XmlPluginRegistryVisitor : public tinyxml2::XMLVisitor
 {
@@ -104,47 +67,7 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 		std::string name = element.Attribute("name") == nullptr ? 
 			GetNameFromPath(path) : std::string(element.Attribute("name"));
 
-		auto library = Helper::GetLibrary(path);
-		if (library == nullptr) {
-			return true;
-		}
-
-		GetPluginEngineMajorVersionFunc getPluginEngineMajorVersion = 
-			Helper::GetFunctionPtr<GetPluginEngineMajorVersionFunc>(library, "GetPluginEngineMajorVersion");
-		GetPluginEngineMinorVersionFunc getPluginEngineMinorVersion = 
-			Helper::GetFunctionPtr<GetPluginEngineMinorVersionFunc>(library, "GetPluginEngineMinorVersion");
-		GetPluginActivatorFunc getPluginActivator = 
-			Helper::GetFunctionPtr<GetPluginActivatorFunc>(library, "GetPluginActivator");
-		GetPluginVersionFunc getPluginVersion =
-			Helper::GetFunctionPtr<GetPluginVersionFunc>(library, "GetPluginVersion");
-
-		if (getPluginEngineMajorVersion == nullptr ||
-			getPluginEngineMajorVersion == nullptr ||
-			getPluginActivator == nullptr) {
-			Helper::UnloadLibrary(library);
-			return true;
-		}
-
-		int expectedMajorVersion = (*getPluginEngineMajorVersion)();
-		if (expectedMajorVersion != PLUGIN_ENGINE_MAJOR_VERSION) {
-			Helper::UnloadLibrary(library);
-			return true;
-		}
-
-		IPluginActivator* activator = (*getPluginActivator)(&mPluginContext);
-		if (activator == nullptr) {
-			Helper::UnloadLibrary(library);
-			return true;
-		}
-
-		const char* pluginVersion = (*getPluginVersion)();
-		int majorVersion = 0;
-		int minorVersion = 0;
-		int patchVersion = 0;
-		if (pluginVersion != nullptr)
-			sscanf(pluginVersion, "%d.%d.%d", &majorVersion, &minorVersion, &patchVersion);
-		
-		mPluginContext.StartPlugin(activator, std::string(name), Version(majorVersion, minorVersion, patchVersion));
+		mPluginContext.LoadPlugin(path, name);
 	}
 
 	return true;

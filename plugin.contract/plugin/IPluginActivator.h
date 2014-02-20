@@ -37,7 +37,7 @@ namespace plugin
 
 		// 
 		// Function signature for the function used to return the actual plugin activator
-		typedef IPluginActivator*(*GetPluginActivatorFunc)(IPluginContext*);
+		typedef IPluginActivator*(*GetPluginActivatorFunc)();
 
 		//
 		// Function signature for retrieving the expected engine major version
