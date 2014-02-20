@@ -24,6 +24,10 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	if (library == nullptr)
 		return;
 
+	//
+	// 
+	std::vector<std::string> functions = ModuleLoader::GetFunctionNames(library);
+
 	auto getPluginEngineMajorVersion = ModuleLoader::GetFunction<GetPluginEngineVersionFunc>(library, "GetPluginEngineVersion");
 	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator");
 	auto getPluginVersion = ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
@@ -41,6 +45,8 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 		ModuleLoader::UnloadLibrary(library);
 		return;
 	}
+
+
 
 	IPluginActivator* activator = (*getPluginActivator)();
 	if (activator == nullptr) {

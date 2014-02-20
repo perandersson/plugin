@@ -2,6 +2,8 @@
 #ifndef _PLUGIN_MODULE_LOADER_H_
 #define _PLUGIN_MODULE_LOADER_H_
 
+#include <vector>
+
 namespace plugin
 {
 	namespace core
@@ -42,6 +44,14 @@ namespace plugin
 
 				return reinterpret_cast<T>(ptr);
 			}
+
+			//
+			// Retrieves a list of all exported functions in a library
+			//
+			// @param library
+			//			The library
+			// @return A list of all the functions exported into the supplied library.
+			static std::vector<std::string> GetFunctionNames(LibraryHandle library);
 
 		private:
 			static void* GetFunctionPtr(LibraryHandle library, const char* name);
