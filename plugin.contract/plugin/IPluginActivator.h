@@ -13,6 +13,7 @@ namespace plugin
 		class PLUGIN_API IPlugin;
 
 		//
+		// Interface that represents the entry- and exit point of a plugin.
 		class PLUGIN_API IPluginActivator
 		{
 		public:

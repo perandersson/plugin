@@ -24,14 +24,10 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	if (library == nullptr)
 		return;
 
-	GetPluginEngineMajorVersionFunc getPluginEngineMajorVersion =
-		ModuleLoader::GetFunction<GetPluginEngineMajorVersionFunc>(library, "GetPluginEngineMajorVersion");
-	GetPluginEngineMinorVersionFunc getPluginEngineMinorVersion =
-		ModuleLoader::GetFunction<GetPluginEngineMinorVersionFunc>(library, "GetPluginEngineMinorVersion");
-	GetPluginActivatorFunc getPluginActivator =
-		ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator");
-	GetPluginVersionFunc getPluginVersion =
-		ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
+	auto getPluginEngineMajorVersion = ModuleLoader::GetFunction<GetPluginEngineMajorVersionFunc>(library, "GetPluginEngineMajorVersion");
+	auto getPluginEngineMinorVersion = ModuleLoader::GetFunction<GetPluginEngineMinorVersionFunc>(library, "GetPluginEngineMinorVersion");
+	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator");
+	auto getPluginVersion = ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
 
 	if (getPluginEngineMajorVersion == nullptr ||
 		getPluginEngineMajorVersion == nullptr ||
