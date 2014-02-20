@@ -3,6 +3,12 @@
 using namespace plugin;
 using namespace plugin::core;
 
+Version::Version(const char* version)
+: mMajor(0), mMinor(0), mPatch(0)
+{
+	sscanf(version, "%d.%d.%d", &mMajor, &mMinor, &mPatch);
+}
+
 Version::Version(const Version& version)
 : mMajor(version.mMajor), mMinor(version.mMinor), mPatch(version.mPatch)
 {

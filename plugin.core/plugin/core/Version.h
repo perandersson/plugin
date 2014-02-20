@@ -13,6 +13,7 @@ namespace plugin
 		class Version : public IVersion
 		{
 		public:
+			Version(const char* version);
 			Version(const Version& version);
 			Version(int major, int minor, int patch);
 			~Version();
