@@ -47,5 +47,8 @@
     <ClInclude Include="..\..\plugin.contract\plugin\IVersion.h">
       <Filter>Contract</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\plugin.contract\plugin\IContract.h">
+      <Filter>Contract</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

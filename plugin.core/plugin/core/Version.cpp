@@ -1,4 +1,5 @@
 #include "Version.h"
+#include <iostream>
 
 using namespace plugin;
 using namespace plugin::core;

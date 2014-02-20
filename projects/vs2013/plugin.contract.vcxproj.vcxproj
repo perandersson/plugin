@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\plugin.contract\plugin\contract.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\defines.h" />
+    <ClInclude Include="..\..\plugin.contract\plugin\IContract.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IPlugin.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IPluginActivator.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\IPluginContext.h" />

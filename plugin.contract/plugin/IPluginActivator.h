@@ -3,7 +3,6 @@
 #define _PLUGIN_IPLUGIN_ACTIVATOR_H_
 
 #include "defines.h"
-#include <memory>
 
 namespace plugin
 {
@@ -42,11 +41,7 @@ namespace plugin
 
 		//
 		// Function signature for retrieving the expected engine major version
-		typedef int(*GetPluginEngineMajorVersionFunc)(void);
-
-		//
-		// Function signature for retrieving the expected engine minor version
-		typedef int(*GetPluginEngineMinorVersionFunc)(void);
+		typedef const char* (*GetPluginEngineVersionFunc)(void);
 
 		//
 		// Function signature for retriving the plugin version
@@ -61,11 +56,8 @@ namespace plugin
 		return new Type(); \
 	} \
 	\
-	PLUGIN_API int GetPluginEngineMajorVersion() { \
-		return PLUGIN_ENGINE_MAJOR_VERSION; \
-	} \
-	PLUGIN_API int GetPluginEngineMinorVersion() { \
-		return PLUGIN_ENGINE_MINOR_VERSION; \
+	PLUGIN_API const char* GetPluginEngineVersion() { \
+		return PLUGIN_ENGINE_CONTRACT_VERSION; \
 	} \
 	PLUGIN_API const char* GetPluginVersion() { \
 		return Version; \

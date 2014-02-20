@@ -11,5 +11,6 @@
 #include "IPlugin.h"
 #include "IPluginListener.h"
 #include "IVersion.h"
+#include "IContract.h"
 
 #endif

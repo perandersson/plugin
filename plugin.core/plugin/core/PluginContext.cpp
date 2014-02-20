@@ -24,8 +24,7 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	if (library == nullptr)
 		return;
 
-	auto getPluginEngineMajorVersion = ModuleLoader::GetFunction<GetPluginEngineMajorVersionFunc>(library, "GetPluginEngineMajorVersion");
-	auto getPluginEngineMinorVersion = ModuleLoader::GetFunction<GetPluginEngineMinorVersionFunc>(library, "GetPluginEngineMinorVersion");
+	auto getPluginEngineMajorVersion = ModuleLoader::GetFunction<GetPluginEngineVersionFunc>(library, "GetPluginEngineVersion");
 	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator");
 	auto getPluginVersion = ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
 
@@ -36,8 +35,8 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 		return;
 	}
 
-	int expectedMajorVersion = (*getPluginEngineMajorVersion)();
-	if (expectedMajorVersion != PLUGIN_ENGINE_MAJOR_VERSION) {
+	Version expectedVersion((*getPluginEngineMajorVersion)());
+	if (expectedVersion.GetMajor() != PLUGIN_ENGINE_CONTRACT_MAJOR_VERSION) {
 		ModuleLoader::UnloadLibrary(library);
 		return;
 	}
