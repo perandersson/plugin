@@ -6,6 +6,7 @@
 #include <list>
 #include <memory>
 #include "Version.h"
+#include "ModuleLoader.h"
 
 #ifdef __GNUC__
 #include <ext/hash_map>
@@ -32,7 +33,7 @@ namespace plugin
 			typedef std::list<IPluginListener*> PluginListeners;
 
 		public:
-			Plugin(IPluginActivator* activator, const std::string& name, const Version& version);
+			Plugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version);
 			~Plugin();
 
 			//
@@ -87,8 +88,9 @@ namespace plugin
 			virtual const char* GetName();
 
 		private:
+			LibraryHandle mLibrary;
 			PluginContext* mPluginContext;
-			std::auto_ptr<IPluginActivator> mActivator;
+			IPluginActivator* mActivator;
 			Version mVersion;
 			ServiceReferences mReferences;
 			ServiceListeners mServiceListeners;

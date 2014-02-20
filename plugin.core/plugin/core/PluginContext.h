@@ -3,6 +3,7 @@
 #define _CORE_PLUGIN_CONTEXT_H_
 
 #include <plugin/contract.h>
+#include "ModuleLoader.h"
 #include <memory>
 #include <list>
 
@@ -38,13 +39,15 @@ namespace plugin
 			//
 			// Start a new plugin using the supplied activator
 			//
+			// @param library
+			//			The library
 			// @param activator
 			//			The plugin activator class responsible for starting- and stopping the plugin
 			// @param name
 			//			The name of the plugin
 			// @param version
 			//			The plugin version
-			void StartPlugin(IPluginActivator* activator, const std::string& name, const Version& version);
+			void StartPlugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version);
 
 			//
 			// Notifies all the listeners

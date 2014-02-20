@@ -15,7 +15,7 @@ PluginContext::PluginContext()
 
 PluginContext::~PluginContext()
 {
-
+	mPlugins.clear();
 }
 
 void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
@@ -47,19 +47,12 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 		return;
 	}
 
-	const char* pluginVersion = (*getPluginVersion)();
-	int majorVersion = 0;
-	int minorVersion = 0;
-	int patchVersion = 0;
-	if (pluginVersion != nullptr)
-		sscanf(pluginVersion, "%d.%d.%d", &majorVersion, &minorVersion, &patchVersion);
-
-	StartPlugin(activator, std::string(name), Version(majorVersion, minorVersion, patchVersion));
+	StartPlugin(library, activator, name, Version((*getPluginVersion)()));
 }
 
-void PluginContext::StartPlugin(IPluginActivator* activator, const std::string& name, const Version& version)
+void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version)
 {
-	std::shared_ptr<Plugin> plugin(new Plugin(activator, name, version));
+	std::shared_ptr<Plugin> plugin(new Plugin(library, activator, name, version));
 	mPlugins.push_back(plugin);
 	plugin->Start(this);
 }

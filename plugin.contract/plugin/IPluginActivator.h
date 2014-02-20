@@ -52,8 +52,9 @@ namespace plugin
 #ifndef DEFINE_PLUGIN
 #define DEFINE_PLUGIN(Type, Version) \
 	extern "C" { \
+	Type __pluginActivator; \
 	PLUGIN_API plugin::contract::IPluginActivator* GetPluginActivator() { \
-		return new Type(); \
+		return &__pluginActivator; \
 	} \
 	\
 	PLUGIN_API const char* GetPluginEngineVersion() { \

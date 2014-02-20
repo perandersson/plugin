@@ -7,15 +7,16 @@ using namespace plugin;
 using namespace plugin::contract;
 using namespace plugin::core;
 
-Plugin::Plugin(IPluginActivator* activator, const std::string& name, const Version& version)
-: mPluginContext(nullptr), mActivator(activator), mVersion(version), mStatus(STATUS_STOPPED), mName(name)
+Plugin::Plugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version)
+: mLibrary(library), mPluginContext(nullptr), mActivator(activator), mVersion(version), mStatus(STATUS_STOPPED), mName(name)
 {
 
 }
 
 Plugin::~Plugin()
 {
-
+	ModuleLoader::UnloadLibrary(mLibrary);
+	mLibrary = nullptr;
 }
 
 void Plugin::Start(PluginContext* context)
