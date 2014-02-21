@@ -9,6 +9,9 @@ using namespace plugin::core;
 LibraryHandle ModuleLoader::GetLibraryHandle(const char* fileName)
 {
 	auto library = LoadLibraryA(fileName);
+	if (library == nullptr)
+		return nullptr;
+
 	assert(((PIMAGE_DOS_HEADER)library)->e_magic == IMAGE_DOS_SIGNATURE);
 
 	return library;

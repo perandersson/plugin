@@ -38,22 +38,6 @@ namespace plugin
 			// @param callback
 			//			A callack instance
 			virtual void GetServiceReferences(const type_info& type, IServiceReferences* callback) = 0;
-
-			//
-			// Resolves a service based on it's service reference. This ensures that the actual pointer
-			// to the service is never deleted as long as it's in use
-			//
-			// @param reference
-			//			The service reference
-			// @return
-			virtual IService* GetService(IServiceReference* reference) = 0;
-
-			//
-			// Releases the service object based on it's service reference
-			//
-			// @param reference
-			//			The service reference
-			virtual void UngetService(IServiceReference* reference) = 0;
 		};
 	}
 }

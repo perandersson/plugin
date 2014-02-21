@@ -23,7 +23,7 @@ int main()
 
 	//
 	// Retrieve the actual pointer to the instance
-	auto game = dynamic_cast<gameengine::IGame*>(pluginContext.GetService(reference));
+	auto game = dynamic_cast<gameengine::IGame*>(reference->GetService());
 	if (game == nullptr) {
 		std::cerr << "No IGame instance is registered" << std::endl;
 		std::cin.get();
@@ -33,7 +33,7 @@ int main()
 
 	//
 	// Return the reference to the plugin system after it's been used!
-	pluginContext.UngetService(reference);
+	reference->Release();
 
 	return 0;
 }

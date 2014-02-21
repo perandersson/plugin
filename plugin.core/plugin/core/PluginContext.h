@@ -73,8 +73,6 @@ namespace plugin
 		public:
 			virtual IServiceReference* GetServiceReference(const type_info& type);
 			virtual void GetServiceReferences(const type_info& type, IServiceReferences* callback);
-			virtual IService* GetService(IServiceReference* reference);
-			virtual void UngetService(IServiceReference* reference);
 
 		private:
 			Plugins mPlugins;

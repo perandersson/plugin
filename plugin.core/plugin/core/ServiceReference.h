@@ -18,21 +18,13 @@ namespace plugin
 			ServiceReference(Plugin* plugin, IService* service, const type_info& type);
 			virtual ~ServiceReference();
 
-			//
-			// Retrieves the service for this reference and increase it's reference counter
-			//
-			// @return The pointer to the service
-			IService* GetService();
-
-			//
-			// Returns the pointer and decrease the reference counter for the supplied service
-			void UngetService();
-
 		// IServiceReference
 		public:
 			virtual IPlugin* GetPlugin();
 			virtual const IPlugin* GetPlugin() const;
 			virtual const type_info& GetType() const;
+			virtual IService* GetService();
+			virtual void Release();
 
 		private:
 			Plugin* mPlugin;

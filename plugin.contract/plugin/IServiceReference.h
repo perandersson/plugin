@@ -29,6 +29,17 @@ namespace plugin
 			//
 			// @return The type that the service reference is implementing
 			virtual const type_info& GetType() const = 0;
+
+			//
+			// Resolves the service based on this reference. This ensures that the actual pointer
+			// to the service is never deleted as long as it's in use.
+			//
+			// @return A pointer to the actual service; NULL if the service is no longer in memory
+			virtual IService* GetService() = 0;
+
+			//
+			// Releases the service object based on it's service reference
+			virtual void Release() = 0;
 		};
 	}
 }

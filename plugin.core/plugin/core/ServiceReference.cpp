@@ -21,7 +21,7 @@ IService* ServiceReference::GetService()
 	return mService;
 }
 
-void ServiceReference::UngetService()
+void ServiceReference::Release()
 {
 	mNumReferences--;
 }
