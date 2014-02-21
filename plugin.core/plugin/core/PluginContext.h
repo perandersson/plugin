@@ -20,6 +20,7 @@ namespace plugin
 		class PluginContext : public IPluginContext1
 		{
 			typedef std::list<std::shared_ptr<Plugin>> Plugins;
+			typedef std::list<Plugin*> UnregisterPluginsList;
 
 		protected:
 			PluginContext();
@@ -74,6 +75,7 @@ namespace plugin
 
 		private:
 			Plugins mPlugins;
+			UnregisterPluginsList mUnregistrationList;
 		};
 	}
 }

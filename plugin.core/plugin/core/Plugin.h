@@ -27,6 +27,7 @@ namespace plugin
 		class Plugin : public IPluginBundle1
 		{
 			typedef std::hash_map<std::string, std::shared_ptr<ServiceReference>> ServiceReferences;
+			typedef std::list<ServiceReference*> UnregistrationServiceReferences;
 			typedef std::list<IPluginServiceListener1*> ServiceListeners;
 			typedef std::list<IPluginBundleListener1*> PluginListeners;
 
@@ -91,6 +92,7 @@ namespace plugin
 			IPluginActivator1* mActivator;
 			Version mVersion;
 			ServiceReferences mReferences;
+			UnregistrationServiceReferences mUnregistrationList;
 			ServiceListeners mServiceListeners;
 			PluginListeners mPluginListeners;
 			Status mStatus;

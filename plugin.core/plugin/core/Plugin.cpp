@@ -2,6 +2,7 @@
 #include "ServiceReference.h"
 #include "PluginContext.h"
 #include "Version.h"
+#include <cassert>
 
 using namespace plugin;
 using namespace plugin::core;
@@ -14,6 +15,7 @@ Plugin::Plugin(LibraryHandle library, IPluginActivator1* activator, const std::s
 
 Plugin::~Plugin()
 {
+	assert(mStatus == STATUS_STOPPED);
 	ModuleLoader::UnloadLibrary(mLibrary);
 	mLibrary = nullptr;
 }
@@ -30,6 +32,16 @@ void Plugin::Start(PluginContext* context)
 void Plugin::Stop()
 {
 	mStatus = STATUS_STOPPING;
+
+	// Unregister all the services
+	UnregistrationServiceReferences copy(mUnregistrationList);
+	UnregistrationServiceReferences::iterator it = copy.begin();
+	UnregistrationServiceReferences::const_iterator end = copy.end();
+	for (; it != end; ++it) {
+		UnregisterService((*it));
+	}
+	mUnregistrationList.clear();
+
 	mActivator->Stop(this);
 	mStatus = STATUS_STOPPED;
 	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener1::STATUS_INACTIVE);
@@ -55,6 +67,7 @@ IPluginServiceReference1* Plugin::RegisterService(const type_info& type, IPlugin
 	auto serviceReference = new ServiceReference(this, service, type);
 	std::shared_ptr<ServiceReference> reference(serviceReference);
 	mReferences.insert(std::make_pair(typeName, reference));
+	mUnregistrationList.push_front(serviceReference);
 
 	// Notify all the registered service listeners about the new service
 	mPluginContext->NotifyServiceChanged(serviceReference, IPluginServiceListener1::STATUS_REGISTERED);
@@ -85,6 +98,11 @@ void Plugin::UnregisterService(IPluginServiceReference1* reference)
 			mPluginContext->NotifyServiceChanged(reference.get(), IPluginServiceListener1::STATUS_UNREGISTERED);
 			break;
 		}
+	}
+
+	UnregistrationServiceReferences::iterator unregIt = std::find(mUnregistrationList.begin(), mUnregistrationList.end(), reference);
+	if (unregIt != mUnregistrationList.end()) {
+		mUnregistrationList.erase(unregIt);
 	}
 }
 

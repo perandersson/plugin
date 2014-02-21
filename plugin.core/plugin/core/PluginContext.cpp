@@ -15,6 +15,13 @@ PluginContext::PluginContext()
 
 PluginContext::~PluginContext()
 {
+	UnregisterPluginsList copy(mUnregistrationList);
+	UnregisterPluginsList::iterator it = copy.begin();
+	UnregisterPluginsList::const_iterator end = copy.end();
+	for (; it != end; ++it) {
+		(*it)->Stop();
+	}
+	mUnregistrationList.clear();
 	mPlugins.clear();
 }
 
@@ -50,6 +57,7 @@ void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator1* activa
 {
 	std::shared_ptr<Plugin> plugin(new Plugin(library, activator, name, version));
 	mPlugins.push_back(plugin);
+	mUnregistrationList.push_front(plugin.get());
 	plugin->Start(this);
 }
 
