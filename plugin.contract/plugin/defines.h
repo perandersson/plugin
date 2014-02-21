@@ -2,6 +2,8 @@
 #ifndef _PLUGIN_DEFINES_H_
 #define _PLUGIN_DEFINES_H_
 
+#include <typeinfo>
+
 #define SSTRINGIFY(x) #x
 #define STRINGIFY(x) SSTRINGIFY(x)
 
@@ -32,6 +34,10 @@
 #else
 #define THREAD_LOCAL __thread
 #endif
+#endif
+
+#ifdef __GNUC__
+typedef std::type_info type_info;
 #endif
 
 #endif
