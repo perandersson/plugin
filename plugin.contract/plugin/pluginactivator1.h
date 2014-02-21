@@ -1,0 +1,53 @@
+#pragma once
+#ifndef _IPLUGIN_ACTIVATOR1_H_
+#define _IPLUGIN_ACTIVATOR1_H_
+
+#include "defines.h"
+
+DECLARE_INTERFACE(IPluginContext1);
+DECLARE_INTERFACE(IPluginBundle1);
+
+//
+// Interface that represents the entry- and exit point of a plugin.
+DEFINE_INTERFACE(IPluginActivator1, IPluginObject)
+{
+	//
+	// Starts this plugin instance and registers it's internal resources
+	//
+	// @param context
+	//			The plugin context. It manages all the active plugin- and plugin features.
+	// @param plugin
+	//			The plugin representation inside the engine
+	virtual void Start(IPluginContext1* context, IPluginBundle1* plugin) = 0;
+
+	//
+	// Stop this plugin instance and release it's internal resources.
+	//
+	// @param plugin
+	//			The plugin representation inside the engine
+	virtual void Stop(IPluginBundle1* plugin) = 0;
+};
+
+// 
+// Function signature for the function used to return the actual plugin activator
+typedef IPluginActivator1* (*GetPluginActivator1Func)(void);
+
+//
+// Function signature for retrieving the plugin version
+typedef const char* (*GetPluginVersionFunc)(void);
+
+#ifndef DEFINE_PLUGIN
+#define DEFINE_PLUGIN(Type, Version) \
+	extern "C" { \
+	Type __pluginActivator; \
+	PLUGIN_API IPluginActivator1* __cdecl GetPluginActivator1() { \
+		return &__pluginActivator; \
+	} \
+	PLUGIN_API const char* __cdecl GetPluginVersion() { \
+	\
+		return Version; \
+	}\
+}
+#endif
+
+#endif

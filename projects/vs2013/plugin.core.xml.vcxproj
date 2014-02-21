@@ -19,10 +19,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\plugin.core.xml\plugin\core\xml\XMLPluginContext.h" />
+    <ClInclude Include="..\..\plugin.core.xml\plugin\core\xml\xmlplugincontext.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\plugin.core.xml\plugin\core\xml\XMLPluginContext.cpp" />
+    <ClCompile Include="..\..\plugin.core.xml\plugin\core\xml\xmlplugincontext.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8753D6C5-C85A-4594-A792-2D913375E933}</ProjectGuid>

@@ -3,14 +3,12 @@
 #define _CORE_PLUGIN_CONTEXT_H_
 
 #include <plugin/contract.h>
-#include "ModuleLoader.h"
+#include "moduleloader.h"
 #include <memory>
 #include <list>
 
 namespace plugin
 {
-	using namespace contract;
-
 	namespace core
 	{
 		class Plugin;
@@ -19,7 +17,7 @@ namespace plugin
 
 		//
 		// Base class for the plugin manager.
-		class PluginContext : public IPluginContext
+		class PluginContext : public IPluginContext1
 		{
 			typedef std::list<std::shared_ptr<Plugin>> Plugins;
 
@@ -47,7 +45,7 @@ namespace plugin
 			//			The name of the plugin
 			// @param version
 			//			The plugin version
-			void StartPlugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version);
+			void StartPlugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version);
 
 			//
 			// Notifies all the listeners
@@ -58,7 +56,7 @@ namespace plugin
 			//			The actual service
 			// @param status
 			//			The status of the service
-			void NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status);
+			void NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener1::Status status);
 
 			//
 			// Notifies all the listeners
@@ -67,12 +65,12 @@ namespace plugin
 			//			The plugin that's being changed
 			// @param status
 			//			The status of the plugin
-			void NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status);
+			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::Status status);
 
 		// IPluginContext
 		public:
-			virtual IServiceReference* GetServiceReference(const type_info& type);
-			virtual void GetServiceReferences(const type_info& type, IServiceReferences* callback);
+			virtual IPluginServiceReference1* GetServiceReference(const type_info& type);
+			virtual void GetServiceReferences(const type_info& type, IPluginServiceReferences1* callback);
 
 		private:
 			Plugins mPlugins;

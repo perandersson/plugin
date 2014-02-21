@@ -13,7 +13,7 @@
     <ClInclude Include="contract.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="IGame.h">
+    <ClInclude Include="game.h">
       <Filter>Contract</Filter>
     </ClInclude>
   </ItemGroup>

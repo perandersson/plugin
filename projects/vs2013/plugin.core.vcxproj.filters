@@ -7,37 +7,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\plugin.core\plugin\core\Plugin.cpp">
+    <ClInclude Include="..\..\plugin.core\plugin\core\version.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\plugin.core\plugin\core\PluginContext.cpp">
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.core\plugin\core\servicereference.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\plugin.core\plugin\core\ServiceReference.cpp">
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.core\plugin\core\plugincontext.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\plugin.core\plugin\core\Version.cpp">
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.core\plugin\core\plugin.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\plugin.core\plugin\core\ModuleLoader.cpp">
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.core\plugin\core\moduleloader.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\plugin.core\plugin\core\Plugin.h">
+    <ClCompile Include="..\..\plugin.core\plugin\core\version.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.core\plugin\core\PluginContext.h">
+    </ClCompile>
+    <ClCompile Include="..\..\plugin.core\plugin\core\servicereference.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.core\plugin\core\ServiceReference.h">
+    </ClCompile>
+    <ClCompile Include="..\..\plugin.core\plugin\core\plugincontext.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.core\plugin\core\Version.h">
+    </ClCompile>
+    <ClCompile Include="..\..\plugin.core\plugin\core\plugin.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.core\plugin\core\ModuleLoader.h">
+    </ClCompile>
+    <ClCompile Include="..\..\plugin.core\plugin\core\moduleloader.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

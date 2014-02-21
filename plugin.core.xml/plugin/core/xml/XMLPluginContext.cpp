@@ -1,4 +1,4 @@
-#include "XMLPluginContext.h"
+#include "xmlplugincontext.h"
 #include <tinyxml2.h>
 
 using namespace plugin;

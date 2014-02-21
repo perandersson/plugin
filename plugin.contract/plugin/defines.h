@@ -7,11 +7,6 @@
 #define SSTRINGIFY(x) #x
 #define STRINGIFY(x) SSTRINGIFY(x)
 
-#define PLUGIN_ENGINE_CONTRACT_MAJOR_VERSION 1
-#define PLUGIN_ENGINE_CONTRACT_MINOR_VERSION 0
-#define PLUGIN_ENGINE_CONTRACT_PATCH_VERSION 0
-#define PLUGIN_ENGINE_CONTRACT_VERSION STRINGIFY(PLUGIN_ENGINE_CONTRACT_MAJOR_VERSION) "." STRINGIFY(PLUGIN_ENGINE_CONTRACT_MINOR_VERSION) "." STRINGIFY(PLUGIN_ENGINE_CONTRACT_PATCH_VERSION)
-
 #ifdef _USRDLL
 #ifndef PLUGIN_API
 #define PLUGIN_API __declspec(dllexport)
@@ -39,5 +34,25 @@
 #ifdef __GNUC__
 typedef std::type_info type_info;
 #endif
+
+#ifndef DEFINE_INTERFACE
+#define DEFINE_INTERFACE(Name, Inherits) \
+struct PLUGIN_API Name : public Inherits
+#endif
+
+#ifndef DEFINE_INTERFACE_B
+#define DEFINE_INTERFACE_B(Name) \
+struct PLUGIN_API Name
+#endif
+
+#ifndef DECLARE_INTERFACE
+#define DECLARE_INTERFACE(Name) \
+struct PLUGIN_API Name
+#endif
+
+DEFINE_INTERFACE_B(IPluginObject)
+{
+	virtual ~IPluginObject() {}
+};
 
 #endif

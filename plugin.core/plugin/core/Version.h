@@ -6,11 +6,9 @@
 
 namespace plugin
 {
-	using namespace contract;
-
 	namespace core
 	{
-		class Version : public IVersion
+		class Version : public IPluginVersion1
 		{
 		public:
 			Version(const char* version);

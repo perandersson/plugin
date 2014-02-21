@@ -9,45 +9,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\plugin.contract\plugin\contract.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\plugin.contract\plugin\contract.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.contract\plugin\defines.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IPlugin.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginbundle1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IPluginActivator.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginactivator1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IPluginContext.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\plugincontext1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IPluginListener.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginbundlelistener1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IService.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginservice1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IServiceListener.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginservicelistener1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IServiceReference.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginservicereference1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IServiceReferences.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginservicereferences1.h">
       <Filter>Contract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IVersion.h">
-      <Filter>Contract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\IContract.h">
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginversion1.h">
       <Filter>Contract</Filter>
     </ClInclude>
   </ItemGroup>

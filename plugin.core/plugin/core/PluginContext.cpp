@@ -1,8 +1,8 @@
-#include "PluginContext.h"
-#include "ServiceReference.h"
-#include "Plugin.h"
-#include "Version.h"
-#include "ModuleLoader.h"
+#include "plugincontext.h"
+#include "servicereference.h"
+#include "plugin.h"
+#include "version.h"
+#include "moduleloader.h"
 #include <algorithm>
 
 using namespace plugin;
@@ -28,27 +28,16 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	// 
 	std::vector<std::string> functions = ModuleLoader::GetFunctionNames(library);
 
-	auto getPluginEngineMajorVersion = ModuleLoader::GetFunction<GetPluginEngineVersionFunc>(library, "GetPluginEngineVersion");
-	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator");
+	//
+	// Retrieves the activator function
+	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivator1Func>(library, "GetPluginActivator1");
 	auto getPluginVersion = ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
-
-	if (getPluginEngineMajorVersion == nullptr ||
-		getPluginEngineMajorVersion == nullptr ||
-		getPluginActivator == nullptr) {
+	if (getPluginActivator == nullptr || getPluginVersion == nullptr) {
 		ModuleLoader::UnloadLibrary(library);
 		return;
 	}
 
-	Version expectedVersion((*getPluginEngineMajorVersion)());
-	if (expectedVersion.GetMajor() != PLUGIN_ENGINE_CONTRACT_MAJOR_VERSION ||
-		expectedVersion.GetMinor() != PLUGIN_ENGINE_CONTRACT_MINOR_VERSION) {
-		ModuleLoader::UnloadLibrary(library);
-		return;
-	}
-
-
-
-	IPluginActivator* activator = (*getPluginActivator)();
+	IPluginActivator1* activator = (*getPluginActivator)();
 	if (activator == nullptr) {
 		ModuleLoader::UnloadLibrary(library);
 		return;
@@ -57,14 +46,14 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	StartPlugin(library, activator, name, Version((*getPluginVersion)()));
 }
 
-void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version)
+void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version)
 {
 	std::shared_ptr<Plugin> plugin(new Plugin(library, activator, name, version));
 	mPlugins.push_back(plugin);
 	plugin->Start(this);
 }
 
-void PluginContext::NotifyServiceChanged(ServiceReference* reference, IServiceListener::Status status)
+void PluginContext::NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener1::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -73,7 +62,7 @@ void PluginContext::NotifyServiceChanged(ServiceReference* reference, IServiceLi
 	}
 }
 
-void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status)
+void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -82,7 +71,7 @@ void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginListener::Status 
 	}
 }
 
-IServiceReference* PluginContext::GetServiceReference(const type_info& type)
+IPluginServiceReference1* PluginContext::GetServiceReference(const type_info& type)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -93,10 +82,10 @@ IServiceReference* PluginContext::GetServiceReference(const type_info& type)
 		}
 	}
 
-	return nullptr;
+	return &NoServiceReferenceFound::INSTANCE;
 }
 
-void PluginContext::GetServiceReferences(const type_info& type, IServiceReferences* callback)
+void PluginContext::GetServiceReferences(const type_info& type, IPluginServiceReferences1* callback)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();

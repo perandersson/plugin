@@ -2,8 +2,8 @@
 #ifndef _CORE_XML_PLUGIN_CONTEXT_H_
 #define _CORE_XML_PLUGIN_CONTEXT_H_
 
-#include <plugin/core/PluginContext.h>
-#include <plugin/core/Version.h>
+#include <plugin/core/plugincontext.h>
+#include <plugin/core/version.h>
 
 namespace plugin
 {

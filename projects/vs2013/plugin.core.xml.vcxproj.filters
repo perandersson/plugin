@@ -7,12 +7,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\plugin.core.xml\plugin\core\xml\XMLPluginContext.h">
+    <ClInclude Include="..\..\plugin.core.xml\plugin\core\xml\xmlplugincontext.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\plugin.core.xml\plugin\core\xml\XMLPluginContext.cpp">
+    <ClCompile Include="..\..\plugin.core.xml\plugin\core\xml\xmlplugincontext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

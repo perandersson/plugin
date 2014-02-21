@@ -79,7 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="contract.h" />
-    <ClInclude Include="IGame.h" />
+    <ClInclude Include="game.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="contract.cpp" />

@@ -1,4 +1,4 @@
-#include "ModuleLoader.h"
+#include "moduleloader.h"
 #include <cassert>
 using namespace plugin::core;
 

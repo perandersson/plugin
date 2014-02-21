@@ -3,13 +3,8 @@
 #include <iostream>
 
 #include <plugin/contract.h>
-using plugin::contract::IPluginActivator;
-using plugin::contract::IServiceListener;
-using plugin::contract::IServiceReference;
-using plugin::contract::IPluginContext;
-using plugin::contract::IPlugin;
 
-class DemoActivator : public IPluginActivator, public IServiceListener
+class DemoActivator : public IPluginActivator1, public IPluginServiceListener1
 {
 public:
 	DemoActivator() {
@@ -20,16 +15,16 @@ public:
 
 	}
 
-	virtual void Start(IPluginContext* context, IPlugin* plugin) {
+	virtual void Start(IPluginContext1* context, IPluginBundle1* plugin) {
 		plugin->AddServiceListener(this);
 		plugin->RegisterService(typeid(gameengine::IGame), &mService);
 	}
 
-	virtual void Stop(IPlugin* plugin) {
+	virtual void Stop(IPluginBundle1* plugin) {
 		std::cout << "DemoActivator is deactivated" << std::endl;
 	}
 
-	virtual void OnServiceChanged(IServiceReference* reference, Status status) {
+	virtual void OnServiceChanged(IPluginServiceReference1* reference, Status status) {
 		if (status == STATUS_REGISTERED) {
 			const type_info& type = reference->GetType();
 			if (type == typeid(gameengine::IGame)) {

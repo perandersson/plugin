@@ -6,31 +6,37 @@
 
 namespace plugin
 {
-	using namespace contract;
-
 	namespace core
 	{
 		class Plugin;
 
-		class ServiceReference : public IServiceReference
+		class ServiceReference : public IPluginServiceReference1
 		{
 		public:
-			ServiceReference(Plugin* plugin, IService* service, const type_info& type);
+			ServiceReference(Plugin* plugin, IPluginService1* service);
 			virtual ~ServiceReference();
 
 		// IServiceReference
 		public:
-			virtual IPlugin* GetPlugin();
-			virtual const IPlugin* GetPlugin() const;
+			virtual IPluginBundle1* GetPlugin();
+			virtual const IPluginBundle1* GetPlugin() const;
 			virtual const type_info& GetType() const;
-			virtual IService* GetService();
+			virtual IPluginService1* GetService();
 			virtual void Release();
 
 		private:
 			Plugin* mPlugin;
-			IService* mService;
+			IPluginService1* mService;
 			int mNumReferences;
-			const type_info& mType;
+		};
+
+		class NoServiceReferenceFound : public ServiceReference
+		{
+		public:
+			NoServiceReferenceFound();
+			virtual ~NoServiceReferenceFound();
+
+			static NoServiceReferenceFound INSTANCE;
 		};
 	}
 }

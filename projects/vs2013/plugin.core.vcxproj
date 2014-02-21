@@ -90,23 +90,23 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\plugin.core\plugin\core\ModuleLoader.cpp" />
-    <ClCompile Include="..\..\plugin.core\plugin\core\Plugin.cpp" />
-    <ClCompile Include="..\..\plugin.core\plugin\core\PluginContext.cpp" />
-    <ClCompile Include="..\..\plugin.core\plugin\core\ServiceReference.cpp" />
-    <ClCompile Include="..\..\plugin.core\plugin\core\Version.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\plugin.core\plugin\core\ModuleLoader.h" />
-    <ClInclude Include="..\..\plugin.core\plugin\core\Plugin.h" />
-    <ClInclude Include="..\..\plugin.core\plugin\core\PluginContext.h" />
-    <ClInclude Include="..\..\plugin.core\plugin\core\ServiceReference.h" />
-    <ClInclude Include="..\..\plugin.core\plugin\core\Version.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="plugin.contract.vcxproj.vcxproj">
       <Project>{6a708f37-bd90-482c-92cd-0ccca385112a}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\plugin.core\plugin\core\moduleloader.h" />
+    <ClInclude Include="..\..\plugin.core\plugin\core\plugin.h" />
+    <ClInclude Include="..\..\plugin.core\plugin\core\plugincontext.h" />
+    <ClInclude Include="..\..\plugin.core\plugin\core\servicereference.h" />
+    <ClInclude Include="..\..\plugin.core\plugin\core\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\plugin.core\plugin\core\moduleloader.cpp" />
+    <ClCompile Include="..\..\plugin.core\plugin\core\plugin.cpp" />
+    <ClCompile Include="..\..\plugin.core\plugin\core\plugincontext.cpp" />
+    <ClCompile Include="..\..\plugin.core\plugin\core\servicereference.cpp" />
+    <ClCompile Include="..\..\plugin.core\plugin\core\version.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
