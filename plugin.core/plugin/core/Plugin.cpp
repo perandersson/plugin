@@ -52,7 +52,7 @@ IPluginServiceReference1* Plugin::RegisterService(const type_info& type, IPlugin
 		// WHAT TO DO???
 	}
 
-	auto serviceReference = new ServiceReference(this, service);
+	auto serviceReference = new ServiceReference(this, service, type);
 	std::shared_ptr<ServiceReference> reference(serviceReference);
 	mReferences.insert(std::make_pair(typeName, reference));
 

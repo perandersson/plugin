@@ -27,8 +27,9 @@ public:
 	virtual void OnServiceChanged(IPluginServiceReference1* reference, Status status) {
 		if (status == STATUS_REGISTERED) {
 			const type_info& type = reference->GetType();
-			if (type == typeid(gameengine::IGame)) {
-				std::cout << "IGame instance registered!!" << std::endl;
+			if (type == typeid(gameengine::IComponent)) {
+				auto component = dynamic_cast<gameengine::IComponent*>(reference->GetService());
+				mService.AddComponent(component);
 			}
 		}
 		std::cout << "DemoActivator -> Service status changed for type: " << reference->GetType().name() << std::endl;

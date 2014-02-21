@@ -4,8 +4,8 @@
 using namespace plugin;
 using namespace plugin::core;
 
-ServiceReference::ServiceReference(Plugin* plugin, IPluginService1* service)
-: mPlugin(plugin), mService(service), mNumReferences(0)
+ServiceReference::ServiceReference(Plugin* plugin, IPluginService1* service, const type_info& type)
+: mPlugin(plugin), mService(service), mNumReferences(0), mType(type)
 {
 
 }
@@ -50,13 +50,11 @@ NoServiceReferenceFound NoServiceReferenceFound::INSTANCE;
 
 const type_info& ServiceReference::GetType() const
 {
-	if (mService != nullptr)
-		return typeid(*mService);
-	return typeid(NoServiceReferenceFound);
+	return mType;
 }
 
 NoServiceReferenceFound::NoServiceReferenceFound()
-: ServiceReference(nullptr, nullptr)
+: ServiceReference(nullptr, nullptr, typeid(NoServiceReferenceFound))
 {
 
 }

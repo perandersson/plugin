@@ -13,7 +13,7 @@ namespace plugin
 		class ServiceReference : public IPluginServiceReference1
 		{
 		public:
-			ServiceReference(Plugin* plugin, IPluginService1* service);
+			ServiceReference(Plugin* plugin, IPluginService1* service, const type_info& type);
 			virtual ~ServiceReference();
 
 		// IServiceReference
@@ -28,6 +28,7 @@ namespace plugin
 			Plugin* mPlugin;
 			IPluginService1* mService;
 			int mNumReferences;
+			const type_info& mType;
 		};
 
 		class NoServiceReferenceFound : public ServiceReference

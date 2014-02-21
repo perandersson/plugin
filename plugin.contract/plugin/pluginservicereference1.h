@@ -25,13 +25,14 @@ DEFINE_INTERFACE(IPluginServiceReference1, IPluginObject)
 
 	//
 	// Resolves the service based on this reference. This ensures that the actual pointer
-	// to the service is never deleted as long as it's in use.
+	// to the service is never deleted as long as it's in use. This increases the internal reference counter for
+	// the service.
 	//
 	// @return A pointer to the actual service; NULL if the service is no longer in memory
 	virtual IPluginService1* GetService() = 0;
 
 	//
-	// Releases the service object based on it's service reference
+	// Decreases the reference counter Releases the service object.
 	virtual void Release() = 0;
 };
 

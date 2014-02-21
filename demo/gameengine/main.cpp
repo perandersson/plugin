@@ -7,7 +7,7 @@ using namespace plugin::core::xml;
 static const char PLUGINS_XML[] = {
 	"<plugins> \
 		<plugin path=\"demo.dll\" /> \
-		<plugin path=\"mydemodll.dll\" /> \
+		<plugin path=\"customcomponent1.dll\" /> \
 	</plugins>" };
 
 int main()

@@ -84,6 +84,11 @@
   <ItemGroup>
     <ClInclude Include="DemoGame.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gameengine.contract\gameengine.contract.vcxproj">
+      <Project>{ac42a67a-cdf4-4870-b7a3-38e6d73365bf}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

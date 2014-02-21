@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AC42A67A-CDF4-4870-B7A3-38E6D73365BF}</ProjectGuid>
+    <ProjectGuid>{C4E45C96-41C6-4B64-A5C1-B7EE3545FD02}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>gameenginecontract</RootNamespace>
+    <RootNamespace>customcomponent1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -51,7 +51,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GAMEENGINECONTRACT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CUSTOMCOMPONENT1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../plugin.contract</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -67,7 +67,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GAMEENGINECONTRACT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CUSTOMCOMPONENT1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../plugin.contract</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -78,12 +78,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="component.h" />
-    <ClInclude Include="contract.h" />
-    <ClInclude Include="game.h" />
+    <ProjectReference Include="..\gameengine.contract\gameengine.contract.vcxproj">
+      <Project>{ac42a67a-cdf4-4870-b7a3-38e6d73365bf}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="contract.cpp" />
+    <ClInclude Include="CustomComponent1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CustomComponent1.cpp" />
+    <ClCompile Include="CustomComponent1Activator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
