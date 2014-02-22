@@ -55,4 +55,24 @@ DEFINE_INTERFACE_B(IPluginObject)
 	virtual ~IPluginObject() {}
 };
 
+
+#ifdef ENABLE_ONLY_MSVC
+#if !_MSC_VER
+#error You are building your code using another compiler than the MSVC, which has been approaved for your contract
+#endif
+#endif
+
+#ifdef ENABLE_ONLY_GCC
+#if !__GNUC__
+#error You are building your code using another compiler than the GCC, which has been approaved for your contract
+#endif
+#endif
+
+#ifdef ENABLE_ONLY_INTEL_COMPILER
+#if !__INTEL_COMPILER
+#error You are building your code using another compiler than the Intel Compiler, which has been approaved for your contract
+#endif
+#endif
+
+
 #endif

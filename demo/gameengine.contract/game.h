@@ -2,6 +2,7 @@
 #ifndef _GAMEENGINE_IGAME_H_
 #define _GAMEENGINE_IGAME_H_
 
+#define ENABLE_ONLY_MSVC
 #include <plugin/contract.h>
 
 namespace gameengine
