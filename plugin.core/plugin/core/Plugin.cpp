@@ -16,8 +16,10 @@ Plugin::Plugin(LibraryHandle library, IPluginActivator* activator, const std::st
 Plugin::~Plugin()
 {
 	assert(mStatus == STATUS_STOPPED);
-	ModuleLoader::UnloadLibrary(mLibrary);
-	mLibrary = nullptr;
+	if (mLibrary != nullptr) {
+		ModuleLoader::UnloadLibrary(mLibrary);
+		mLibrary = nullptr;
+	}
 }
 
 void Plugin::Start(PluginContext* context)

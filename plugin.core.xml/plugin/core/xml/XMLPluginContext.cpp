@@ -81,6 +81,12 @@ XMLPluginContext::XMLPluginContext()
 
 }
 
+XMLPluginContext::XMLPluginContext(IPluginActivator* hostActivator, const std::string& hostName, const Version& hostVersion)
+: PluginContext(hostActivator, hostName, hostVersion)
+{
+
+}
+
 XMLPluginContext::~XMLPluginContext()
 {
 

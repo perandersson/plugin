@@ -17,6 +17,7 @@ namespace plugin
 			{
 			public:
 				XMLPluginContext();
+				XMLPluginContext(IPluginActivator* hostActivator, const std::string& hostName, const Version& hostVersion);
 				virtual ~XMLPluginContext();
 
 				//

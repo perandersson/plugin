@@ -10,7 +10,11 @@ using namespace plugin::core;
 
 PluginContext::PluginContext()
 {
+}
 
+PluginContext::PluginContext(IPluginActivator* hostActivator, const std::string& hostName, const Version& hostVersion)
+{
+	StartPlugin(nullptr, hostActivator, hostName, hostVersion);
 }
 
 PluginContext::~PluginContext()

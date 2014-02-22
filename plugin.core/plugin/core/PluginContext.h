@@ -24,6 +24,7 @@ namespace plugin
 
 		protected:
 			PluginContext();
+			PluginContext(IPluginActivator* hostActivator, const std::string& hostName, const Version& hostVersion);
 
 		public:
 			virtual ~PluginContext();
