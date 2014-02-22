@@ -53,6 +53,11 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	StartPlugin(library, activator, name, Version((*getPluginVersion)()));
 }
 
+void PluginContext::UnloadPlugin(const char* fileName)
+{
+	
+}
+
 void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version)
 {
 	std::shared_ptr<Plugin> plugin(new Plugin(library, activator, name, version));
@@ -93,6 +98,12 @@ IPluginServiceReference1* PluginContext::GetServiceReference(const type_info& ty
 	return &NoServiceReferenceFound::INSTANCE;
 }
 
+IPluginServiceReference1* PluginContext::GetServiceReference(const type_info& type, const char* filter)
+{
+	// TODO Implement me!
+	return GetServiceReference(type);
+}
+
 void PluginContext::GetServiceReferences(const type_info& type, IPluginServiceReferences1* callback)
 {
 	Plugins::iterator it = mPlugins.begin();
@@ -101,4 +112,9 @@ void PluginContext::GetServiceReferences(const type_info& type, IPluginServiceRe
 		auto reference = (*it)->FindServiceReference(type);
 		callback->OnServiceReference(reference);
 	}
+}
+
+void PluginContext::GetServiceReferences(const type_info& type, const char* filter, IPluginServiceReferences1* callback)
+{
+	GetServiceReferences(type, callback);
 }

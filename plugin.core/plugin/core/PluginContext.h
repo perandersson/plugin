@@ -36,6 +36,12 @@ namespace plugin
 			void LoadPlugin(const char* fileName, const std::string& name);
 
 			//
+			// Unload the supplied plugin file
+			//
+			// @param fileName
+			void UnloadPlugin(const char* fileName);
+
+			//
 			// Start a new plugin using the supplied activator
 			//
 			// @param library
@@ -71,7 +77,9 @@ namespace plugin
 		// IPluginContext
 		public:
 			virtual IPluginServiceReference1* GetServiceReference(const type_info& type);
+			virtual IPluginServiceReference1* GetServiceReference(const type_info& type, const char* filter);
 			virtual void GetServiceReferences(const type_info& type, IPluginServiceReferences1* callback);
+			virtual void GetServiceReferences(const type_info& type, const char* filter, IPluginServiceReferences1* callback);
 
 		private:
 			Plugins mPlugins;
