@@ -8,7 +8,7 @@ namespace plugin
 {
 	namespace core
 	{
-		class Version : public IPluginVersion1
+		class Version : public IPluginVersion
 		{
 		public:
 			Version(const char* version);

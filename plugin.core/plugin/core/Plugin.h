@@ -24,15 +24,15 @@ namespace plugin
 
 		//
 		// Implementation of the IPlugin contract
-		class Plugin : public IPluginBundle1
+		class Plugin : public IPluginBundle
 		{
 			typedef std::hash_map<std::string, std::shared_ptr<ServiceReference>> ServiceReferences;
 			typedef std::list<ServiceReference*> UnregistrationServiceReferences;
-			typedef std::list<IPluginServiceListener1*> ServiceListeners;
-			typedef std::list<IPluginBundleListener1*> PluginListeners;
+			typedef std::list<IPluginServiceListener*> ServiceListeners;
+			typedef std::list<IPluginBundleListener*> PluginListeners;
 
 		public:
-			Plugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version);
+			Plugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version);
 			~Plugin();
 
 			//
@@ -61,7 +61,7 @@ namespace plugin
 			//			The actual service
 			// @param status
 			//			The status of the service
-			void NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener1::Status status);
+			void NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener::Status status);
 
 			//
 			// Notifies all the listeners connected via this plugin
@@ -70,26 +70,26 @@ namespace plugin
 			//			The plugin that's being changed
 			// @param status
 			//			The status of the plugin
-			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::Status status);
+			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status);
 
 		// IPlugin
 		public:
-			virtual IPluginServiceReference1* RegisterService(const type_info& type, IPluginService1* service);
+			virtual IPluginServiceReference* RegisterService(const type_info& type, IPluginService* service);
 			virtual void UnregisterServices(const type_info& type);
-			virtual void UnregisterService(IPluginServiceReference1* reference);
-			virtual void AddServiceListener(IPluginServiceListener1* listener);
-			virtual void RemoveServiceListener(IPluginServiceListener1* listener);
-			virtual void AddPluginListener(IPluginBundleListener1* listener);
-			virtual void RemovePluginListener(IPluginBundleListener1* listener);
+			virtual void UnregisterService(IPluginServiceReference* reference);
+			virtual void AddServiceListener(IPluginServiceListener* listener);
+			virtual void RemoveServiceListener(IPluginServiceListener* listener);
+			virtual void AddPluginListener(IPluginBundleListener* listener);
+			virtual void RemovePluginListener(IPluginBundleListener* listener);
 			virtual Status GetStatus() const;
-			virtual const IPluginVersion1* GetVersion() const;
-			virtual IPluginContext1* GetPluginContext();
+			virtual const IPluginVersion* GetVersion() const;
+			virtual IPluginContext* GetPluginContext();
 			virtual const char* GetName();
 
 		private:
 			LibraryHandle mLibrary;
 			PluginContext* mPluginContext;
-			IPluginActivator1* mActivator;
+			IPluginActivator* mActivator;
 			Version mVersion;
 			ServiceReferences mReferences;
 			UnregistrationServiceReferences mUnregistrationList;

@@ -37,14 +37,14 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 
 	//
 	// Retrieves the activator function
-	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivator1Func>(library, "GetPluginActivator1");
+	auto getPluginActivator = ModuleLoader::GetFunction<GetPluginActivatorFunc>(library, "GetPluginActivator1");
 	auto getPluginVersion = ModuleLoader::GetFunction<GetPluginVersionFunc>(library, "GetPluginVersion");
 	if (getPluginActivator == nullptr || getPluginVersion == nullptr) {
 		ModuleLoader::UnloadLibrary(library);
 		return;
 	}
 
-	IPluginActivator1* activator = (*getPluginActivator)();
+	IPluginActivator* activator = (*getPluginActivator)();
 	if (activator == nullptr) {
 		ModuleLoader::UnloadLibrary(library);
 		return;
@@ -58,7 +58,7 @@ void PluginContext::UnloadPlugin(const char* fileName)
 	
 }
 
-void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version)
+void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version)
 {
 	std::shared_ptr<Plugin> plugin(new Plugin(library, activator, name, version));
 	mPlugins.push_back(plugin);
@@ -66,7 +66,7 @@ void PluginContext::StartPlugin(LibraryHandle library, IPluginActivator1* activa
 	plugin->Start(this);
 }
 
-void PluginContext::NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener1::Status status)
+void PluginContext::NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -75,7 +75,7 @@ void PluginContext::NotifyServiceChanged(ServiceReference* reference, IPluginSer
 	}
 }
 
-void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::Status status)
+void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -84,7 +84,7 @@ void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::
 	}
 }
 
-IPluginServiceReference1* PluginContext::GetServiceReference(const type_info& type)
+IPluginServiceReference* PluginContext::GetServiceReference(const type_info& type)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -98,13 +98,13 @@ IPluginServiceReference1* PluginContext::GetServiceReference(const type_info& ty
 	return &NoServiceReferenceFound::INSTANCE;
 }
 
-IPluginServiceReference1* PluginContext::GetServiceReference(const type_info& type, const char* filter)
+IPluginServiceReference* PluginContext::GetServiceReference(const type_info& type, const char* filter)
 {
 	// TODO Implement me!
 	return GetServiceReference(type);
 }
 
-void PluginContext::GetServiceReferences(const type_info& type, IPluginServiceReferences1* callback)
+void PluginContext::GetServiceReferences(const type_info& type, IPluginServiceReferences* callback)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();
@@ -114,7 +114,7 @@ void PluginContext::GetServiceReferences(const type_info& type, IPluginServiceRe
 	}
 }
 
-void PluginContext::GetServiceReferences(const type_info& type, const char* filter, IPluginServiceReferences1* callback)
+void PluginContext::GetServiceReferences(const type_info& type, const char* filter, IPluginServiceReferences* callback)
 {
 	GetServiceReferences(type, callback);
 }

@@ -7,7 +7,7 @@
 using namespace plugin;
 using namespace plugin::core;
 
-Plugin::Plugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version)
+Plugin::Plugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version)
 : mLibrary(library), mPluginContext(nullptr), mActivator(activator), mVersion(version), mStatus(STATUS_STOPPED), mName(name)
 {
 
@@ -26,7 +26,7 @@ void Plugin::Start(PluginContext* context)
 	mStatus = STATUS_STARTING;
 	mActivator->Start(context, this);
 	mStatus = STATUS_ACTIVE;
-	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener1::STATUS_ACTIVE);
+	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener::STATUS_ACTIVE);
 }
 
 void Plugin::Stop()
@@ -44,7 +44,7 @@ void Plugin::Stop()
 
 	mActivator->Stop(this);
 	mStatus = STATUS_STOPPED;
-	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener1::STATUS_INACTIVE);
+	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener::STATUS_INACTIVE);
 }
 
 ServiceReference* Plugin::FindServiceReference(const type_info& type)
@@ -57,7 +57,7 @@ ServiceReference* Plugin::FindServiceReference(const type_info& type)
 	return it->second.get();
 }
 
-IPluginServiceReference1* Plugin::RegisterService(const type_info& type, IPluginService1* service)
+IPluginServiceReference* Plugin::RegisterService(const type_info& type, IPluginService* service)
 {
 	std::string typeName(type.name());
 	if (mReferences.find(typeName) != mReferences.end()) {
@@ -70,7 +70,7 @@ IPluginServiceReference1* Plugin::RegisterService(const type_info& type, IPlugin
 	mUnregistrationList.push_front(serviceReference);
 
 	// Notify all the registered service listeners about the new service
-	mPluginContext->NotifyServiceChanged(serviceReference, IPluginServiceListener1::STATUS_REGISTERED);
+	mPluginContext->NotifyServiceChanged(serviceReference, IPluginServiceListener::STATUS_REGISTERED);
 	return serviceReference;
 }
 
@@ -84,10 +84,10 @@ void Plugin::UnregisterServices(const type_info& type)
 	//
 	auto reference = it->second;
 	mReferences.erase(it);
-	mPluginContext->NotifyServiceChanged(reference.get(), IPluginServiceListener1::STATUS_UNREGISTERED);
+	mPluginContext->NotifyServiceChanged(reference.get(), IPluginServiceListener::STATUS_UNREGISTERED);
 }
 
-void Plugin::UnregisterService(IPluginServiceReference1* reference)
+void Plugin::UnregisterService(IPluginServiceReference* reference)
 {
 	ServiceReferences::iterator it = mReferences.begin();
 	ServiceReferences::const_iterator end = mReferences.end();
@@ -95,7 +95,7 @@ void Plugin::UnregisterService(IPluginServiceReference1* reference)
 		if (it->second.get() == reference) {
 			auto reference = it->second;
 			mReferences.erase(it);
-			mPluginContext->NotifyServiceChanged(reference.get(), IPluginServiceListener1::STATUS_UNREGISTERED);
+			mPluginContext->NotifyServiceChanged(reference.get(), IPluginServiceListener::STATUS_UNREGISTERED);
 			break;
 		}
 	}
@@ -106,31 +106,31 @@ void Plugin::UnregisterService(IPluginServiceReference1* reference)
 	}
 }
 
-void Plugin::AddServiceListener(IPluginServiceListener1* listener)
+void Plugin::AddServiceListener(IPluginServiceListener* listener)
 {
 	mServiceListeners.push_back(listener);
 }
 
-void Plugin::RemoveServiceListener(IPluginServiceListener1* listener)
+void Plugin::RemoveServiceListener(IPluginServiceListener* listener)
 {
 	ServiceListeners::iterator it = std::find(mServiceListeners.begin(), mServiceListeners.end(), listener);
 	if (it != mServiceListeners.end())
 		mServiceListeners.erase(it);
 }
 
-void Plugin::AddPluginListener(IPluginBundleListener1* listener)
+void Plugin::AddPluginListener(IPluginBundleListener* listener)
 {
 	mPluginListeners.push_back(listener);
 }
 
-void Plugin::RemovePluginListener(IPluginBundleListener1* listener)
+void Plugin::RemovePluginListener(IPluginBundleListener* listener)
 {
 	PluginListeners::iterator it = std::find(mPluginListeners.begin(), mPluginListeners.end(), listener);
 	if (it != mPluginListeners.end())
 		mPluginListeners.erase(it);
 }
 
-void Plugin::NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener1::Status status)
+void Plugin::NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener::Status status)
 {
 	ServiceListeners::iterator it = mServiceListeners.begin();
 	ServiceListeners::const_iterator end = mServiceListeners.end();
@@ -139,7 +139,7 @@ void Plugin::NotifyServiceChanged(ServiceReference* reference, IPluginServiceLis
 	}
 }
 
-void Plugin::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::Status status)
+void Plugin::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status)
 {
 	PluginListeners::iterator it = mPluginListeners.begin();
 	PluginListeners::const_iterator end = mPluginListeners.end();
@@ -153,12 +153,12 @@ IPluginBundle1::Status Plugin::GetStatus() const
 	return mStatus;
 }
 
-const IPluginVersion1* Plugin::GetVersion() const
+const IPluginVersion* Plugin::GetVersion() const
 {
 	return &mVersion;
 }
 
-IPluginContext1* Plugin::GetPluginContext()
+IPluginContext* Plugin::GetPluginContext()
 {
 	return mPluginContext;
 }

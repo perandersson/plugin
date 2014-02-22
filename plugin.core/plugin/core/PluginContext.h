@@ -17,7 +17,7 @@ namespace plugin
 
 		//
 		// Base class for the plugin manager.
-		class PluginContext : public IPluginContext1
+		class PluginContext : public IPluginContext
 		{
 			typedef std::list<std::shared_ptr<Plugin>> Plugins;
 			typedef std::list<Plugin*> UnregisterPluginsList;
@@ -52,7 +52,7 @@ namespace plugin
 			//			The name of the plugin
 			// @param version
 			//			The plugin version
-			void StartPlugin(LibraryHandle library, IPluginActivator1* activator, const std::string& name, const Version& version);
+			void StartPlugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version);
 
 			//
 			// Notifies all the listeners
@@ -63,7 +63,7 @@ namespace plugin
 			//			The actual service
 			// @param status
 			//			The status of the service
-			void NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener1::Status status);
+			void NotifyServiceChanged(ServiceReference* reference, IPluginServiceListener::Status status);
 
 			//
 			// Notifies all the listeners
@@ -72,14 +72,14 @@ namespace plugin
 			//			The plugin that's being changed
 			// @param status
 			//			The status of the plugin
-			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener1::Status status);
+			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status);
 
 		// IPluginContext
 		public:
-			virtual IPluginServiceReference1* GetServiceReference(const type_info& type);
-			virtual IPluginServiceReference1* GetServiceReference(const type_info& type, const char* filter);
-			virtual void GetServiceReferences(const type_info& type, IPluginServiceReferences1* callback);
-			virtual void GetServiceReferences(const type_info& type, const char* filter, IPluginServiceReferences1* callback);
+			virtual IPluginServiceReference* GetServiceReference(const type_info& type);
+			virtual IPluginServiceReference* GetServiceReference(const type_info& type, const char* filter);
+			virtual void GetServiceReferences(const type_info& type, IPluginServiceReferences* callback);
+			virtual void GetServiceReferences(const type_info& type, const char* filter, IPluginServiceReferences* callback);
 
 		private:
 			Plugins mPlugins;

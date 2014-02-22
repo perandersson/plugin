@@ -10,23 +10,23 @@ namespace plugin
 	{
 		class Plugin;
 
-		class ServiceReference : public IPluginServiceReference1
+		class ServiceReference : public IPluginServiceReference
 		{
 		public:
-			ServiceReference(Plugin* plugin, IPluginService1* service, const type_info& type);
+			ServiceReference(Plugin* plugin, IPluginService* service, const type_info& type);
 			virtual ~ServiceReference();
 
 		// IServiceReference
 		public:
-			virtual IPluginBundle1* GetPlugin();
-			virtual const IPluginBundle1* GetPlugin() const;
+			virtual IPluginBundle* GetPlugin();
+			virtual const IPluginBundle* GetPlugin() const;
 			virtual const type_info& GetType() const;
-			virtual IPluginService1* GetService();
+			virtual IPluginService* GetService();
 			virtual void Release();
 
 		private:
 			Plugin* mPlugin;
-			IPluginService1* mService;
+			IPluginService* mService;
 			int mNumReferences;
 			const type_info& mType;
 		};

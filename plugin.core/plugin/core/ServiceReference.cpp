@@ -4,7 +4,7 @@
 using namespace plugin;
 using namespace plugin::core;
 
-ServiceReference::ServiceReference(Plugin* plugin, IPluginService1* service, const type_info& type)
+ServiceReference::ServiceReference(Plugin* plugin, IPluginService* service, const type_info& type)
 : mPlugin(plugin), mService(service), mNumReferences(0), mType(type)
 {
 
@@ -15,7 +15,7 @@ ServiceReference::~ServiceReference()
 
 }
 
-IPluginService1* ServiceReference::GetService()
+IPluginService* ServiceReference::GetService()
 {
 	if (mService == nullptr)
 		return nullptr;
@@ -36,12 +36,12 @@ void ServiceReference::Release()
 	}
 }
 
-IPluginBundle1* ServiceReference::GetPlugin()
+IPluginBundle* ServiceReference::GetPlugin()
 {
 	return mPlugin;
 }
 
-const IPluginBundle1* ServiceReference::GetPlugin() const
+const IPluginBundle* ServiceReference::GetPlugin() const
 {
 	return mPlugin;
 }

@@ -4,7 +4,7 @@
 
 #include <plugin/contract.h>
 
-class CustomComponent1Activator : public IPluginActivator1, public IPluginServiceListener1
+class CustomComponent1Activator : public IPluginActivator, public IPluginServiceListener
 {
 public:
 	CustomComponent1Activator() {
@@ -15,16 +15,16 @@ public:
 
 	}
 
-	virtual void Start(IPluginContext1* context, IPluginBundle1* plugin) {
+	virtual void Start(IPluginContext* context, IPluginBundle* plugin) {
 		plugin->AddServiceListener(this);
 		plugin->RegisterService(typeid(gameengine::IComponent), &mService);
 	}
 
-	virtual void Stop(IPluginBundle1* plugin) {
+	virtual void Stop(IPluginBundle* plugin) {
 		std::cout << "CustomComponent1Activator is deactivated" << std::endl;
 	}
 
-	virtual void OnServiceChanged(IPluginServiceReference1* reference, Status status) {
+	virtual void OnServiceChanged(IPluginServiceReference* reference, Status status) {
 		std::cout << "CustomComponent1Activator -> Service status changed for type: " << reference->GetType().name() << std::endl;
 	}
 

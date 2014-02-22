@@ -6,8 +6,8 @@
 // This is the version 1 of the plugin library
 //
 
-#include "pluginbundle1.h"
 #include "pluginactivator1.h"
+#include "pluginbundle1.h"
 #include "plugincontext1.h"
 #include "pluginbundlelistener1.h"
 #include "pluginservice1.h"
@@ -15,5 +15,20 @@
 #include "pluginservicereference1.h"
 #include "pluginservicereferences1.h"
 #include "pluginversion1.h"
+
+//
+// Typedefs for prettier interface
+//
+
+typedef IPluginActivator1 IPluginActivator;
+typedef IPluginBundle1 IPluginBundle;
+typedef IPluginBundleListener1 IPluginBundleListener;
+typedef IPluginContext1 IPluginContext;
+typedef IPluginService1 IPluginService;
+typedef IPluginServiceListener1 IPluginServiceListener;
+typedef IPluginServiceReference1 IPluginServiceReference;
+typedef IPluginServiceReferences1 IPluginServiceReferences;
+typedef IPluginVersion1 IPluginVersion;
+typedef GetPluginActivator1Func GetPluginActivatorFunc;
 
 #endif

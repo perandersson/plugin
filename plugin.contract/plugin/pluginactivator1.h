@@ -40,7 +40,7 @@ typedef const char* (*GetPluginVersionFunc)(void);
 #define DEFINE_PLUGIN(Type, Version) \
 	extern "C" { \
 	Type __pluginActivator; \
-	PLUGIN_API IPluginActivator1* __cdecl GetPluginActivator1() { \
+	PLUGIN_API IPluginActivator* __cdecl GetPluginActivator1() { \
 		return &__pluginActivator; \
 	} \
 	PLUGIN_API const char* __cdecl GetPluginVersion() { \

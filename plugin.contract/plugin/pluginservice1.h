@@ -11,7 +11,7 @@ DEFINE_INTERFACE(IPluginService1, IPluginObject)
 };
 
 #ifndef DEFINE_SERVICE
-#define DEFINE_SERVICE(Type) DEFINE_INTERFACE(Type, IPluginService1)
+#define DEFINE_SERVICE(Type) DEFINE_INTERFACE(Type, IPluginService)
 #endif
 
 #endif
