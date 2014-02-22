@@ -7,12 +7,6 @@
 #define SSTRINGIFY(x) #x
 #define STRINGIFY(x) SSTRINGIFY(x)
 
-#ifdef _USRDLL
-#ifndef PLUGIN_API
-#define PLUGIN_API __declspec(dllexport)
-#endif
-#endif
-
 #ifdef PLUGIN_EXPORTS 
 #ifndef PLUGIN_API
 #define PLUGIN_API __declspec(dllexport)
@@ -42,7 +36,7 @@ struct PLUGIN_API Name : public Inherits
 
 #ifndef DEFINE_INTERFACE_B
 #define DEFINE_INTERFACE_B(Name) \
-struct PLUGIN_API Name
+class PLUGIN_API Name
 #endif
 
 #ifndef DECLARE_INTERFACE
@@ -52,6 +46,7 @@ struct PLUGIN_API Name
 
 DEFINE_INTERFACE_B(IPluginObject)
 {
+public:
 	virtual ~IPluginObject() {}
 };
 

@@ -25,9 +25,9 @@ PluginContext::~PluginContext()
 	mPlugins.clear();
 }
 
-void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
+void PluginContext::LoadPlugin(const std::string& fileName, const std::string& name)
 {
-	auto library = ModuleLoader::GetLibraryHandle(fileName);
+	auto library = ModuleLoader::GetLibraryHandle(fileName.c_str());
 	if (library == nullptr)
 		return;
 
@@ -53,7 +53,7 @@ void PluginContext::LoadPlugin(const char* fileName, const std::string& name)
 	StartPlugin(library, activator, name, Version((*getPluginVersion)()));
 }
 
-void PluginContext::UnloadPlugin(const char* fileName)
+void PluginContext::UnloadPlugin(const std::string& fileName)
 {
 	
 }

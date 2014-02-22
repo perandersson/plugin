@@ -33,13 +33,13 @@ namespace plugin
 			//
 			// @param fileName
 			// @param name
-			void LoadPlugin(const char* fileName, const std::string& name);
+			void LoadPlugin(const std::string& fileName, const std::string& name);
 
 			//
 			// Unload the supplied plugin file
 			//
 			// @param fileName
-			void UnloadPlugin(const char* fileName);
+			void UnloadPlugin(const std::string& fileName);
 
 			//
 			// Start a new plugin using the supplied activator

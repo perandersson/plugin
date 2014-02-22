@@ -60,14 +60,14 @@ bool XmlPluginRegistryVisitor::VisitEnter(const tinyxml2::XMLElement& element, c
 	const std::string name = element.Name();
 	if (TAG_PLUGIN == name) {
 		const char* path = element.Attribute("path");
-		if (path == NULL) {
+		if (path == nullptr) {
 			return true;
 		}
 
 		std::string name = element.Attribute("name") == nullptr ? 
 			GetNameFromPath(path) : std::string(element.Attribute("name"));
 
-		mPluginContext.LoadPlugin(path, name);
+		mPluginContext.LoadPlugin(std::string(path), name);
 	}
 
 	return true;
