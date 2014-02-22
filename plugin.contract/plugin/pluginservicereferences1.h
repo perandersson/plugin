@@ -2,13 +2,13 @@
 #ifndef _IPLUGIN_SERVICE_REFERENCES1_H_
 #define _IPLUGIN_SERVICE_REFERENCES1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPluginServiceReference1);
 
 //
 //
-DEFINE_INTERFACE(IPluginServiceReferences1, IPluginObject)
+DEFINE_INTERFACE(IPluginServiceReferences1, IPluginObject1)
 {
 	//
 	//

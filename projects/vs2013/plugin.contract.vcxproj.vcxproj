@@ -17,6 +17,7 @@
     <ClInclude Include="..\..\plugin.contract\plugin\pluginactivator1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\plugincontext1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginlistener1.h" />
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginobject1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginservicereferences1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginversion1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginservice1.h" />

@@ -2,11 +2,11 @@
 #ifndef _IPLUGIN_VERSION1_H_
 #define _IPLUGIN_VERSION1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 //
 //
-DEFINE_INTERFACE(IPluginVersion1, IPluginObject)
+DEFINE_INTERFACE(IPluginVersion1, IPluginObject1)
 {
 	//
 	// @return The major component of this version instance

@@ -2,14 +2,14 @@
 #ifndef _IPLUGIN_ACTIVATOR1_H_
 #define _IPLUGIN_ACTIVATOR1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPluginContext1);
 DECLARE_INTERFACE(IPlugin1);
 
 //
 // Interface that represents the entry- and exit point of a plugin.
-DEFINE_INTERFACE(IPluginActivator1, IPluginObject)
+DEFINE_INTERFACE(IPluginActivator1, IPluginObject1)
 {
 	//
 	// Starts this plugin instance and registers it's internal resources

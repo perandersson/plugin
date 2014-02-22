@@ -34,21 +34,10 @@ typedef std::type_info type_info;
 struct PLUGIN_API Name : public Inherits
 #endif
 
-#ifndef DEFINE_INTERFACE_B
-#define DEFINE_INTERFACE_B(Name) \
-class PLUGIN_API Name
-#endif
-
 #ifndef DECLARE_INTERFACE
 #define DECLARE_INTERFACE(Name) \
 struct PLUGIN_API Name
 #endif
-
-DEFINE_INTERFACE_B(IPluginObject)
-{
-public:
-	virtual ~IPluginObject() {}
-};
 
 
 #ifdef ENABLE_ONLY_MSVC

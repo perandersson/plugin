@@ -2,22 +2,22 @@
 #ifndef _IPLUGIN_LISTENER1_H_
 #define _IPLUGIN_LISTENER1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPlugin1);
 
 //
 // 
-DEFINE_INTERFACE(IPluginListener1, IPluginObject)
+DEFINE_INTERFACE(IPluginListener1, IPluginObject1)
 {
 	enum PLUGIN_API Status {
 		//
 		// The plugin is activated.
-		STATUS_ACTIVE = 1,
+		STATUS_ACTIVE = 0,
 
 		//
 		// The plugin has been inactivated
-		STATUS_INACTIVE = 2,
+		STATUS_INACTIVE = 1,
 	};
 
 	//

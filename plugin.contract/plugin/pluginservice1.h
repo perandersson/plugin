@@ -2,11 +2,11 @@
 #ifndef _IPLUGIN_SERVICE1_H_
 #define _IPLUGIN_SERVICE1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 //
 //
-DEFINE_INTERFACE(IPluginService1, IPluginObject)
+DEFINE_INTERFACE(IPluginService1, IPluginObject1)
 {
 };
 

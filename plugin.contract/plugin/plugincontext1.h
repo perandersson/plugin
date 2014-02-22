@@ -2,14 +2,14 @@
 #ifndef _IPLUGIN_CONTEXT1_H_
 #define _IPLUGIN_CONTEXT1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPluginServiceReference1);
 DECLARE_INTERFACE(IPluginServiceReferences1);
 
 //
 //
-DEFINE_INTERFACE(IPluginContext1, IPluginObject)
+DEFINE_INTERFACE(IPluginContext1, IPluginObject1)
 {
 	//
 	// Retrieves a specific service reference based on it's type. If multiple services has registered the same type

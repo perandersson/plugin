@@ -42,5 +42,8 @@
     <ClInclude Include="..\..\plugin.contract\plugin\pluginlistener1.h">
       <Filter>Contract</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginobject1.h">
+      <Filter>Contract</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

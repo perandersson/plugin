@@ -2,14 +2,14 @@
 #ifndef _IPLUGIN_SERVICE_REFERENCE1_H_
 #define _IPLUGIN_SERVICE_REFERENCE1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPlugin1);
 DECLARE_INTERFACE(IPluginService1);
 
 //
 // Interface that symbolizes a placeholder for a registered service.
-DEFINE_INTERFACE(IPluginServiceReference1, IPluginObject)
+DEFINE_INTERFACE(IPluginServiceReference1, IPluginObject1)
 {
 	//
 	// @return The plugin this service reference is connected to

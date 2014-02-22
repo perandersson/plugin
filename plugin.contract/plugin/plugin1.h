@@ -2,7 +2,7 @@
 #ifndef _IPLUGIN1_H_
 #define _IPLUGIN1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPluginVersion1);
 DECLARE_INTERFACE(IPluginService1);
@@ -13,26 +13,26 @@ DECLARE_INTERFACE(IPluginContext1);
 
 //
 // Interface representing the actual plugin. 
-DEFINE_INTERFACE(IPlugin1, IPluginObject)
+DEFINE_INTERFACE(IPlugin1, IPluginObject1)
 {
 	enum PLUGIN_API Status {
 		//
 		// Symbolizes that the plugin is starting up.
-		STATUS_STARTING = 1,
+		STATUS_STARTING = 0,
 
 		//
 		// Symbolizes that the plugin is active and all it's services registered inside
 		// the plugin engine
-		STATUS_ACTIVE = 2,
+		STATUS_ACTIVE = 1,
 
 		//
 		// The plugin is stopping and is currently removing it's internal resources
-		STATUS_STOPPING = 3,
+		STATUS_STOPPING = 2,
 
 		//
 		// An inactive status means that the plugin engine is aware of the plugin but none of
 		// the services are registrered.
-		STATUS_STOPPED = 4,
+		STATUS_STOPPED = 3,
 	};
 
 	//

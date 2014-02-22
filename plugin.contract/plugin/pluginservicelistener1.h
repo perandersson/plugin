@@ -2,23 +2,23 @@
 #ifndef _IPLUGIN_SERVICE_LISTENER1_H_
 #define _IPLUGIN_SERVICE_LISTENER1_H_
 
-#include "defines.h"
+#include "pluginobject1.h"
 
 DECLARE_INTERFACE(IPluginServiceReference1);
 DECLARE_INTERFACE(IPluginContext1);
 
 //
 //
-DEFINE_INTERFACE(IPluginServiceListener1, IPluginObject)
+DEFINE_INTERFACE(IPluginServiceListener1, IPluginObject1)
 {
 	enum PLUGIN_API Status {
 		//
 		// Status if a service is registered
-		STATUS_REGISTERED = 1,
+		STATUS_REGISTERED = 0,
 
 		//
 		// Status if a service is unregistered
-		STATUS_UNREGISTERED = 2
+		STATUS_UNREGISTERED = 1
 	};
 
 	//

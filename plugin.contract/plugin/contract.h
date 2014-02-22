@@ -15,6 +15,7 @@
 #include "pluginservicereference1.h"
 #include "pluginservicereferences1.h"
 #include "pluginversion1.h"
+#include "pluginobject1.h"
 
 //
 // Typedefs for prettier interface
@@ -29,6 +30,7 @@ typedef IPluginServiceListener1 IPluginServiceListener;
 typedef IPluginServiceReference1 IPluginServiceReference;
 typedef IPluginServiceReferences1 IPluginServiceReferences;
 typedef IPluginVersion1 IPluginVersion;
+typedef IPluginObject1 IPluginObject;
 typedef GetPluginActivator1Func GetPluginActivatorFunc;
 
 #endif
