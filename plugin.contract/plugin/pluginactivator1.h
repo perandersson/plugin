@@ -5,7 +5,7 @@
 #include "defines.h"
 
 DECLARE_INTERFACE(IPluginContext1);
-DECLARE_INTERFACE(IPluginBundle1);
+DECLARE_INTERFACE(IPlugin1);
 
 //
 // Interface that represents the entry- and exit point of a plugin.
@@ -18,14 +18,14 @@ DEFINE_INTERFACE(IPluginActivator1, IPluginObject)
 	//			The plugin context. It manages all the active plugin- and plugin features.
 	// @param plugin
 	//			The plugin representation inside the engine
-	virtual void Start(IPluginContext1* context, IPluginBundle1* plugin) = 0;
+	virtual void Start(IPluginContext1* context, IPlugin1* plugin) = 0;
 
 	//
 	// Stop this plugin instance and release it's internal resources.
 	//
 	// @param plugin
 	//			The plugin representation inside the engine
-	virtual void Stop(IPluginBundle1* plugin) = 0;
+	virtual void Stop(IPlugin1* plugin) = 0;
 };
 
 // 

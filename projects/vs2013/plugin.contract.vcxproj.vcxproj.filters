@@ -15,16 +15,10 @@
     <ClInclude Include="..\..\plugin.contract\plugin\defines.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\pluginbundle1.h">
-      <Filter>Contract</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\plugin.contract\plugin\pluginactivator1.h">
       <Filter>Contract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.contract\plugin\plugincontext1.h">
-      <Filter>Contract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\plugin.contract\plugin\pluginbundlelistener1.h">
       <Filter>Contract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.contract\plugin\pluginservice1.h">
@@ -40,6 +34,12 @@
       <Filter>Contract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\plugin.contract\plugin\pluginversion1.h">
+      <Filter>Contract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.contract\plugin\plugin1.h">
+      <Filter>Contract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginlistener1.h">
       <Filter>Contract</Filter>
     </ClInclude>
   </ItemGroup>

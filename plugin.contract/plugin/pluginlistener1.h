@@ -1,14 +1,14 @@
 #pragma once
-#ifndef _IPLUGIN_BUNDLE_LISTENER1_H_
-#define _IPLUGIN_BUNDLE_LISTENER1_H_
+#ifndef _IPLUGIN_LISTENER1_H_
+#define _IPLUGIN_LISTENER1_H_
 
 #include "defines.h"
 
-DECLARE_INTERFACE(IPluginBundle1);
+DECLARE_INTERFACE(IPlugin1);
 
 //
 // 
-DEFINE_INTERFACE(IPluginBundleListener1, IPluginObject)
+DEFINE_INTERFACE(IPluginListener1, IPluginObject)
 {
 	enum PLUGIN_API Status {
 		//
@@ -27,7 +27,7 @@ DEFINE_INTERFACE(IPluginBundleListener1, IPluginObject)
 	//			The plugin that's being changed
 	// @param status
 	//			What happened with the plugin
-	virtual void OnPluginChanged(IPluginBundle1* plugin, Status status) = 0;
+	virtual void OnPluginChanged(IPlugin1* plugin, Status status) = 0;
 };
 
 #endif

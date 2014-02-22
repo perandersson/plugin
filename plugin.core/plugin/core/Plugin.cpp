@@ -26,7 +26,7 @@ void Plugin::Start(PluginContext* context)
 	mStatus = STATUS_STARTING;
 	mActivator->Start(context, this);
 	mStatus = STATUS_ACTIVE;
-	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener::STATUS_ACTIVE);
+	mPluginContext->NotifyPluginChanged(this, IPluginListener::STATUS_ACTIVE);
 }
 
 void Plugin::Stop()
@@ -44,7 +44,7 @@ void Plugin::Stop()
 
 	mActivator->Stop(this);
 	mStatus = STATUS_STOPPED;
-	mPluginContext->NotifyPluginChanged(this, IPluginBundleListener::STATUS_INACTIVE);
+	mPluginContext->NotifyPluginChanged(this, IPluginListener::STATUS_INACTIVE);
 }
 
 ServiceReference* Plugin::FindServiceReference(const type_info& type)
@@ -118,12 +118,12 @@ void Plugin::RemoveServiceListener(IPluginServiceListener* listener)
 		mServiceListeners.erase(it);
 }
 
-void Plugin::AddPluginListener(IPluginBundleListener* listener)
+void Plugin::AddPluginListener(IPluginListener* listener)
 {
 	mPluginListeners.push_back(listener);
 }
 
-void Plugin::RemovePluginListener(IPluginBundleListener* listener)
+void Plugin::RemovePluginListener(IPluginListener* listener)
 {
 	PluginListeners::iterator it = std::find(mPluginListeners.begin(), mPluginListeners.end(), listener);
 	if (it != mPluginListeners.end())
@@ -139,7 +139,7 @@ void Plugin::NotifyServiceChanged(ServiceReference* reference, IPluginServiceLis
 	}
 }
 
-void Plugin::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status)
+void Plugin::NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status)
 {
 	PluginListeners::iterator it = mPluginListeners.begin();
 	PluginListeners::const_iterator end = mPluginListeners.end();
@@ -148,7 +148,7 @@ void Plugin::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status s
 	}
 }
 
-IPluginBundle1::Status Plugin::GetStatus() const
+IPlugin::Status Plugin::GetStatus() const
 {
 	return mStatus;
 }

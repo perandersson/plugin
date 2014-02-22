@@ -15,12 +15,12 @@ public:
 
 	}
 
-	virtual void Start(IPluginContext* context, IPluginBundle* plugin) {
+	virtual void Start(IPluginContext* context, IPlugin* plugin) {
 		plugin->AddServiceListener(this);
 		plugin->RegisterService(typeid(gameengine::IComponent), &mService);
 	}
 
-	virtual void Stop(IPluginBundle* plugin) {
+	virtual void Stop(IPlugin* plugin) {
 		std::cout << "CustomComponent1Activator is deactivated" << std::endl;
 	}
 

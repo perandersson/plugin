@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _IPLUGINBUNDLE1_H_
-#define _IPLUGINBUNDLE1_H_
+#ifndef _IPLUGIN1_H_
+#define _IPLUGIN1_H_
 
 #include "defines.h"
 
@@ -8,12 +8,12 @@ DECLARE_INTERFACE(IPluginVersion1);
 DECLARE_INTERFACE(IPluginService1);
 DECLARE_INTERFACE(IPluginServiceReference1);
 DECLARE_INTERFACE(IPluginServiceListener1);
-DECLARE_INTERFACE(IPluginBundleListener1);
+DECLARE_INTERFACE(IPluginListener1);
 DECLARE_INTERFACE(IPluginContext1);
 
 //
 // Interface representing the actual plugin. 
-DEFINE_INTERFACE(IPluginBundle1, IPluginObject)
+DEFINE_INTERFACE(IPlugin1, IPluginObject)
 {
 	enum PLUGIN_API Status {
 		//
@@ -83,13 +83,13 @@ DEFINE_INTERFACE(IPluginBundle1, IPluginObject)
 	//
 	// @param listener
 	//			The listener instance
-	virtual void AddPluginListener(IPluginBundleListener1* listener) = 0;
+	virtual void AddPluginListener(IPluginListener1* listener) = 0;
 
 	//
 	// Remove a plugin listener. Listeners are automatically unregistrered during the plugins STATUS_STOPPING phase.
 	//
 	// @param listener
-	virtual void RemovePluginListener(IPluginBundleListener1* listener) = 0;
+	virtual void RemovePluginListener(IPluginListener1* listener) = 0;
 
 	//
 	// @return The status for this plugin

@@ -4,7 +4,7 @@
 
 #include "defines.h"
 
-DECLARE_INTERFACE(IPluginBundle1);
+DECLARE_INTERFACE(IPlugin1);
 DECLARE_INTERFACE(IPluginService1);
 
 //
@@ -13,11 +13,11 @@ DEFINE_INTERFACE(IPluginServiceReference1, IPluginObject)
 {
 	//
 	// @return The plugin this service reference is connected to
-	virtual IPluginBundle1* GetPlugin() = 0;
+	virtual IPlugin1* GetPlugin() = 0;
 
 	//
 	// @return The plugin this service reference is connected to
-	virtual const IPluginBundle1* GetPlugin() const = 0;
+	virtual const IPlugin1* GetPlugin() const = 0;
 
 	//
 	// @return The type that the service reference is implementing

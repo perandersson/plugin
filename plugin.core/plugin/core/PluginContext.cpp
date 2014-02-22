@@ -75,7 +75,7 @@ void PluginContext::NotifyServiceChanged(ServiceReference* reference, IPluginSer
 	}
 }
 
-void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status)
+void PluginContext::NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status)
 {
 	Plugins::iterator it = mPlugins.begin();
 	Plugins::const_iterator end = mPlugins.end();

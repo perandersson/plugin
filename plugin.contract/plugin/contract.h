@@ -7,9 +7,9 @@
 //
 
 #include "pluginactivator1.h"
-#include "pluginbundle1.h"
+#include "plugin1.h"
 #include "plugincontext1.h"
-#include "pluginbundlelistener1.h"
+#include "pluginlistener1.h"
 #include "pluginservice1.h"
 #include "pluginservicelistener1.h"
 #include "pluginservicereference1.h"
@@ -21,8 +21,8 @@
 //
 
 typedef IPluginActivator1 IPluginActivator;
-typedef IPluginBundle1 IPluginBundle;
-typedef IPluginBundleListener1 IPluginBundleListener;
+typedef IPlugin1 IPlugin;
+typedef IPluginListener1 IPluginListener;
 typedef IPluginContext1 IPluginContext;
 typedef IPluginService1 IPluginService;
 typedef IPluginServiceListener1 IPluginServiceListener;

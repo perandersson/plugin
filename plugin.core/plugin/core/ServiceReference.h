@@ -18,8 +18,8 @@ namespace plugin
 
 		// IServiceReference
 		public:
-			virtual IPluginBundle* GetPlugin();
-			virtual const IPluginBundle* GetPlugin() const;
+			virtual IPlugin* GetPlugin();
+			virtual const IPlugin* GetPlugin() const;
 			virtual const type_info& GetType() const;
 			virtual IPluginService* GetService();
 			virtual void Release();

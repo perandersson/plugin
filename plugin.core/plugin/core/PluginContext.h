@@ -72,7 +72,7 @@ namespace plugin
 			//			The plugin that's being changed
 			// @param status
 			//			The status of the plugin
-			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status);
+			void NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status);
 
 		// IPluginContext
 		public:

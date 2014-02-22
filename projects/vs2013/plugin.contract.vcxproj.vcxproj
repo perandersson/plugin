@@ -13,10 +13,10 @@
   <ItemGroup>
     <ClInclude Include="..\..\plugin.contract\plugin\contract.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\defines.h" />
-    <ClInclude Include="..\..\plugin.contract\plugin\pluginbundle1.h" />
+    <ClInclude Include="..\..\plugin.contract\plugin\plugin1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginactivator1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\plugincontext1.h" />
-    <ClInclude Include="..\..\plugin.contract\plugin\pluginbundlelistener1.h" />
+    <ClInclude Include="..\..\plugin.contract\plugin\pluginlistener1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginservicereferences1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginversion1.h" />
     <ClInclude Include="..\..\plugin.contract\plugin\pluginservice1.h" />

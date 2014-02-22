@@ -24,12 +24,12 @@ namespace plugin
 
 		//
 		// Implementation of the IPlugin contract
-		class Plugin : public IPluginBundle
+		class Plugin : public IPlugin
 		{
 			typedef std::hash_map<std::string, std::shared_ptr<ServiceReference>> ServiceReferences;
 			typedef std::list<ServiceReference*> UnregistrationServiceReferences;
 			typedef std::list<IPluginServiceListener*> ServiceListeners;
-			typedef std::list<IPluginBundleListener*> PluginListeners;
+			typedef std::list<IPluginListener*> PluginListeners;
 
 		public:
 			Plugin(LibraryHandle library, IPluginActivator* activator, const std::string& name, const Version& version);
@@ -70,7 +70,7 @@ namespace plugin
 			//			The plugin that's being changed
 			// @param status
 			//			The status of the plugin
-			void NotifyPluginChanged(Plugin* plugin, IPluginBundleListener::Status status);
+			void NotifyPluginChanged(Plugin* plugin, IPluginListener::Status status);
 
 		// IPlugin
 		public:
@@ -79,8 +79,8 @@ namespace plugin
 			virtual void UnregisterService(IPluginServiceReference* reference);
 			virtual void AddServiceListener(IPluginServiceListener* listener);
 			virtual void RemoveServiceListener(IPluginServiceListener* listener);
-			virtual void AddPluginListener(IPluginBundleListener* listener);
-			virtual void RemovePluginListener(IPluginBundleListener* listener);
+			virtual void AddPluginListener(IPluginListener* listener);
+			virtual void RemovePluginListener(IPluginListener* listener);
 			virtual Status GetStatus() const;
 			virtual const IPluginVersion* GetVersion() const;
 			virtual IPluginContext* GetPluginContext();

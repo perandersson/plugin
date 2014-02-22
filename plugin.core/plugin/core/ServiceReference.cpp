@@ -36,12 +36,12 @@ void ServiceReference::Release()
 	}
 }
 
-IPluginBundle* ServiceReference::GetPlugin()
+IPlugin* ServiceReference::GetPlugin()
 {
 	return mPlugin;
 }
 
-const IPluginBundle* ServiceReference::GetPlugin() const
+const IPlugin* ServiceReference::GetPlugin() const
 {
 	return mPlugin;
 }
