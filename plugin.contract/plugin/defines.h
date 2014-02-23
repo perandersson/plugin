@@ -4,9 +4,6 @@
 
 #include <typeinfo>
 
-#define SSTRINGIFY(x) #x
-#define STRINGIFY(x) SSTRINGIFY(x)
-
 #ifdef PLUGIN_EXPORTS 
 #ifndef PLUGIN_API
 #define PLUGIN_API __declspec(dllexport)
@@ -14,14 +11,6 @@
 #else
 #ifndef PLUGIN_API
 #define PLUGIN_API __declspec(dllimport)
-#endif
-#endif
-
-#ifndef THREAD_LOCAL
-#ifdef WIN32
-#define THREAD_LOCAL __declspec(thread)
-#else
-#define THREAD_LOCAL __thread
 #endif
 #endif
 
