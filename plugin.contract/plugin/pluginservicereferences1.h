@@ -4,11 +4,9 @@
 
 #include "pluginobject1.h"
 
-DECLARE_INTERFACE(IPluginServiceReference1);
-
 //
 //
-DEFINE_INTERFACE(IPluginServiceReferences1, IPluginObject1)
+DECLARE_INTERFACE(IPluginServiceReferences1, IPluginObject1)
 {
 	//
 	//

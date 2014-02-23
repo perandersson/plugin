@@ -6,12 +6,12 @@
 
 //
 //
-DEFINE_INTERFACE(IPluginService1, IPluginObject1)
+DECLARE_INTERFACE(IPluginService1, IPluginObject1)
 {
 };
 
 #ifndef DEFINE_SERVICE
-#define DEFINE_SERVICE(Type) DEFINE_INTERFACE(Type, IPluginService)
+#define DEFINE_SERVICE(Type) DECLARE_INTERFACE(Type, IPluginService)
 #endif
 
 #endif

@@ -4,16 +4,9 @@
 
 #include "pluginobject1.h"
 
-DECLARE_INTERFACE(IPluginVersion1);
-DECLARE_INTERFACE(IPluginService1);
-DECLARE_INTERFACE(IPluginServiceReference1);
-DECLARE_INTERFACE(IPluginServiceListener1);
-DECLARE_INTERFACE(IPluginListener1);
-DECLARE_INTERFACE(IPluginContext1);
-
 //
 // Interface representing the actual plugin. 
-DEFINE_INTERFACE(IPlugin1, IPluginObject1)
+DECLARE_INTERFACE(IPlugin1, IPluginObject1)
 {
 	enum PLUGIN_API Status {
 		//

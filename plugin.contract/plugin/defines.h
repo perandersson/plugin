@@ -18,16 +18,10 @@
 typedef std::type_info type_info;
 #endif
 
-#ifndef DEFINE_INTERFACE
-#define DEFINE_INTERFACE(Name, Inherits) \
+#ifndef DECLARE_INTERFACE
+#define DECLARE_INTERFACE(Name, Inherits) \
 struct PLUGIN_API Name : public Inherits
 #endif
-
-#ifndef DECLARE_INTERFACE
-#define DECLARE_INTERFACE(Name) \
-struct PLUGIN_API Name
-#endif
-
 
 #ifdef ENABLE_ONLY_MSVC
 #if !_MSC_VER

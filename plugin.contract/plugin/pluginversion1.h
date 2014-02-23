@@ -6,7 +6,7 @@
 
 //
 //
-DEFINE_INTERFACE(IPluginVersion1, IPluginObject1)
+DECLARE_INTERFACE(IPluginVersion1, IPluginObject1)
 {
 	//
 	// @return The major component of this version instance
