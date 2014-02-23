@@ -3,7 +3,7 @@
 
 CustomComponent1::CustomComponent1()
 {
-
+	total = 0;
 }
 
 CustomComponent1::~CustomComponent1()
@@ -13,5 +13,5 @@ CustomComponent1::~CustomComponent1()
 
 void CustomComponent1::Update(float dt)
 {
-	std::cout << "Updating CustomComponent1: " << dt << std::endl;
+	//std::cout << "Updating CustomComponent1: " << dt << std::endl;
 }

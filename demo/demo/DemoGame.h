@@ -10,6 +10,7 @@ public:
 	DemoGame();
 	virtual ~DemoGame();
 
+	void AddInternalComponent(gameengine::IComponent* component);
 	void AddComponent(gameengine::IComponent* component);
 
 
@@ -18,5 +19,6 @@ public:
 
 private:
 	std::list<gameengine::IComponent*> mComponents;
+	std::list<gameengine::IComponent*> mInternalComponents;
 
 };

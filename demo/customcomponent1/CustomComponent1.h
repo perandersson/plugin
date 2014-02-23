@@ -10,4 +10,7 @@ public:
 
 public:
 	virtual void Update(float dt);
+
+private:
+	float total;
 };

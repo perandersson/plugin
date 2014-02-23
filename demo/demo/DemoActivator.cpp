@@ -4,6 +4,19 @@
 
 #include <plugin/contract.h>
 
+class InternalComponent : public gameengine::IComponent
+{
+public:
+	InternalComponent() { counter = 0; }
+	virtual ~InternalComponent() {}
+
+	virtual void Update(float dt) {
+		counter += dt;
+	}
+
+	float counter;
+};
+
 class DemoActivator : public IPluginActivator, public IPluginServiceListener
 {
 public:
@@ -18,6 +31,7 @@ public:
 	virtual void Start(IPluginContext* context, IPlugin* plugin) {
 		plugin->AddServiceListener(this);
 		plugin->RegisterService(typeid(gameengine::IGame), &mService);
+		mService.AddInternalComponent(new InternalComponent());
 	}
 
 	virtual void Stop(IPlugin* plugin) {
