@@ -17,40 +17,32 @@ public:
 	float counter;
 };
 
-class DemoActivator : public IPluginActivator, public IPluginServiceListener
-{
-public:
-	DemoActivator() {
+DemoGame* gGame;
 
+PL_RES GetAllComponents(PL_TYPE type, PIPluginObject object) {
+	gameengine::IComponent* component;
+	if (object->ConvertToType(PL_TYPEOF(gameengine::IComponent), (void**)&component)) {
+		gGame->AddComponent(component);
 	}
+	return PL_RESOK;
+}
 
-	virtual ~DemoActivator() {
+PL_RES MyEntryPoint() {
+	gGame = new DemoGame();
+	Plugin_RegisterObject(PL_TYPEOF(gameengine::IGame), gGame);
 
-	}
+	Plugin_GetObjects(PL_TYPEOF(gameengine::IComponent), GetAllComponents);
 
-	virtual void Start(IPluginContext* context, IPlugin* plugin) {
-		plugin->AddServiceListener(this);
-		plugin->RegisterService(typeid(gameengine::IGame), &mService);
-		mService.AddInternalComponent(new InternalComponent());
-	}
-
-	virtual void Stop(IPlugin* plugin) {
-		std::cout << "DemoActivator is deactivated" << std::endl;
-	}
-
-	virtual void OnServiceChanged(IPluginServiceReference* reference, Status status) {
-		if (status == STATUS_REGISTERED) {
-			const type_info& type = reference->GetType();
-			if (type == typeid(gameengine::IComponent)) {
-				auto component = dynamic_cast<gameengine::IComponent*>(reference->GetService());
-				mService.AddComponent(component);
-			}
+	IPluginObject* ptr;
+	if (Plugin_GetObject(PL_TYPEOF(gameengine::IComponent), &ptr)) {
+		gameengine::IComponent* component;
+		if (ptr->ConvertToType(PL_TYPEOF(gameengine::IComponent), (void**)&component)) {
+			gGame->AddComponent(component);
 		}
-		std::cout << "DemoActivator -> Service status changed for type: " << reference->GetType().name() << std::endl;
+		ptr->Release();
 	}
-	
-private:
-	DemoGame mService;
-};
 
-DEFINE_PLUGIN(DemoActivator, "1.0.0");
+	return PL_RESOK;
+}
+
+DEFINE_ENTRYPOINT(MyEntryPoint);

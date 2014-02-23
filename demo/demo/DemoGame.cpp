@@ -2,14 +2,18 @@
 #include <iostream>
 #include <Windows.h>
 
-DemoGame::DemoGame()
+DemoGame::DemoGame() :mRefCount(0)
 {
 
 }
 
 DemoGame::~DemoGame()
 {
-
+	std::list<gameengine::IComponent*>::iterator it = mComponents.begin();
+	std::list<gameengine::IComponent*>::iterator end = mComponents.end();
+	for (; it != end; ++it) {
+		(*it)->Release();
+	}
 }
 
 void DemoGame::AddComponent(gameengine::IComponent* component)
@@ -26,6 +30,7 @@ void DemoGame::StartGame()
 {
 	std::cout << "Starting demogame" << std::endl;
 	DWORD systime = GetTickCount();
+
 #ifdef _DEBUG
 	for (int i = 0; i < 1000000; i++) {
 #else
@@ -56,3 +61,30 @@ void DemoGame::StartGame()
 	std::cout << "External time: " << systime2 - systime << ", Internal time: " << systime4 - systime3 << std::endl;
 }
 
+
+PL_UINT64 DemoGame::AddRef()
+{
+	mRefCount++;
+	return mRefCount;
+}
+
+PL_UINT64 DemoGame::Release()
+{
+	mRefCount--;
+	if (mRefCount <= 0) delete this;
+	return mRefCount;
+}
+
+PL_RES DemoGame::ConvertToType(PL_TYPE type, void** _out_Ptr)
+{
+	if (_out_Ptr == nullptr)
+		return PL_RESERR;
+
+	if (type == PL_TYPEOF(gameengine::IGame)) {
+		*_out_Ptr = static_cast<IGame*>(this);
+		AddRef();
+		return PL_RESOK;
+	}
+	*_out_Ptr = nullptr;
+	return PL_RESERR;
+}

@@ -1,18 +1,14 @@
 #pragma once
-#ifndef _GAMEENGINE_ICOMPONENT_H_
-#define _GAMEENGINE_ICOMPONENT_H_
-
-#define ENABLE_ONLY_MSVC
 #include <plugin/contract.h>
 
 namespace gameengine
 {
 	//
 	// The actual game instance
-	DEFINE_SERVICE(IComponent)
+	DECLARE_INTERFACE(IComponent, IPluginObject)
 	{
 		virtual void Update(float dt) = 0;
 	};
-}
 
-#endif
+	DEFINE_PLTYPE(IComponent, 9343021366);
+}

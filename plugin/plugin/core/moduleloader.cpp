@@ -1,6 +1,5 @@
 #include "moduleloader.h"
 #include <cassert>
-using namespace plugin::core;
 
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN

@@ -4,32 +4,9 @@
 
 #include <plugin/contract.h>
 
-class CustomComponent1Activator : public IPluginActivator, public IPluginServiceListener
-{
-public:
-	CustomComponent1Activator() {
+PL_RES MyEntryPoint() {
+	PL_RES res = Plugin_RegisterObject(PL_TYPEOF(gameengine::IComponent), new CustomComponent1());
+	return res;
+}
 
-	}
-
-	virtual ~CustomComponent1Activator() {
-
-	}
-
-	virtual void Start(IPluginContext* context, IPlugin* plugin) {
-		plugin->AddServiceListener(this);
-		plugin->RegisterService(typeid(gameengine::IComponent), &mService);
-	}
-
-	virtual void Stop(IPlugin* plugin) {
-		std::cout << "CustomComponent1Activator is deactivated" << std::endl;
-	}
-
-	virtual void OnServiceChanged(IPluginServiceReference* reference, Status status) {
-		std::cout << "CustomComponent1Activator -> Service status changed for type: " << reference->GetType().name() << std::endl;
-	}
-
-private:
-	CustomComponent1 mService;
-};
-
-DEFINE_PLUGIN(CustomComponent1Activator, "1.0.0");
+DEFINE_ENTRYPOINT(MyEntryPoint);

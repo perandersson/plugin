@@ -9,33 +9,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{e4fcfd7b-f3c0-45b1-9d21-337df1c7f2e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="plugin_context.h">
+    <ClInclude Include="..\..\plugin\plugin\contract.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="plugin_activator.h">
+    <ClInclude Include="..\..\plugin\plugin\defines.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="plugin_feature.h">
+    <ClInclude Include="..\..\plugin\plugin\pluginobject1.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="feature_listener.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\..\plugin\plugin\core\moduleloader.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugin\plugin\core\plugincontext.h">
+      <Filter>Source Files\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="feature_listener.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\plugin\plugin\core\moduleloader.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="plugin_activator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="plugin_context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="plugin_feature.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\plugin\plugin\core\plugincontext.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
