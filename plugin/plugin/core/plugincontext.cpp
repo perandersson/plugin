@@ -242,7 +242,7 @@ public:
 			return PL_ERR;
 		}
 
-		PL_LIBID newID = mNextID.fetch_add(1);
+		PL_LIBID newID = mNextID++;
 		auto ref = std::shared_ptr<PluginLibrary>(new PluginLibrary(library, newID));
 		mCurrentLibrary = ref;
 		PL_RES result = (*entryPoint)();
@@ -253,7 +253,7 @@ public:
 		}
 
 		mLibraries.insert(mLibraries.begin(), ref);
-		return PL_OK;
+		return newID;
 	}
 
 	PL_RES UnloadLibrary(PL_LIBID id) {
@@ -262,12 +262,26 @@ public:
 			return PL_ERR;
 		}
 
-		Libraries::size_type size = mLibraries.size();
+		const Libraries::size_type size = mLibraries.size();
+		if (size == 0) {
+			SetLastError(PL_ERRCODE_NONEXISTENTLIBID);
+			return PL_ERR;
+		}
+
+		// You are only allowd to remove libraries in the reverse order of
+		// when you added them. Remember that the items are always added at the top (push_front).
 		for (Libraries::size_type i = 0; i < size; ++i) {
-			if (mLibraries[i]->GetID() == id) {
-				Libraries::iterator removeIt = mLibraries.begin() + i;
-				mLibraries.erase(removeIt);
-				return PL_OK;
+			auto library = mLibraries[i];
+			if (library->GetID() == id) {
+				if (i != 0) {
+					SetLastError(PL_ERRCODE_LIBRARYINUSE);
+					return PL_ERR;
+				}
+				else {
+					Libraries::iterator removeIt = mLibraries.begin() + i;
+					mLibraries.erase(removeIt);
+					return PL_OK;
+				}
 			}
 		}
 

@@ -71,11 +71,15 @@ int main()
 	res = Plugin_RegisterGlobalObject(PL_TYPEOF(gameengine::IComponent), new HostAppService()); assert(SUCCESS(res));
 
 	// Load our custom libraries
-	res = Plugin_LoadLibrary("customcomponent1.dll"); assert(SUCCESS(res));
-	res = Plugin_LoadLibrary("demo.dll"); assert(SUCCESS(res));
+	PL_LIBID customcomponent1_dll = Plugin_LoadLibrary("customcomponent1.dll"); assert(customcomponent1_dll != PL_ERR);
+	PL_LIBID demo_dll = Plugin_LoadLibrary("demo.dll"); assert(demo_dll != PL_ERR);
 
 	// Start the game!
 	StartGame();
+
+	// Unload libraries
+	res = Plugin_UnloadLibrary(demo_dll); assert(SUCCESS(res));
+	res = Plugin_UnloadLibrary(customcomponent1_dll); assert(SUCCESS(res));
 
 	// Release the plugin framework
 	res = Plugin_Release(); assert(SUCCESS(res));
