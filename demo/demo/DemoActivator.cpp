@@ -24,7 +24,7 @@ PL_RES GetAllComponents(PL_TYPE type, PIPluginObject object) {
 	if (object->ConvertToType(PL_TYPEOF(gameengine::IComponent), (void**)&component)) {
 		gGame->AddComponent(component);
 	}
-	return PL_RESOK;
+	return PL_OK;
 }
 
 PL_RES MyEntryPoint() {
@@ -42,7 +42,7 @@ PL_RES MyEntryPoint() {
 		ptr->Release();
 	}
 
-	return PL_RESOK;
+	return PL_OK;
 }
 
 DEFINE_ENTRYPOINT(MyEntryPoint);

@@ -1,7 +1,7 @@
 plugin
 ======
 
-This project is a C++ plugin system heavily based on Component Object Model released by Microsoft.
+This project is a C++ plugin system heavily influensed of Component Object Model released by Microsoft.
 
 Please read the [wiki](https://github.com/perandersson/plugin/wiki) for more information.
 

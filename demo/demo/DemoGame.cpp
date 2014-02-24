@@ -70,21 +70,23 @@ PL_UINT64 DemoGame::AddRef()
 
 PL_UINT64 DemoGame::Release()
 {
-	mRefCount--;
-	if (mRefCount <= 0) delete this;
+	if (--mRefCount == 0) {
+		delete this;
+		return 0;
+	}
 	return mRefCount;
 }
 
 PL_RES DemoGame::ConvertToType(PL_TYPE type, void** _out_Ptr)
 {
 	if (_out_Ptr == nullptr)
-		return PL_RESERR;
+		return PL_ERR;
 
 	if (type == PL_TYPEOF(gameengine::IGame)) {
 		*_out_Ptr = static_cast<IGame*>(this);
 		AddRef();
-		return PL_RESOK;
+		return PL_OK;
 	}
 	*_out_Ptr = nullptr;
-	return PL_RESERR;
+	return PL_ERR;
 }

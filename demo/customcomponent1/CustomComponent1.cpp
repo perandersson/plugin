@@ -25,8 +25,10 @@ PL_UINT64 CustomComponent1::AddRef()
 
 PL_UINT64 CustomComponent1::Release()
 {
-	mRefCount--;
-	if (mRefCount <= 0) delete this;
+	if (--mRefCount == 0) {
+		delete this;
+		return 0;
+	}
 	return mRefCount;
 }
 
@@ -35,8 +37,8 @@ PL_RES CustomComponent1::ConvertToType(PL_TYPE type, void** _out_Ptr)
 	if (type == PL_TYPEOF(gameengine::IComponent)) {
 		*_out_Ptr = static_cast<IComponent*>(this); 
 		AddRef();
-		return PL_RESOK;
+		return PL_OK;
 	}
 	*_out_Ptr = nullptr;
-	return PL_RESERR;
+	return PL_ERR;
 }

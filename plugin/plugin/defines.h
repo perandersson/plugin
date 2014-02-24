@@ -46,8 +46,8 @@ typedef int PL_ERRCODE;
 // Symbolizes an unsigned long in the plugin framework
 typedef unsigned long PL_UINT64;
 
-#define PL_RESOK 1
-#define PL_RESERR 0
+#define PL_OK 1
+#define PL_ERR 0
 
 
 //
@@ -75,45 +75,53 @@ typedef unsigned long PL_UINT64;
 #define SAFE_RELEASE(Obj) if(Obj != nullptr) Obj->Release()
 #endif
 
+#ifndef FAILED
+#define FAILED(X) ((X) == PL_ERR)
+#endif
+
+#ifndef SUCCESS
+#define SUCCESS(X) ((X) == PL_OK)
+#endif
+
 //
 // Error codes
 //
 
 // No error has occured
-#define PLERRCODE_NOERROR 0
+#define PL_ERRCODE_NOERROR 0
 
 // The library was not found
-#define PLERRCODE_LIBRARYNOTFOUND 1
+#define PL_ERRCODE_LIBRARYNOTFOUND 1
 
 // The entry point is missing inside the plugin
-#define PLERRCODE_MISSINGENTRYPOINT 2
+#define PL_ERRCODE_MISSINGENTRYPOINT 2
 
 // Entry point returned failure
-#define PLERRCODE_ENTRYPOINTFAILURE 3
+#define PL_ERRCODE_ENTRYPOINTFAILURE 3
 
 // The object you are looking for is not found
-#define PLERRCODE_OBJECTNOTFOUND 4
+#define PL_ERRCODE_OBJECTNOTFOUND 4
 
 // The supplied PL_LIBID doesn't exist
-#define PLERRCODE_NONEXISTENTLIBID 5
+#define PL_ERRCODE_NONEXISTENTLIBID 5
 
 // You are trying to perform an action without an active plugin available
-#define PLERRCODE_NOACTIVEPLUGIN 6
+#define PL_ERRCODE_NOACTIVEPLUGIN 6
 
 // You are trying to register a non-global object as a plugin, which is not allowed.
-#define PLERRCODE_NOTHOSTERROR 7
+#define PL_ERRCODE_NOTHOSTERROR 7
 
 // The plugin framework is not initialized
-#define PLERRCODE_NOTINITIALIZED 8
+#define PL_ERRCODE_NOTINITIALIZED 8
 
 // This error code happens if the host application tries to unload 
 // a library that's currently in use (has object's with reference counter > 0).
-#define PLERRCODE_LIBRARYINUSE 9
+#define PL_ERRCODE_LIBRARYINUSE 9
 
 // Error code occures if retrieval of get objects fails by some reason
-#define PLERRCODE_GETOBJECTSFAILED 10
+#define PL_ERRCODE_GETOBJECTSFAILED 10
 
 // A supplied argument is invalid
-#define PLERRCODE_INVALIDARGUMENT 11
+#define PL_ERRCODE_INVALIDARGUMENT 11
 
 #endif

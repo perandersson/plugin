@@ -8,6 +8,7 @@
 
 #include "pluginobject1.h"
 
+
 //
 // Typedefs for prettier interface
 //
@@ -20,13 +21,13 @@ extern "C" {
 	//
 	// Initializes the plugin framework
 	//
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_Init();
 
 	//
 	// Releases the plugin frameworks internal resources
 	//
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_Release();
 
 	//
@@ -44,7 +45,7 @@ extern "C" {
 	//			The service type
 	// @param _out_Ptr
 	//			The memory location where we want to put the object into
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_GetObject(PL_TYPE type, PIPluginObject* _out_Ptr);
 
 	//
@@ -58,7 +59,7 @@ extern "C" {
 	//			The service type
 	// @param func
 	//			The function we want to invoke for each object found
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_GetObjects(PL_TYPE type, PIPluginObjectFunc func);
 
 	//
@@ -66,7 +67,7 @@ extern "C" {
 	//
 	// @param type
 	// @param ptr
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_RegisterObject(PL_TYPE type, PIPluginObject ptr);
 
 	//
@@ -76,7 +77,7 @@ extern "C" {
 	//			The type of the object
 	// @param ptr
 	//			The pointer to the plugin object
-	// @return PL_RESOK if successfull; PL_RESERR otherwise
+	// @return PL_OK if successfull; PL_ERR otherwise
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_RegisterGlobalObject(PL_TYPE type, PIPluginObject ptr);
 
 	//
@@ -92,9 +93,12 @@ extern "C" {
 	//
 	// @param id
 	//			The library id. This value is returned by the Plugin1_LoadLibrary function.
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_UnloadLibrary(PL_LIBID id);
 }
+
+// Function signature for the entry-point of the plugin
+typedef PL_RES(*Plugin1EntryPointFunc)();
 
 #define Plugin_Init Plugin1_Init
 #define Plugin_Release Plugin1_Release
@@ -105,6 +109,8 @@ extern "C" {
 #define Plugin_RegisterGlobalObject Plugin1_RegisterGlobalObject
 #define Plugin_LoadLibrary Plugin1_LoadLibrary
 #define Plugin_UnloadLibrary Plugin1_UnloadLibrary
+
+#define PluginEntryPointFunc Plugin1EntryPointFunc
 
 //
 // Each plugin is required to supply an entry-point function for the plugin.
@@ -117,7 +123,5 @@ extern "C" { \
 	} \
 }
 
-// Function signature for the entry-point of the plugin
-typedef PL_RES(*Plugin1EntryPointFunc)();
 
 #endif

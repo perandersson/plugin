@@ -29,7 +29,7 @@ public:
 	//			The new type
 	// @param _out_Ptr
 	//			A memory location where we put the new pointer
-	// @return PL_RESOK if successfull; PL_RESERR otherwise;
+	// @return PL_OK if successfull; PL_ERR otherwise;
 	virtual PL_RES ConvertToType(PL_TYPE type, void** _out_Ptr) = 0;
 };
 
