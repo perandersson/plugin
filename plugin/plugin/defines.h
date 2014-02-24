@@ -75,8 +75,8 @@ typedef unsigned long PL_UINT64;
 #define SAFE_RELEASE(Obj) if(Obj != nullptr) Obj->Release()
 #endif
 
-#ifndef FAILED
-#define FAILED(X) ((X) == PL_ERR)
+#ifndef FAILURE
+#define FAILURE(X) ((X) == PL_ERR)
 #endif
 
 #ifndef SUCCESS

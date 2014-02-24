@@ -77,7 +77,8 @@ int main()
 	// Start the game!
 	StartGame();
 
-	// Unload libraries
+	// Unload libraries. This is done automatically by the Plugin_Release command.
+	// You are only allowed to unload libraries that are not in use.
 	res = Plugin_UnloadLibrary(demo_dll); assert(SUCCESS(res));
 	res = Plugin_UnloadLibrary(customcomponent1_dll); assert(SUCCESS(res));
 
