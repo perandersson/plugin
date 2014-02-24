@@ -5,10 +5,8 @@ namespace gameengine
 {
 	//
 	// The actual game instance
-	DECLARE_INTERFACE(IGame, IPluginObject)
+	DECLARE_INTERFACE(IGame, 800200966, IPluginObject)
 	{
 		virtual void StartGame() = 0;
 	};
-
-	DEFINE_PLTYPE(IGame, 800200966);
 }
