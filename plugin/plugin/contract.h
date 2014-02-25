@@ -37,9 +37,11 @@ extern "C" {
 	extern PLUGIN_CONTRACT_API PL_ERRCODE Plugin1_GetLastError();
 
 	//
-	// Retrieves an object registered in the plugin framework. This increases the reference counter of the object
-	// by invoking {@see IPluginObject1::AddRef}. If the plugin framework returns a valid pointer then you are
-	// responsible for invoking the {@see IPluginObject1::Release} method when you are done.
+	// Retrieves an object registered in the plugin framework. 
+
+	// This increases the reference counter of the object by invoking {@see IPluginObject1::AddRef}. If the 
+	// plugin framework returns a valid pointer then you are responsible for 
+	// invoking the {@see IPluginObject1::Release} method when you are done.
 	//
 	// @param type
 	//			The service type
@@ -47,6 +49,22 @@ extern "C" {
 	//			The memory location where we want to put the object into
 	// @return PL_OK if successfull; PL_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_RES Plugin1_GetObject(PL_TYPE type, PIPluginObject* _out_Ptr);
+
+	//
+	// Retrieves an object registered in the plugin framework from the specified library. 
+	
+	// This increases the reference counter of the object by invoking {@see IPluginObject1::AddRef}. If the 
+	// plugin framework returns a valid pointer then you are responsible for 
+	// invoking the {@see IPluginObject1::Release} method when you are done.
+	//
+	// @param libraryID
+	//			The library ID returned by the Plugin1_LoadLibrary.
+	// @param type
+	//			The service type
+	// @param _out_Ptr
+	//			The memory location where we want to put the object into
+	// @return PL_OK if successfull; PL_ERR otherwise;
+	extern PLUGIN_CONTRACT_API PL_RES Plugin1_GetObjectFromLibrary(PL_LIBID libraryID, PL_TYPE type, PIPluginObject* _out_Ptr);
 
 	//
 	// Retrieves all objects registered in the plugin framework by the given type. An object is automatically
@@ -104,6 +122,7 @@ typedef PL_RES(*Plugin1EntryPointFunc)();
 #define Plugin_Release Plugin1_Release
 #define Plugin_GetLastError Plugin1_GetLastError
 #define Plugin_GetObject Plugin1_GetObject
+#define Plugin_GetObjectFromLibrary Plugin1_GetObjectFromLibrary
 #define Plugin_GetObjects Plugin1_GetObjects
 #define Plugin_RegisterObject Plugin1_RegisterObject
 #define Plugin_RegisterGlobalObject Plugin1_RegisterGlobalObject

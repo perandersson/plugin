@@ -72,14 +72,9 @@ typedef unsigned long PL_UINT64;
 //
 // @param Name
 //			The interface name
-// @param UID
-//			A unique ID number. It's up to your project to select which ones you want. 
-//			Numbers below 10 are reserved for the plugin framework.
 // @param Inherits
 //			The class that the new interface inherits from. If nothing then specify IPluginObject
-#define DECLARE_INTERFACE(Name, UID, Inherits) DEFINE_PLTYPE(Name, UID); \
-	struct PLUGIN_API Name : public Inherits
-
+#define DECLARE_INTERFACE(Name, Inherits) struct PLUGIN_API Name : public Inherits
 
 #ifndef SAFE_RELEASE
 #define SAFE_RELEASE(Obj) if(Obj != nullptr) Obj->Release()

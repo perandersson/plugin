@@ -139,6 +139,31 @@ public:
 		return PL_ERR;
 	}
 
+	PL_RES GetObjectFromLibrary(PL_LIBID libraryID, PL_TYPE type, PIPluginObject* _out_Ptr) {
+		if (libraryID == 0 || type == 0 || _out_Ptr == nullptr) {
+			SetLastError(PL_ERRCODE_INVALIDARGUMENT);
+			return PL_ERR;
+		}
+
+
+		Libraries::size_type size = mLibraries.size();
+		for (Libraries::size_type i = 0; i < size; ++i) {
+			auto library = mLibraries[i];
+			if (library->GetID() == libraryID) {
+				auto object = library->GetObject(type);
+				if (object != nullptr) {
+					object->AddRef();
+					*_out_Ptr = object;
+					return PL_OK;
+				}
+			}
+		}
+
+		*_out_Ptr = nullptr;
+		SetLastError(PL_ERRCODE_OBJECTNOTFOUND);
+		return PL_ERR;
+	}
+
 	PL_RES GetObjects(PL_TYPE type, PIPluginObjectFunc func) {
 		if (type == 0 || func == nullptr) {
 			SetLastError(PL_ERRCODE_INVALIDARGUMENT);
@@ -331,6 +356,14 @@ PLUGIN_CONTRACT_API PL_RES Plugin_GetObject(PL_TYPE type, PIPluginObject* _out_P
 		return PL_ERR;
 	
 	return gPluginContext->GetObject(type, _out_Ptr);
+}
+
+PLUGIN_CONTRACT_API PL_RES Plugin_GetObjectFromLibrary(PL_LIBID libraryID, PL_TYPE type, PIPluginObject* _out_Ptr)
+{
+	if (gPluginContext == nullptr)
+		return PL_ERR;
+
+	return gPluginContext->GetObjectFromLibrary(libraryID, type, _out_Ptr);
 }
 
 PLUGIN_CONTRACT_API PL_RES Plugin_GetObjects(PL_TYPE type, PIPluginObjectFunc func)
