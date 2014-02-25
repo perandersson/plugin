@@ -102,7 +102,7 @@ extern "C" {
 	// Load the supplied library
 	//
 	// @param filename
-	//			A null-terminated string containing the path to the plugin
+	//			A null-terminated string containing the path to the plugin without the suffix
 	// @return An non-zero identifier if successfull; PLRES_ERR otherwise;
 	extern PLUGIN_CONTRACT_API PL_LIBID Plugin1_LoadLibrary(const char* filename);
 

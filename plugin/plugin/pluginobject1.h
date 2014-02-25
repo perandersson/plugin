@@ -30,7 +30,8 @@ public:
 	// @param _out_Ptr
 	//			A memory location where we put the new pointer
 	// @return PL_OK if successfull; PL_ERR otherwise;
-	virtual PL_RES ConvertToType(PL_TYPE type, void** _out_Ptr) = 0;
+	virtual PL_RES ToInterface(PL_TYPE type, void** _out_Ptr) = 0;
 };
 
 DEFINE_PLTYPE(IPluginObject1, 1);
+DEFINE_PLTYPE(IPluginObject, 1);

@@ -7,7 +7,10 @@
 
 LibraryHandle ModuleLoader::GetLibraryHandle(const char* fileName)
 {
-	auto library = LoadLibraryA(fileName);
+	char tmp[1024] = { 0 };
+	sprintf(tmp, "%s.dll", fileName);
+
+	auto library = LoadLibraryA(tmp);
 	if (library == nullptr)
 		return nullptr;
 
